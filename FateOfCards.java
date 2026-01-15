@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class FateOfCards extends JPanel {
 
-    int width = 0;
-    int height = 0;
+    int width = 700;
+    int height = 900;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));

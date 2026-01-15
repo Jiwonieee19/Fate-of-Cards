@@ -8,12 +8,12 @@ public class myFrame extends JFrame {
     myFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
-        this.setLocationRelativeTo(null);
         this.setResizable(false);
 
         FateOfCards FoC = new FateOfCards();
         FoC.requestFocus();
         this.add(FoC);
-        // this.pack();
+        this.pack();
+        this.setLocationRelativeTo(null);
     }
 }
