@@ -18,6 +18,6 @@ public class FateOfCards extends JPanel {
     }
 
     public void draw(Graphics g) {
-        // cc
+        // cc cc
     }
 }
