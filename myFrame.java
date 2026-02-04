@@ -11,8 +11,9 @@ public class myFrame extends JFrame {
         this.setResizable(false);
 
         FateOfCards FoC = new FateOfCards();
+        Menu menu = new Menu();
         FoC.requestFocus();
-        this.add(FoC);
+        this.add(menu);
         this.pack();
         this.setLocationRelativeTo(null);
     }
