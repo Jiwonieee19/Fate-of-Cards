@@ -23,25 +23,33 @@ public class FateOfCards extends JPanel implements ActionListener {
 
     int width = 700;
     int height = 900;
-    Timer timer;
+    int pixel = 20;
+    Timer fpsTimer;
+    Timer roundPrepTimer;
+    Timer roundBattleTimer;
     private Image starImg;
     private Image towerImg;
     private Image devilImg;
+    boolean donePrep;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        Image starImg = new ImageIcon(getClass().getResource("src/star.jpg")).getImage();
+        starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
+        towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
+        devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        this.starImg = starImg;
-        this.towerImg = towerImg;
-        this.devilImg = devilImg;
+        donePrep = false;
+        fpsTimer = new Timer(1000 / 10, this); // 10 fps
+        fpsTimer.start();
 
-        timer = new Timer(1000 / 10, this); // 10 fps
-        timer.start();
+    }
 
+    public void prep() {
+        System.out.println("6secs");
+        donePrep = true;
     }
 
     public void move() {
@@ -60,6 +68,19 @@ public class FateOfCards extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("10fps");
+
+        if (donePrep) {
+            donePrep = false;
+            System.out.println("hellu akoa gi stop");
+            roundPrepTimer.stop();
+            fpsTimer.start();
+        } else {
+            fpsTimer.stop();
+            roundPrepTimer = new Timer(6000, this);
+            prep();
+        }
+
         move();
         repaint();
     }
