@@ -30,7 +30,7 @@ public class FateOfCards extends JPanel implements ActionListener {
     private Image starImg;
     private Image towerImg;
     private Image devilImg;
-    boolean donePrep;
+    int donePrep;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
@@ -41,15 +41,14 @@ public class FateOfCards extends JPanel implements ActionListener {
         towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        donePrep = false;
-        fpsTimer = new Timer(1000 / 10, this); // 10 fps
+        donePrep = 0;
+        fpsTimer = new Timer(100, this); // 10 fps
         fpsTimer.start();
 
     }
 
     public void prep() {
-        System.out.println("6secs");
-        donePrep = true;
+        System.out.println(donePrep);
     }
 
     public void move() {
@@ -69,19 +68,15 @@ public class FateOfCards extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("10fps");
-
-        if (donePrep) {
-            donePrep = false;
-            System.out.println("hellu akoa gi stop");
-            roundPrepTimer.stop();
-            fpsTimer.start();
+        if (donePrep == 6000) {
+            donePrep = 0;
+            System.out.println("reset");
+            move();
+            repaint();
         } else {
-            fpsTimer.stop();
-            roundPrepTimer = new Timer(6000, this);
+            // 6secs magsulod siyas prep until time is up then back to original
+            donePrep += 100;
             prep();
         }
-
-        move();
-        repaint();
     }
 }
