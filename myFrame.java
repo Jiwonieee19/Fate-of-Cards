@@ -6,15 +6,16 @@ public class myFrame extends JFrame {
     int height = 100;
 
     myFrame() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(width, height);
-        this.setResizable(false);
+        setTitle("FoC");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(width, height);
+        setResizable(false);
 
         FateOfCards FoC = new FateOfCards();
         Menu menu = new Menu();
         FoC.requestFocus();
-        this.add(FoC);
-        this.pack();
-        this.setLocationRelativeTo(null);
+        add(FoC);
+        pack();
+        setLocationRelativeTo(null);
     }
 }

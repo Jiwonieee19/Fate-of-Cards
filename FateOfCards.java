@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.*;
@@ -5,9 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FateOfCards extends JPanel implements ActionListener {
-
-    int width = 700;
-    int height = 900;
 
     class cards {
         int x, y, width, height;
@@ -23,12 +21,23 @@ public class FateOfCards extends JPanel implements ActionListener {
         }
     }
 
+    int width = 700;
+    int height = 900;
     Timer timer;
+    private Image starImg;
+    private Image towerImg;
+    private Image devilImg;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
         setBackground(Color.BLACK);
+
+        Image starImg = new ImageIcon(getClass().getResource("src/star.jpg")).getImage();
+
+        this.starImg = starImg;
+        this.towerImg = towerImg;
+        this.devilImg = devilImg;
 
         timer = new Timer(1000 / 10, this); // 10 fps
         timer.start();
