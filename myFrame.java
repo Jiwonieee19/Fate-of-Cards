@@ -13,7 +13,7 @@ public class myFrame extends JFrame {
         FateOfCards FoC = new FateOfCards();
         Menu menu = new Menu();
         FoC.requestFocus();
-        this.add(menu);
+        this.add(FoC);
         this.pack();
         this.setLocationRelativeTo(null);
     }
