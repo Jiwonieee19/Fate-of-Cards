@@ -31,6 +31,7 @@ public class FateOfCards extends JPanel implements ActionListener {
     private Image towerImg;
     private Image devilImg;
     int donePrep;
+    boolean prepAgain;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
@@ -42,6 +43,7 @@ public class FateOfCards extends JPanel implements ActionListener {
         devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
         donePrep = 0;
+        prepAgain = true;
         fpsTimer = new Timer(100, this); // 10 fps
         fpsTimer.start();
 
@@ -70,13 +72,18 @@ public class FateOfCards extends JPanel implements ActionListener {
         System.out.println("10fps");
         if (donePrep == 6000) {
             donePrep = 0;
+            prepAgain = false;
             System.out.println("reset");
             move();
             repaint();
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
-            donePrep += 100;
+            if (prepAgain) {
+                donePrep += 100;
+            }
             prep();
         }
     }
+
+    // SEGEH MESSY CODEZ NA NI, AS LONG AS MA BUHAT NAKO IN MY WAY
 }
