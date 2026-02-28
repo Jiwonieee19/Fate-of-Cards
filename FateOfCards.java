@@ -15,12 +15,15 @@ public class FateOfCards extends JPanel implements ActionListener {
     MainCards towerCard;
     MainCards devilCard;
 
+    int cardWidth = 735 / 8;
+    int cardHeight = 1208 / 8;
+
     Timer gameLoop;
     Timer roundPrepTimer;
     Timer roundBattleTimer;
 
     int timeCountHolder;
-    boolean prepAgain;
+    boolean preparingPhaseBool;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
@@ -31,12 +34,12 @@ public class FateOfCards extends JPanel implements ActionListener {
         Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        starCard = new MainCards(100, 100, pixel * 2, pixel * 2, starImg);
-        towerCard = new MainCards(100, 100, pixel * 2, pixel * 2, towerImg);
-        devilCard = new MainCards(100, 100, pixel * 2, pixel * 2, devilImg);
+        starCard = new MainCards(100, 100, cardWidth, cardHeight, starImg);
+        towerCard = new MainCards(100, 100, cardWidth, cardHeight, towerImg);
+        devilCard = new MainCards(100, 100, cardWidth, cardHeight, devilImg);
 
         timeCountHolder = 0;
-        prepAgain = true;
+        preparingPhaseBool = true;
         gameLoop = new Timer(100, this); // 10 fps (1000ms / 100ms = 10 frame per 1000ms)
         gameLoop.start();
 
@@ -67,14 +70,17 @@ public class FateOfCards extends JPanel implements ActionListener {
         System.out.println("10fps");
         if (timeCountHolder == 6000) {
             timeCountHolder = 0;
-            prepAgain = false;
+            preparingPhaseBool = false;
             System.out.println("reset");
             move();
             repaint();
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
-            if (prepAgain) {
-                timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs
+            if (preparingPhaseBool) {
+                timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs, after 6secs, done na
+                                        // preparation
+                PreparationPhase prepPhaseObj = new PreparationPhase();
+                prepPhaseObj.PreparationFunction();
             }
             prep();
         }
