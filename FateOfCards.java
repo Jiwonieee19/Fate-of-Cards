@@ -10,12 +10,15 @@ public class FateOfCards extends JPanel implements ActionListener {
     int width = 700;
     int height = 900;
     int pixel = 20;
-    Timer fpsTimer;
+
+    MainCards starCard;
+    MainCards towerCard;
+    MainCards devilCard;
+
+    Timer gameLoop;
     Timer roundPrepTimer;
     Timer roundBattleTimer;
-    private Image starImg;
-    private Image towerImg;
-    private Image devilImg;
+
     int timeCountHolder;
     boolean prepAgain;
 
@@ -24,14 +27,18 @@ public class FateOfCards extends JPanel implements ActionListener {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
-        towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
-        devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
+        Image starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
+        Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
+        Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
+
+        starCard = new MainCards(100, 100, pixel * 2, pixel * 2, starImg);
+        towerCard = new MainCards(100, 100, pixel * 2, pixel * 2, towerImg);
+        devilCard = new MainCards(100, 100, pixel * 2, pixel * 2, devilImg);
 
         timeCountHolder = 0;
         prepAgain = true;
-        fpsTimer = new Timer(100, this); // 10 fps (1000ms / 100ms = 10 frame per 1000ms)
-        fpsTimer.start();
+        gameLoop = new Timer(100, this); // 10 fps (1000ms / 100ms = 10 frame per 1000ms)
+        gameLoop.start();
 
     }
 
@@ -51,6 +58,8 @@ public class FateOfCards extends JPanel implements ActionListener {
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawString("Fate of Cards", width / 2 - 30, 20);
+        g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(), starCard.getWidth(), starCard.getHeight(),
+                null);
     }
 
     @Override

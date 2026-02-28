@@ -12,7 +12,7 @@ public class myFrame extends JFrame {
         setResizable(false);
 
         FateOfCards FoC = new FateOfCards();
-        Menu menu = new Menu();
+        // Menu menu = new Menu();
         FoC.requestFocus();
         add(FoC);
         pack();
