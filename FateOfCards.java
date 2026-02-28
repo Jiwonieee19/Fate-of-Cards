@@ -30,7 +30,7 @@ public class FateOfCards extends JPanel implements ActionListener {
 
         timeCountHolder = 0;
         prepAgain = true;
-        fpsTimer = new Timer(100, this); // 10 fps
+        fpsTimer = new Timer(100, this); // 10 fps (1000ms / 100ms = 10 frame per 1000ms)
         fpsTimer.start();
 
     }
