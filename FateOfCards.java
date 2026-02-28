@@ -7,20 +7,6 @@ import java.awt.event.ActionListener;
 
 public class FateOfCards extends JPanel implements ActionListener {
 
-    class cards {
-        int x, y, width, height;
-        Image img;
-        Color standard = Color.WHITE;
-
-        cards(int x, int y, int width, int height, Image img) {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-            this.img = img;
-        }
-    }
-
     int width = 700;
     int height = 900;
     int pixel = 20;
@@ -30,7 +16,7 @@ public class FateOfCards extends JPanel implements ActionListener {
     private Image starImg;
     private Image towerImg;
     private Image devilImg;
-    int donePrep;
+    int timeCountHolder;
     boolean prepAgain;
 
     FateOfCards() {
@@ -42,7 +28,7 @@ public class FateOfCards extends JPanel implements ActionListener {
         towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        donePrep = 0;
+        timeCountHolder = 0;
         prepAgain = true;
         fpsTimer = new Timer(100, this); // 10 fps
         fpsTimer.start();
@@ -50,7 +36,7 @@ public class FateOfCards extends JPanel implements ActionListener {
     }
 
     public void prep() {
-        System.out.println(donePrep);
+        System.out.println(timeCountHolder);
     }
 
     public void move() {
@@ -70,8 +56,8 @@ public class FateOfCards extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("10fps");
-        if (donePrep == 6000) {
-            donePrep = 0;
+        if (timeCountHolder == 6000) {
+            timeCountHolder = 0;
             prepAgain = false;
             System.out.println("reset");
             move();
@@ -79,7 +65,7 @@ public class FateOfCards extends JPanel implements ActionListener {
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
             if (prepAgain) {
-                donePrep += 100;
+                timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs
             }
             prep();
         }
