@@ -3,8 +3,10 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class FateOfCards extends JPanel implements ActionListener {
+public class FateOfCards extends JPanel implements ActionListener, MouseListener {
 
     int width = 700;
     int height = 900;
@@ -19,10 +21,13 @@ public class FateOfCards extends JPanel implements ActionListener {
     int timeCountHolder;
     boolean preparingPhaseBool;
 
+    Point mouseClickedCoordinates;
+
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
         setBackground(Color.BLACK);
+        addMouseListener(this);
 
         prepPhaseObj = new PreparationPhase();
 
@@ -74,6 +79,31 @@ public class FateOfCards extends JPanel implements ActionListener {
             }
             prep();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        mouseClickedCoordinates = e.getPoint();
+        if (mouseClickedCoordinates.y > prepPhaseObj.starCard.getY()) {
+            System.out.println("try nakasulod ba greater than y"); // works perfectly
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
     // SEGEH MESSY CODEZ NA NI, AS LONG AS MA BUHAT NAKO IN MY WAY

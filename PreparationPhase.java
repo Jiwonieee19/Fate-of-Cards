@@ -9,6 +9,7 @@ public class PreparationPhase {
 
     int cardWidth = 735 / 8; // 92
     int cardHeight = 1208 / 8; // 151
+    int margin = 50;
 
     PreparationPhase() {
 
@@ -16,9 +17,9 @@ public class PreparationPhase {
         Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        starCard = new MainCards(100, 100, cardWidth, cardHeight, starImg);
-        towerCard = new MainCards(192, 100, cardWidth, cardHeight, towerImg);
-        devilCard = new MainCards(284, 100, cardWidth, cardHeight, devilImg);
+        starCard = new MainCards(100 + margin, 700, cardWidth, cardHeight, starImg);
+        towerCard = new MainCards(192 + (margin * 2), 700, cardWidth, cardHeight, towerImg);
+        devilCard = new MainCards(284 + (margin * 3), 700, cardWidth, cardHeight, devilImg);
     }
 
     public void PreparationFunction() {
