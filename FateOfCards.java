@@ -1,4 +1,3 @@
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.*;
@@ -11,16 +10,11 @@ public class FateOfCards extends JPanel implements ActionListener {
     int height = 900;
     int pixel = 20;
 
-    MainCards starCard;
-    MainCards towerCard;
-    MainCards devilCard;
-
-    int cardWidth = 735 / 8;
-    int cardHeight = 1208 / 8;
-
     Timer gameLoop;
     Timer roundPrepTimer;
     Timer roundBattleTimer;
+
+    PreparationPhase prepPhaseObj;
 
     int timeCountHolder;
     boolean preparingPhaseBool;
@@ -30,13 +24,7 @@ public class FateOfCards extends JPanel implements ActionListener {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        Image starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
-        Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
-        Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
-
-        starCard = new MainCards(100, 100, cardWidth, cardHeight, starImg);
-        towerCard = new MainCards(100, 100, cardWidth, cardHeight, towerImg);
-        devilCard = new MainCards(100, 100, cardWidth, cardHeight, devilImg);
+        prepPhaseObj = new PreparationPhase();
 
         timeCountHolder = 0;
         preparingPhaseBool = true;
@@ -61,8 +49,12 @@ public class FateOfCards extends JPanel implements ActionListener {
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawString("Fate of Cards", width / 2 - 30, 20);
-        g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(), starCard.getWidth(), starCard.getHeight(),
-                null);
+        // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
+        // starCard.getWidth(), starCard.getHeight(),
+        // null);
+        if (preparingPhaseBool) {
+            prepPhaseObj.draw(g); // TAE PEDE RA DAAY NIII MOGANA DAAY NI HAHAAHA
+        }
     }
 
     @Override
@@ -79,8 +71,6 @@ public class FateOfCards extends JPanel implements ActionListener {
             if (preparingPhaseBool) {
                 timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs, after 6secs, done na
                                         // preparation
-                PreparationPhase prepPhaseObj = new PreparationPhase();
-                prepPhaseObj.PreparationFunction();
             }
             prep();
         }
