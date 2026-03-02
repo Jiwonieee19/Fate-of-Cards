@@ -10,6 +10,10 @@ public class PreparationPhase {
     int cardWidth = 735 / 8; // 92
     int cardHeight = 1208 / 8; // 151
     int margin = 50;
+    int cardY = 700;
+    int starCardX = 100 + margin;
+    int towerCardX = 192 + (margin * 2);
+    int devilCardX = 284 + (margin * 3);
 
     PreparationPhase() {
 
@@ -17,9 +21,9 @@ public class PreparationPhase {
         Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        starCard = new MainCards(100 + margin, 700, cardWidth, cardHeight, starImg);
-        towerCard = new MainCards(192 + (margin * 2), 700, cardWidth, cardHeight, towerImg);
-        devilCard = new MainCards(284 + (margin * 3), 700, cardWidth, cardHeight, devilImg);
+        starCard = new MainCards(starCardX, cardY, cardWidth, cardHeight, starImg);
+        towerCard = new MainCards(towerCardX, cardY, cardWidth, cardHeight, towerImg);
+        devilCard = new MainCards(devilCardX, cardY, cardWidth, cardHeight, devilImg);
     }
 
     public void PreparationFunction() {
@@ -28,7 +32,6 @@ public class PreparationPhase {
 
     // HANDLES HOVER/CLICK TO ACTIVE A CARD
     public void PreparationMouseClick(Point mouseClickedCoordinates) {
-        boolean starIsActive = false, towerIsActive = false, devilIsActive = false;
 
         if (mouseClickedCoordinates.y > starCard.getY()
                 && mouseClickedCoordinates.y < starCard.getY() + starCard.getHeight()
@@ -37,9 +40,9 @@ public class PreparationPhase {
 
             System.out.println("try nakasulod ba greater than y ni Star"); // works perfectly
 
-            starIsActive = true;
-            towerIsActive = false;
-            devilIsActive = false;
+            starCard.setAllCardsDetails(starCardX - 30, cardY - 30, cardWidth + 60, cardHeight + 60);
+            towerCard.setAllCardsDetails(towerCardX, cardY, cardWidth, cardHeight);
+            devilCard.setAllCardsDetails(devilCardX, cardY, cardWidth, cardHeight);
 
         } else if (mouseClickedCoordinates.y > towerCard.getY()
                 && mouseClickedCoordinates.y < towerCard.getY() + towerCard.getHeight()
@@ -47,10 +50,10 @@ public class PreparationPhase {
                 && mouseClickedCoordinates.x < towerCard.getX() + towerCard.getWidth()) {
 
             System.out.println("in Tower");
-
-            starIsActive = false;
-            towerIsActive = true;
-            devilIsActive = false;
+            towerCard.setAllCardsDetails(towerCardX - 30, cardY - 30, cardWidth + 60,
+                    cardHeight + 60);
+            devilCard.setAllCardsDetails(devilCardX, cardY, cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCardX, cardY, cardWidth, cardHeight);
 
         } else if (mouseClickedCoordinates.y > devilCard.getY()
                 && mouseClickedCoordinates.y < devilCard.getY() + devilCard.getHeight()
@@ -59,27 +62,11 @@ public class PreparationPhase {
 
             System.out.println("in Devil");
 
-            starIsActive = false;
-            towerIsActive = false;
-            devilIsActive = true;
-        }
+            devilCard.setAllCardsDetails(devilCardX - 30, cardY - 30, cardWidth + 60,
+                    cardHeight + 60);
+            towerCard.setAllCardsDetails(towerCardX, cardY, cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCardX, cardY, cardWidth, cardHeight);
 
-        if (starIsActive) {
-            starCard.setAllCardsDetails(starCard.getX() - 50, starCard.getY() - 50, cardWidth + 100, cardHeight + 100);
-            towerCard.setAllCardsDetails(towerCard.getX(), towerCard.getY(), cardWidth, cardHeight);
-            devilCard.setAllCardsDetails(devilCard.getX(), devilCard.getY(), cardWidth, cardHeight);
-        }
-        if (towerIsActive) {
-            towerCard.setAllCardsDetails(towerCard.getX() - 50, towerCard.getY() - 50, cardWidth + 100,
-                    cardHeight + 100);
-            starCard.setAllCardsDetails(starCard.getX(), starCard.getY(), cardWidth, cardHeight);
-            devilCard.setAllCardsDetails(devilCard.getX(), devilCard.getY(), cardWidth, cardHeight);
-        }
-        if (devilIsActive) {
-            devilCard.setAllCardsDetails(devilCard.getX() - 50, devilCard.getY() - 50, cardWidth + 100,
-                    cardHeight + 100);
-            towerCard.setAllCardsDetails(towerCard.getX(), towerCard.getY(), cardWidth, cardHeight);
-            starCard.setAllCardsDetails(starCard.getX(), starCard.getY(), cardWidth, cardHeight);
         }
     }
 
