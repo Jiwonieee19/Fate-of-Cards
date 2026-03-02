@@ -65,16 +65,21 @@ public class PreparationPhase {
         }
 
         if (starIsActive) {
-            starCard.setHeight(starCard.getHeight() + 100);
-            starCard.setWidth(starCard.getWidth() + 100);
+            starCard.setAllCardsDetails(starCard.getX() - 50, starCard.getY() - 50, cardWidth + 100, cardHeight + 100);
+            towerCard.setAllCardsDetails(towerCard.getX(), towerCard.getY(), cardWidth, cardHeight);
+            devilCard.setAllCardsDetails(devilCard.getX(), devilCard.getY(), cardWidth, cardHeight);
         }
         if (towerIsActive) {
-            towerCard.setHeight(towerCard.getHeight() + 100);
-            towerCard.setWidth(towerCard.getWidth() + 100);
+            towerCard.setAllCardsDetails(towerCard.getX() - 50, towerCard.getY() - 50, cardWidth + 100,
+                    cardHeight + 100);
+            starCard.setAllCardsDetails(starCard.getX(), starCard.getY(), cardWidth, cardHeight);
+            devilCard.setAllCardsDetails(devilCard.getX(), devilCard.getY(), cardWidth, cardHeight);
         }
         if (devilIsActive) {
-            devilCard.setHeight(devilCard.getHeight() + 100);
-            devilCard.setWidth(devilCard.getWidth() + 100);
+            devilCard.setAllCardsDetails(devilCard.getX() - 50, devilCard.getY() - 50, cardWidth + 100,
+                    cardHeight + 100);
+            towerCard.setAllCardsDetails(towerCard.getX(), towerCard.getY(), cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCard.getX(), starCard.getY(), cardWidth, cardHeight);
         }
     }
 

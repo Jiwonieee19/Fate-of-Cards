@@ -17,6 +17,14 @@ public class MainCards {
         this.setImg(img);
     }
 
+    public void setAllCardsDetails(int x, int y, int width, int height) {
+        this.setX(x);
+        this.setY(y);
+        this.setWidth(width);
+        this.setHeight(height);
+        // this.setImg(img);
+    }
+
     // OOP YARNS
     public void setX(int x) {
         this.x = x;
