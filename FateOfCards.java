@@ -53,19 +53,23 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
-        g.drawString("Fate of Cards", width / 2 - 30, 20);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("Fate of Cards", width / 2 - 70, 20);
         // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
         // starCard.getWidth(), starCard.getHeight(),
         // null);
         if (preparingPhaseBool) {
             prepPhaseObj.draw(g); // TAE PEDE RA DAAY NIII MOGANA DAAY NI HAHAAHA
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString("Preparation ends in " + (8000 - timeCountHolder) / 1000 + " seconds", width / 2 - 160, 400);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("10fps");
-        if (timeCountHolder == 6000) {
+        if (timeCountHolder == 8000) {
             timeCountHolder = 0;
             preparingPhaseBool = false;
             System.out.println("reset");
@@ -73,7 +77,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
             if (preparingPhaseBool) {
-                timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs, after 6secs, done na
+                timeCountHolder += 100; // pra magcount ni pa 8secs, 100ms x 80 = 8000ms = 8secs, after 8secs, done na
                                         // preparation
             }
             // prep();
