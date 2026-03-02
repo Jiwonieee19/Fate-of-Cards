@@ -76,25 +76,16 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
                 timeCountHolder += 100; // pra magcount ni pa 6secs, 100ms x 60 = 6000ms = 6secs, after 6secs, done na
                                         // preparation
             }
-            prep();
+            // prep();
         }
         repaint();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
         mouseClickedCoordinates = e.getPoint();
-        if (mouseClickedCoordinates.y > prepPhaseObj.starCard.getY()
-                && mouseClickedCoordinates.y < prepPhaseObj.starCard.getY() + prepPhaseObj.starCard.getHeight()
-                && mouseClickedCoordinates.x > prepPhaseObj.starCard.getX()
-                && mouseClickedCoordinates.x < prepPhaseObj.starCard.getX() + prepPhaseObj.starCard.getWidth()) {
-
-            System.out.println("try nakasulod ba greater than y"); // works perfectly
-
-            prepPhaseObj.starCard.setHeight(prepPhaseObj.starCard.getHeight() + 100);
-            prepPhaseObj.starCard.setWidth(prepPhaseObj.starCard.getWidth() + 100);
-
-        }
+        prepPhaseObj.PreparationMouseClick(mouseClickedCoordinates); // HAHAHAH BASIC HIDING SKILLS
 
     }
 
