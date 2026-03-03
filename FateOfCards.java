@@ -46,6 +46,15 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     }
 
+    public void bridgeToBattle() {
+        timeCountHolder = 0;
+        preparingPhaseBool = false;
+        if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) {
+            System.out.println("star ang active"); // it works
+        }
+        System.out.println("reset");
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
@@ -55,9 +64,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Fate of Cards", width / 2 - 70, 20);
-        // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
-        // starCard.getWidth(), starCard.getHeight(),
-        // null);
+
         if (preparingPhaseBool) {
             prepPhaseObj.draw(g); // TAE PEDE RA DAAY NIII MOGANA DAAY NI HAHAAHA
             g.setColor(Color.RED);
@@ -68,12 +75,9 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("10fps");
         if (timeCountHolder == 8000) {
-            timeCountHolder = 0;
-            preparingPhaseBool = false;
-            System.out.println("reset");
-            move();
+            bridgeToBattle();
+            // move();
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
             if (preparingPhaseBool) {
