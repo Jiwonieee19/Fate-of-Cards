@@ -4,12 +4,14 @@ import java.awt.Image;
 
 public class MainCards {
     // INITIALIZE / INSTANTIATE
+    private String name;
     private int x, y, width, height;
     private Image img;
     // private Color standard = Color.WHITE;
 
     // CONSTRUCTORS
-    MainCards(int x, int y, int width, int height, Image img) {
+    MainCards(String name, int x, int y, int width, int height, Image img) {
+        this.setName(name);
         this.setX(x);
         this.setY(y);
         this.setWidth(width);
@@ -18,6 +20,7 @@ public class MainCards {
     }
 
     public void setAllCardsDetails(int x, int y, int width, int height) {
+        // this.setName(name);
         this.setX(x);
         this.setY(y);
         this.setWidth(width);
@@ -26,6 +29,10 @@ public class MainCards {
     }
 
     // OOP YARNS
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setX(int x) {
         this.x = x;
     }
@@ -44,6 +51,10 @@ public class MainCards {
 
     public void setImg(Image img) {
         this.img = img;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public int getX() {

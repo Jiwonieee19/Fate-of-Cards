@@ -21,9 +21,9 @@ public class PreparationPhase {
         Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        starCard = new MainCards(starCardX, cardY, cardWidth, cardHeight, starImg);
-        towerCard = new MainCards(towerCardX, cardY, cardWidth, cardHeight, towerImg);
-        devilCard = new MainCards(devilCardX, cardY, cardWidth, cardHeight, devilImg);
+        starCard = new MainCards("star", starCardX, cardY, cardWidth, cardHeight, starImg);
+        towerCard = new MainCards("tower", towerCardX, cardY, cardWidth, cardHeight, towerImg);
+        devilCard = new MainCards("devil", devilCardX, cardY, cardWidth, cardHeight, devilImg);
     }
 
     public void PreparationFunction() {
