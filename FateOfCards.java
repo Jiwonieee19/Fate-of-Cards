@@ -58,6 +58,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         battlingPhaseBool = true;
         if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) { // if card nga na move ang x since active siya
             System.out.println("star ang active"); // it works
+            batPhaseObj.BattleCards(prepPhaseObj.starCard, null); // pasok sa "star yarn", checker ra ni
         } else if (prepPhaseObj.towerCard.getX() < prepPhaseObj.towerCardX) {
             System.out.println("tower ang active");
         } else if (prepPhaseObj.devilCard.getX() < prepPhaseObj.devilCardX) {
