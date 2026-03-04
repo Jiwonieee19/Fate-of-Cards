@@ -17,9 +17,12 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     Timer roundBattleTimer;
 
     PreparationPhase prepPhaseObj;
+    BattlePhase batPhaseObj;
 
     int timeCountHolder;
+    boolean startGameBool;
     boolean preparingPhaseBool;
+    boolean battlingPhaseBool;
 
     Point mouseClickedCoordinates;
 
@@ -30,9 +33,12 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         addMouseListener(this);
 
         prepPhaseObj = new PreparationPhase();
+        batPhaseObj = new BattlePhase();
 
         timeCountHolder = 0;
-        preparingPhaseBool = true;
+        startGameBool = false;
+        preparingPhaseBool = false;
+        battlingPhaseBool = false;
         gameLoop = new Timer(100, this); // 10 fps (1000ms / 100ms = 10 frame per 1000ms)
         gameLoop.start();
 
@@ -49,8 +55,13 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     public void bridgeToBattle() {
         timeCountHolder = 0;
         preparingPhaseBool = false;
-        if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) {
+        battlingPhaseBool = true;
+        if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) { // if card nga na move ang x since active siya
             System.out.println("star ang active"); // it works
+        } else if (prepPhaseObj.towerCard.getX() < prepPhaseObj.towerCardX) {
+            System.out.println("tower ang active");
+        } else if (prepPhaseObj.devilCard.getX() < prepPhaseObj.devilCardX) {
+            System.out.println("devil ang active");
         }
         System.out.println("reset");
     }
@@ -64,12 +75,20 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Fate of Cards", width / 2 - 70, 20);
-
+        if (!startGameBool) {
+            g.drawString("Press/Hold your mouse click to START", width / 2 - 180, height / 2);
+        }
         if (preparingPhaseBool) {
             prepPhaseObj.draw(g); // TAE PEDE RA DAAY NIII MOGANA DAAY NI HAHAAHA
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Preparation ends in " + (8000 - timeCountHolder) / 1000 + " seconds", width / 2 - 160, 400);
+        } else if (battlingPhaseBool) {
+            batPhaseObj.draw(g);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString("Card Battle", width / 2 - 20, 400);
+
         }
     }
 
@@ -81,8 +100,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         } else {
             // 6secs magsulod siyas prep until time is up then back to original
             if (preparingPhaseBool) {
-                timeCountHolder += 100; // pra magcount ni pa 8secs, 100ms x 80 = 8000ms = 8secs, after 8secs, done na
-                                        // preparation
+                timeCountHolder += 100; // pra magcount ni pa 8secs, 100ms x 80 = 8000ms = 8secs, done na preparation
             }
             // prep();
         }
@@ -91,9 +109,10 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-        mouseClickedCoordinates = e.getPoint();
-        prepPhaseObj.PreparationMouseClick(mouseClickedCoordinates); // HAHAHAH BASIC HIDING SKILLS
+        if (preparingPhaseBool) {
+            mouseClickedCoordinates = e.getPoint();
+            prepPhaseObj.PreparationMouseClick(mouseClickedCoordinates); // HAHAHAH BASIC HIDING SKILLS
+        }
 
     }
 
@@ -103,6 +122,10 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (!startGameBool) {
+            startGameBool = true;
+            preparingPhaseBool = true;
+        }
     }
 
     @Override
