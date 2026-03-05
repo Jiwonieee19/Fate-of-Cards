@@ -22,6 +22,6 @@ public class BattlePhase {
     }
 
     public void draw(Graphics g) {
-
+// cc
     }
 }
