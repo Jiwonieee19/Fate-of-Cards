@@ -12,16 +12,9 @@ public class BattlePhase {
 
     }
 
-    public MainCards BattleCards(MainCards a, MainCards b) {
-        // MainCards winner = a;
+    public void BattleCards(MainCards a, MainCards b) {
 
-        // TIE
-        if (a.getName().equals(b.getName())) {
-            System.out.println("TIE 1");
-            // return null; // tie
-
-            // STAR PLAYER A
-        } else if (a.getName().equals(prepPhaseObj.starCard.getName()) &&
+        if (a.getName().equals(prepPhaseObj.starCard.getName()) &&
                 b.getName().equals(prepPhaseObj.devilCard.getName())) {
 
             System.out.println("star A, devil B winner: DEVIL B {CHECKER}");
@@ -53,8 +46,9 @@ public class BattlePhase {
 
             System.out.println("devil A, star B winner: DEVIL A {CHECKER}");
 
+        } else {
+            System.out.println("TIE 2");
         }
-        return null;
     }
 
     public void draw(Graphics g) {

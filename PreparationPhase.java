@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 
 public class PreparationPhase {
@@ -15,6 +17,8 @@ public class PreparationPhase {
     int towerCardX = 192 + (margin * 2);
     int devilCardX = 284 + (margin * 3);
 
+    Random randomizer;
+
     PreparationPhase() {
 
         Image starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
@@ -24,6 +28,8 @@ public class PreparationPhase {
         starCard = new MainCards("star", starCardX, cardY, cardWidth, cardHeight, starImg);
         towerCard = new MainCards("tower", towerCardX, cardY, cardWidth, cardHeight, towerImg);
         devilCard = new MainCards("devil", devilCardX, cardY, cardWidth, cardHeight, devilImg);
+
+        randomizer = new Random();
     }
 
     public void PreparationFunction() {
@@ -67,6 +73,18 @@ public class PreparationPhase {
             towerCard.setAllCardsDetails(towerCardX, cardY, cardWidth, cardHeight);
             starCard.setAllCardsDetails(starCardX, cardY, cardWidth, cardHeight);
 
+        }
+    }
+
+    public MainCards BotChoice() {
+        int botchoice = randomizer.nextInt(0, 3);
+        // dli ga properly work ang karaan na ways (2) + 1 // {0,1,2} + 1 = 1,2,3
+        if (botchoice == 1) {
+            return starCard;
+        } else if (botchoice == 2) {
+            return towerCard;
+        } else {
+            return devilCard;
         }
     }
 
