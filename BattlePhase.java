@@ -51,6 +51,8 @@ public class BattlePhase {
         }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, MainCards a, MainCards b) {
+        g.drawImage(a.getImg(), 0, 0, a.getWidth(), a.getHeight(), null);
+        g.drawImage(b.getImg(), 500, 500, b.getWidth(), b.getHeight(), null);
     }
 }

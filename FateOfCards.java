@@ -26,6 +26,8 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     Point mouseClickedCoordinates;
 
+    MainCards a, b;
+
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
@@ -59,17 +61,27 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
         if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) { // if card nga na move ang x since active siya
             System.out.println("star ang active"); // it works
+            a = prepPhaseObj.starCard;
+            b = prepPhaseObj.BotChoice();
             // batPhaseObj.BattleCards(prepPhaseObj.starCard, null); // pasok sa "star
             // yarn", checker ra ni
             // batPhaseObj.BattleCards(prepPhaseObj.starCard, prepPhaseObj.devilCard);
             // devil wins (WORKING: NEED NLNG SHUFFLER SA BOT)
-            batPhaseObj.BattleCards(prepPhaseObj.starCard, prepPhaseObj.BotChoice());
+            batPhaseObj.BattleCards(a, b);
 
         } else if (prepPhaseObj.towerCard.getX() < prepPhaseObj.towerCardX) {
             System.out.println("tower ang active");
-
+            a = prepPhaseObj.towerCard;
+            b = prepPhaseObj.BotChoice();
+            batPhaseObj.BattleCards(a, b);
         } else if (prepPhaseObj.devilCard.getX() < prepPhaseObj.devilCardX) {
             System.out.println("devil ang active");
+            a = prepPhaseObj.devilCard;
+            b = prepPhaseObj.BotChoice();
+            batPhaseObj.BattleCards(a, b);
+
+        } else {
+            System.out.println("ERROR, WALAY CARD GI CLICK");
         }
         System.out.println("reset");
     }
@@ -92,7 +104,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Preparation ends in " + (8000 - timeCountHolder) / 1000 + " seconds", width / 2 - 160, 400);
         } else if (battlingPhaseBool) {
-            batPhaseObj.draw(g);
+            batPhaseObj.draw(g, a, b);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Card Battle", width / 2 - 20, 400);
