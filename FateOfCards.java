@@ -27,6 +27,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     Point mouseClickedCoordinates;
 
     MainCards a, b;
+    int aVelocityY, bVelocityY;
 
     FateOfCards() {
         setPreferredSize(new Dimension(width, height));
@@ -36,6 +37,8 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
         prepPhaseObj = new PreparationPhase();
         batPhaseObj = new BattlePhase();
+        aVelocityY = 700;
+        bVelocityY = 300;
 
         timeCountHolder = 0;
         startGameBool = false;
@@ -85,6 +88,10 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         System.out.println("reset");
     }
 
+    public Boolean battleCardCollision(int aY, int bY) {
+        return (aY < bY + prepPhaseObj.cardHeight && prepPhaseObj.cardHeight + bY > aY);
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
@@ -111,11 +118,16 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
             // BATTLE
         } else if (battlingPhaseBool) {
-            batPhaseObj.draw(g, a, b);
+            if (battleCardCollision(aVelocityY, bVelocityY)) {
+                batPhaseObj.collideFunction();
+            } else {
+                aVelocityY -= 15;
+                bVelocityY += 15;
+            }
+            batPhaseObj.draw(g, a, aVelocityY, b, bVelocityY);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Card Battle", 20, 200);
-
         }
     }
 

@@ -51,9 +51,17 @@ public class BattlePhase {
         }
     }
 
-    public void draw(Graphics g, MainCards a, MainCards b) {
-        g.drawImage(a.getImg(), 0, 0, a.getWidth() - 60, a.getHeight() - 60, null);
+    public void collideFunction() {
+        System.out.println("COllide");
+    }
+
+    public void draw(Graphics g, MainCards a, int aVelocityY, MainCards b, int bVelocityY) {
+        g.drawImage(a.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), aVelocityY, a.getWidth() - 60,
+                a.getHeight() - 60,
+                null);
         // -60 ka player since every a ky active card, which is nidako sad if active
-        g.drawImage(b.getImg(), 500, 500, b.getWidth(), b.getHeight(), null);
+        g.drawImage(b.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), bVelocityY, prepPhaseObj.cardWidth,
+                prepPhaseObj.cardHeight, null);
+        // prep nagkuha width and height, pra dli active width ug height makuha tie
     }
 }
