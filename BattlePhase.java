@@ -52,7 +52,8 @@ public class BattlePhase {
     }
 
     public void draw(Graphics g, MainCards a, MainCards b) {
-        g.drawImage(a.getImg(), 0, 0, a.getWidth(), a.getHeight(), null);
+        g.drawImage(a.getImg(), 0, 0, a.getWidth() - 60, a.getHeight() - 60, null);
+        // -60 ka player since every a ky active card, which is nidako sad if active
         g.drawImage(b.getImg(), 500, 500, b.getWidth(), b.getHeight(), null);
     }
 }

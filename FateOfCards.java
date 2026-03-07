@@ -59,10 +59,11 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         preparingPhaseBool = false;
         battlingPhaseBool = true;
 
+        b = prepPhaseObj.BotChoice(); // pede rasad ani, pra pick daan for bot
+
         if (prepPhaseObj.starCard.getX() < prepPhaseObj.starCardX) { // if card nga na move ang x since active siya
             System.out.println("star ang active"); // it works
             a = prepPhaseObj.starCard;
-            b = prepPhaseObj.BotChoice();
             // batPhaseObj.BattleCards(prepPhaseObj.starCard, null); // pasok sa "star
             // yarn", checker ra ni
             // batPhaseObj.BattleCards(prepPhaseObj.starCard, prepPhaseObj.devilCard);
@@ -72,12 +73,10 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         } else if (prepPhaseObj.towerCard.getX() < prepPhaseObj.towerCardX) {
             System.out.println("tower ang active");
             a = prepPhaseObj.towerCard;
-            b = prepPhaseObj.BotChoice();
             batPhaseObj.BattleCards(a, b);
         } else if (prepPhaseObj.devilCard.getX() < prepPhaseObj.devilCardX) {
             System.out.println("devil ang active");
             a = prepPhaseObj.devilCard;
-            b = prepPhaseObj.BotChoice();
             batPhaseObj.BattleCards(a, b);
 
         } else {
@@ -92,22 +91,30 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     }
 
     public void draw(Graphics g) {
+
+        // HEADER IN ALL PHASE
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Fate of Cards", width / 2 - 70, 20);
+        g.drawString("Fate of Cards", width / 2 - 60, 20);
+
+        // START
         if (!startGameBool) {
             g.drawString("Press/Hold your mouse click to START", width / 2 - 180, height / 2);
         }
+
+        // PREPARATION
         if (preparingPhaseBool) {
             prepPhaseObj.draw(g); // TAE PEDE RA DAAY NIII MOGANA DAAY NI HAHAAHA
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString("Preparation ends in " + (8000 - timeCountHolder) / 1000 + " seconds", width / 2 - 160, 400);
+            g.drawString("Preparation ends in " + (8000 - timeCountHolder) / 1000 + " seconds", 20, 200);
+
+            // BATTLE
         } else if (battlingPhaseBool) {
             batPhaseObj.draw(g, a, b);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString("Card Battle", width / 2 - 20, 400);
+            g.drawString("Card Battle", 20, 200);
 
         }
     }
