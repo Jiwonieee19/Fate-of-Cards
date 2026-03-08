@@ -88,6 +88,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         System.out.println("reset");
     }
 
+    // CARD COLLIDE
     public Boolean battleCardCollision(int aY, int bY) {
         return (aY < bY + prepPhaseObj.cardHeight && prepPhaseObj.cardHeight + bY > aY);
     }

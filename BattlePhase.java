@@ -49,6 +49,7 @@ public class BattlePhase {
         } else {
             System.out.println("TIE 2");
         }
+        // cc sori
     }
 
     public void collideFunction() {
