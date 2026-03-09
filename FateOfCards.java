@@ -26,7 +26,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
 
     Point mouseClickedCoordinates;
 
-    MainCards a, b;
+    MainCards a, b; // a is player, b is bot
     int aVelocityY, bVelocityY;
 
     FateOfCards() {
@@ -120,7 +120,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
             // BATTLE
         } else if (battlingPhaseBool) {
             if (battleCardCollision(aVelocityY, bVelocityY)) {
-                batPhaseObj.collideFunction();
+                batPhaseObj.collideResult(a, b); // pasa pasa ras a ug b
             } else {
                 aVelocityY -= 15;
                 bVelocityY += 15;

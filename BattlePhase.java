@@ -3,6 +3,7 @@ import java.awt.Graphics;
 public class BattlePhase {
 
     PreparationPhase prepPhaseObj;
+    MainCards winner;
 
     BattlePhase() {
         prepPhaseObj = new PreparationPhase();
@@ -18,42 +19,52 @@ public class BattlePhase {
                 b.getName().equals(prepPhaseObj.devilCard.getName())) {
 
             System.out.println("star A, devil B winner: DEVIL B {CHECKER}");
+            winner = b;
 
         } else if (a.getName().equals(prepPhaseObj.starCard.getName()) &&
                 b.getName().equals(prepPhaseObj.towerCard.getName())) {
 
             System.out.println("star A, tower B winner: STAR A {CHECKER}");
+            winner = a;
 
             // TOWER PLAYER A
         } else if (a.getName().equals(prepPhaseObj.towerCard.getName()) &&
                 b.getName().equals(prepPhaseObj.starCard.getName())) {
 
             System.out.println("tower A, star B winner: STAR B {CHECKER}");
+            winner = b;
 
         } else if (a.getName().equals(prepPhaseObj.towerCard.getName()) &&
                 b.getName().equals(prepPhaseObj.devilCard.getName())) {
 
             System.out.println("tower A, devil B winner: TOWER A {CHECKER}");
+            winner = a;
 
             // DEVIL PLAYER A
         } else if (a.getName().equals(prepPhaseObj.devilCard.getName()) &&
                 b.getName().equals(prepPhaseObj.towerCard.getName())) {
 
             System.out.println("devil A, tower B winner: TOWER B {CHECKER}");
+            winner = b;
 
         } else if (a.getName().equals(prepPhaseObj.devilCard.getName()) &&
                 b.getName().equals(prepPhaseObj.starCard.getName())) {
 
             System.out.println("devil A, star B winner: DEVIL A {CHECKER}");
+            winner = a;
 
         } else {
             System.out.println("TIE 2");
+            winner = null;
         }
         // cc sori
     }
 
-    public void collideFunction() {
+    public void collideResult(MainCards a, MainCards b) {
         System.out.println("COllide");
+        if (winner == a) {
+            System.out.println("Compared two Mainclass successfully"); // works fine
+        }
     }
 
     public void draw(Graphics g, MainCards a, int aVelocityY, MainCards b, int bVelocityY) {
