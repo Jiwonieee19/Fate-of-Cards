@@ -1,12 +1,19 @@
 import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class BattlePhase {
 
     PreparationPhase prepPhaseObj;
     MainCards winner;
+    Boolean drawXALoser, drawXBLoser;
+    Image X;
 
     BattlePhase() {
         prepPhaseObj = new PreparationPhase();
+        drawXALoser = false;
+        drawXBLoser = false;
+        X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
     }
 
     public void Function() {
@@ -64,6 +71,9 @@ public class BattlePhase {
         System.out.println("COllide");
         if (winner == a) {
             System.out.println("Compared two Mainclass successfully"); // works fine
+            drawXBLoser = true;
+        } else if (winner == b) {
+            drawXALoser = true;
         }
     }
 
@@ -75,5 +85,10 @@ public class BattlePhase {
         g.drawImage(b.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), bVelocityY, prepPhaseObj.cardWidth,
                 prepPhaseObj.cardHeight, null);
         // prep nagkuha width and height, pra dli active width ug height makuha tie
+        if (drawXBLoser) {
+            g.drawImage(X, b.getX(), bVelocityY, 180, 180, null);
+        } else if (drawXALoser) {
+            g.drawImage(X, a.getX(), aVelocityY, 180, 180, null);
+        }
     }
 }
