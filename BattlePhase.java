@@ -64,7 +64,6 @@ public class BattlePhase {
             System.out.println("TIE 2");
             winner = null;
         }
-        // cc sori
     }
 
     public void collideResult(MainCards a, MainCards b) {
