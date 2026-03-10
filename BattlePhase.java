@@ -85,9 +85,10 @@ public class BattlePhase {
                 prepPhaseObj.cardHeight, null);
         // prep nagkuha width and height, pra dli active width ug height makuha tie
         if (drawXBLoser) {
-            g.drawImage(X, b.getX(), bVelocityY, 180, 180, null);
+            // kaya pala mali ang b.getX(), kto daay sa og nga x coordinates gina retrieve
+            g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, bVelocityY, 180, 180, null);
         } else if (drawXALoser) {
-            g.drawImage(X, a.getX(), aVelocityY, 180, 180, null);
+            g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, aVelocityY, 180, 180, null);
         }
     }
 }
