@@ -121,6 +121,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         } else if (battlingPhaseBool) {
             if (battleCardCollision(aVelocityY, bVelocityY)) {
                 batPhaseObj.collideResult(a, b); // pasa pasa ras a ug b
+                battlingPhaseBool = false;
             } else {
                 aVelocityY -= 15;
                 bVelocityY += 15;
@@ -129,7 +130,18 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("Card Battle", 20, 200);
-            // cc
+
+            // RESULT
+        } else if (batPhaseObj.drawXALoser || batPhaseObj.drawXBLoser) {
+            String winnerStr = "";
+            if (batPhaseObj.drawXALoser)
+                winnerStr = "BOT";
+            else
+                winnerStr = "PLAYER";
+            batPhaseObj.draw(g, a, aVelocityY, b, bVelocityY); // PARA MABILIN GHPON TONG PICS SA CARD NGA NAGBANGGA
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString("WINNER CARD: " + winnerStr, 20, 200);
         }
     }
 
