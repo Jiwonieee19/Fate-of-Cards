@@ -100,4 +100,5 @@ public class PreparationPhase {
         g.drawImage(devilCard.getImg(), devilCard.getX(), devilCard.getY(), devilCard.getWidth(), devilCard.getHeight(),
                 null);
     }
+    // PLANNING TO REVISION THIS DRAFT
 }
