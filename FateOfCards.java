@@ -142,6 +142,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.drawString("WINNER CARD: " + winnerStr, 20, 200);
+            // cc sa
         }
     }
 
