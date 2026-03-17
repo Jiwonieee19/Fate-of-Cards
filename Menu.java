@@ -52,3 +52,5 @@ public class Menu extends JPanel implements ActionListener {
         }
     }
 }
+
+// MOGGED, NAAS FRAME ANG MENU
