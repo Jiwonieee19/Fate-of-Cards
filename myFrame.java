@@ -11,10 +11,15 @@ public class myFrame extends JFrame {
         setSize(width, height);
         setResizable(false);
 
-        FateOfCards FoC = new FateOfCards();
-        // Menu menu = new Menu();
-        FoC.requestFocus();
-        add(FoC);
+        // FateOfCards FoC = new FateOfCards();
+        Menu menu = new Menu();
+
+        // FoC.requestFocus();
+        // add(FoC);
+        // pack();
+
+        menu.requestFocus();
+        add(menu);
         pack();
         setLocationRelativeTo(null);
     }
