@@ -25,6 +25,5 @@ public class DefaultButton extends JButton {
 
     // public JButton getButton() {
     // return this;
-    // }
-    // cc
+    // } hatdog wa ka push gaina morning
 }
