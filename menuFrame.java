@@ -1,5 +1,6 @@
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,38 +8,47 @@ import javax.swing.*;
 
 public class menuFrame extends JFrame implements ActionListener {
 
-    int width = 700;
-    int height = 900;
+    int width = 1200;
+    int height = 800;
 
     JButton casualButton;
 
     FateOfCards Foc = new FateOfCards();
 
+    Font cormorantDefaultFont;
+
     menuFrame() {
+
+        // LOAD CUSTOM FONT
+        try {
+            cormorantDefaultFont = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getResourceAsStream("/assets/fonts/CormorantGaramond-Bold.ttf"))
+                    .deriveFont(40f);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(cormorantDefaultFont);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         setTitle("FoC");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(width, height);
         setResizable(false);
-        setLayout(new FlowLayout());
+        setLayout(null);
         setLocationRelativeTo(null);
+        setBackground(Color.BLACK);
 
-        // Menu menu = new Menu();
-
-        // FoC.requestFocus();
-        // add(FoC);
-        // pack();
-
-        // menu.requestFocus();
-        // add(menu);
-        // pack();
-
+        // CASUAL BUTTON SET UP
         casualButton = new JButton();
-        casualButton.setFont(new Font("Arial", Font.BOLD, 24));
+        casualButton.setFont(cormorantDefaultFont);
         casualButton.setText("Hi");
-        casualButton.setSize(25, 40);
+        casualButton.setBounds(100, 500, 200, 50);
         casualButton.addActionListener(this);
         casualButton.setFocusable(false);
         casualButton.setEnabled(true);
+        casualButton.setAlignmentX(BOTTOM_ALIGNMENT);
         this.add(casualButton);
 
         Foc.requestFocus();
