@@ -5,14 +5,15 @@ import java.awt.event.ActionListener;
 
 public class ExitConfirmationPanel extends JPanel implements ActionListener {
 
-    int width = 600, height = 400;
+    int width = 600, height = 400, margin = 100;
 
-    DefaultButton yesButton = new DefaultButton("Yes", width * (1 / 4), 300);
-    DefaultButton noButton = new DefaultButton("No", width + (3 / 4), 300);
+    DefaultButton yesButton = new DefaultButton("Yes", 0 + margin, 250);
+    DefaultButton noButton = new DefaultButton("No", width - (margin * 2), 250);
 
     ExitConfirmationPanel() {
         setBounds(width / 2, height / 2, width, height);
         setBackground(Color.BLUE);
+        setLayout(null);
 
         add(yesButton);
         add(noButton);
