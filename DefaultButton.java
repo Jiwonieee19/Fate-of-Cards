@@ -26,5 +26,4 @@ public class DefaultButton extends JButton {
     // public JButton getButton() {
     // return this;
     // }
-    // CC NASAD POYA SKWELA UY
 }

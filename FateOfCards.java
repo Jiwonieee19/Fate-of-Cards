@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class FateOfCards extends JPanel implements ActionListener, MouseListener {
 
-    int width = 700;
-    int height = 900;
+    int width = 1200;
+    int height = 800;
     int pixel = 20;
 
     Timer gameLoop;

@@ -11,7 +11,7 @@ public class menuFrame extends JFrame implements ActionListener {
 
     FateOfCards Foc = new FateOfCards();
     DefaultFont defaultFont = new DefaultFont();
-    DefaultButton casualButton = new DefaultButton("Try", 700);
+    DefaultButton casualButton = new DefaultButton("Try", 100);
 
     menuFrame() {
 
@@ -21,7 +21,8 @@ public class menuFrame extends JFrame implements ActionListener {
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
-        setBackground(Color.BLACK);
+        // kuhaon pa daay contentpane if frame e change bg
+        getContentPane().setBackground(Color.BLACK);
 
         // CASUAL BUTTON SET UP
         // casualButton = new JButton();
@@ -33,7 +34,7 @@ public class menuFrame extends JFrame implements ActionListener {
         // casualButton.setEnabled(true);
 
         casualButton.addActionListener(this);
-        this.add(casualButton);
+        add(casualButton);
 
         Foc.requestFocus();
         add(Foc);
@@ -43,9 +44,9 @@ public class menuFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == casualButton) {
-            casualButton.setVisible(false);
             Foc.setVisible(true);
             System.out.println("TRY BUTTON CASUAL");
+            casualButton.setVisible(false);
         }
     }
 }
