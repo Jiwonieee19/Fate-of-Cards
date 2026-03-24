@@ -10,7 +10,7 @@ public class DefaultFont {
         try {
             cormorantFont = Font.createFont(Font.TRUETYPE_FONT,
                     getClass().getResourceAsStream("/assets/fonts/CormorantGaramond-Bold.ttf"))
-                    .deriveFont(40f);
+                    .deriveFont(34f);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cormorantFont);

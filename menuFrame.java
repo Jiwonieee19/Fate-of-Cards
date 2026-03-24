@@ -11,7 +11,12 @@ public class menuFrame extends JFrame implements ActionListener {
 
     FateOfCards Foc = new FateOfCards();
     DefaultFont defaultFont = new DefaultFont();
-    DefaultButton casualButton = new DefaultButton("Try", 100);
+    DefaultButton casualButton = new DefaultButton("Casual", 250);
+    DefaultButton competitiveButton = new DefaultButton("Competitive", 310);
+    DefaultButton vsbotButton = new DefaultButton("VS Bot", 370);
+    DefaultButton optionButton = new DefaultButton("Option", 440);
+    DefaultButton guideButton = new DefaultButton("Guide", 500);
+    DefaultButton exitButton = new DefaultButton("Exit", 560);
 
     menuFrame() {
 
@@ -35,9 +40,29 @@ public class menuFrame extends JFrame implements ActionListener {
 
         casualButton.addActionListener(this);
         add(casualButton);
+        competitiveButton.addActionListener(this);
+        add(competitiveButton);
+        vsbotButton.addActionListener(this);
+        add(vsbotButton);
+        optionButton.addActionListener(this);
+        add(optionButton);
+        guideButton.addActionListener(this);
+        add(guideButton);
+        exitButton.addActionListener(this);
+        add(exitButton);
 
         add(Foc);
         Foc.setVisible(false);
+    }
+
+    // kay mo show up if ma hover during render sa panel 10fps
+    public void setButtonsVisibility(boolean b) {
+        casualButton.setVisible(b);
+        competitiveButton.setVisible(b);
+        vsbotButton.setVisible(b);
+        optionButton.setVisible(b);
+        guideButton.setVisible(b);
+        exitButton.setVisible(b);
     }
 
     @Override
@@ -45,8 +70,25 @@ public class menuFrame extends JFrame implements ActionListener {
         if (e.getSource() == casualButton) {
             Foc.setVisible(true);
             Foc.requestFocus();
+            Foc.setFocusable(true);
             System.out.println("TRY BUTTON CASUAL");
-            casualButton.setVisible(false);
+            // DefaultButton.setVisible(false);
+            setButtonsVisibility(false);
+        } else if (e.getSource() == competitiveButton) {
+            System.out.println("Ranked");
+            setButtonsVisibility(false);
+        } else if (e.getSource() == vsbotButton) {
+            System.out.println("VS BOT");
+            setButtonsVisibility(false);
+        } else if (e.getSource() == optionButton) {
+            System.out.println("Option");
+            setButtonsVisibility(false);
+        } else if (e.getSource() == guideButton) {
+            System.out.println("Guide");
+            setButtonsVisibility(false);
+        } else if (e.getSource() == exitButton) {
+            System.out.println("Exited");
+            // this.exit();
         }
     }
 }
