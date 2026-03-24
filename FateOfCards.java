@@ -30,7 +30,9 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     int aVelocityY, bVelocityY;
 
     FateOfCards() {
-        setPreferredSize(new Dimension(width, height));
+        // setPreferredSize(new Dimension(width, height));
+        // since d moagana if null layout ang frame
+        setBounds(0, 0, width, height);
         setFocusable(true);
         setBackground(Color.BLACK);
         addMouseListener(this);

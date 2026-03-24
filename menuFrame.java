@@ -36,7 +36,6 @@ public class menuFrame extends JFrame implements ActionListener {
         casualButton.addActionListener(this);
         add(casualButton);
 
-        Foc.requestFocus();
         add(Foc);
         Foc.setVisible(false);
     }
@@ -45,6 +44,7 @@ public class menuFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == casualButton) {
             Foc.setVisible(true);
+            Foc.requestFocus();
             System.out.println("TRY BUTTON CASUAL");
             casualButton.setVisible(false);
         }
