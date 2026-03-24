@@ -10,6 +10,8 @@ public class menuFrame extends JFrame implements ActionListener {
     int height = 800;
 
     FateOfCards Foc = new FateOfCards();
+    ExitConfirmationPanel ECP = new ExitConfirmationPanel();
+
     DefaultFont defaultFont = new DefaultFont();
     DefaultButton casualButton = new DefaultButton("Casual", 250);
     DefaultButton competitiveButton = new DefaultButton("Competitive", 310);
@@ -38,6 +40,13 @@ public class menuFrame extends JFrame implements ActionListener {
         // casualButton.setFocusable(false);
         // casualButton.setEnabled(true);
 
+        // ADD PANELS TO TOGGLE SETVISIBLE BOOLEAN
+        add(Foc);
+        Foc.setVisible(false);
+        add(ECP);
+        ECP.setVisible(false);
+
+        // BUTTON LISTENER AND ADD
         casualButton.addActionListener(this);
         add(casualButton);
         competitiveButton.addActionListener(this);
@@ -50,9 +59,6 @@ public class menuFrame extends JFrame implements ActionListener {
         add(guideButton);
         exitButton.addActionListener(this);
         add(exitButton);
-
-        add(Foc);
-        Foc.setVisible(false);
     }
 
     // kay mo show up if ma hover during render sa panel 10fps
@@ -88,6 +94,10 @@ public class menuFrame extends JFrame implements ActionListener {
             setButtonsVisibility(false);
         } else if (e.getSource() == exitButton) {
             System.out.println("Exited");
+            ECP.setVisible(true);
+            ECP.requestFocus();
+            ECP.setFocusable(true);
+            // this.setEnabled(false);
             // this.exit();
         }
     }

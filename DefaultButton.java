@@ -5,7 +5,7 @@ import javax.swing.SwingConstants;
 public class DefaultButton extends JButton {
 
     private String text;
-    private int y;
+    private int y, x;
 
     DefaultFont defaultFont = new DefaultFont();
 
@@ -15,7 +15,7 @@ public class DefaultButton extends JButton {
         // MENU BUTTON SET UP
         this.setFont(defaultFont.getFont());
         this.setText(this.text);
-        this.setBounds(70, this.y, 250, 50);
+        this.setBounds(70, this.y, 220, 50);
         this.setFocusable(false);
         this.setBorderPainted(false);
         this.setEnabled(true);
@@ -32,4 +32,19 @@ public class DefaultButton extends JButton {
     // public JButton getButton() {
     // return this;
     // }
+
+    DefaultButton(String text, int x, int y) {
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        // DEFAULT BUTTON SET UP
+        this.setFont(defaultFont.getFont());
+        this.setText(this.text);
+        this.setBounds(this.x, this.y, 100, 50);
+        this.setFocusable(false);
+        this.setBorderPainted(false);
+        this.setEnabled(true);
+        this.setBackground(Color.BLACK);
+        this.setForeground(Color.WHITE);
+    }
 }
