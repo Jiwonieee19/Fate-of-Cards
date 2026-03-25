@@ -62,6 +62,11 @@ public class MenuFrame extends JFrame implements ActionListener {
         add(guideButton);
         exitButton.addActionListener(this);
         add(exitButton);
+
+        // UNAVAILABLE BUTTONS
+        casualButton.setEnabled(false);
+        competitiveButton.setEnabled(false);
+        optionButton.setEnabled(false);
     }
 
     // kay mo show up if ma hover during render sa panel 10fps
@@ -74,15 +79,18 @@ public class MenuFrame extends JFrame implements ActionListener {
         exitButton.setVisible(b);
     }
 
+    // OPEN PANEL ACCORDINGLY< THIS ONE FOR VSBOT
+    public void openVSBot() {
+        FOCs.setVisible(true);
+        FOCs.requestFocus();
+        FOCs.setFocusable(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // CASUAL
         if (e.getSource() == casualButton) {
-            FOCs.setVisible(true);
-            FOCs.requestFocus();
-            FOCs.setFocusable(true);
             System.out.println("TRY BUTTON CASUAL");
-            // DefaultButton.setVisible(false);
             setButtonsVisibility(false);
             // COMPE
         } else if (e.getSource() == competitiveButton) {
@@ -90,6 +98,7 @@ public class MenuFrame extends JFrame implements ActionListener {
             setButtonsVisibility(false);
             // VSBOT
         } else if (e.getSource() == vsbotButton) {
+            openVSBot();
             System.out.println("VS BOT");
             setButtonsVisibility(false);
             // OPTION

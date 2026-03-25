@@ -40,7 +40,7 @@ public class DefaultFont {
         return cormorantBoldFont;
     }
 
-    public Font getRegFont() {
+    public Font getLightFont() {
         return cormorantLightFont;
     }
 }

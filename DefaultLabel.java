@@ -15,7 +15,7 @@ public class DefaultLabel extends JLabel {
         this.y = y;
         this.width = width;
         // DEFAULT LABEL SET UP
-        this.setFont(defaultFont.getRegFont());
+        this.setFont(defaultFont.getLightFont());
         this.setText(this.text);
         this.setBounds(this.x, this.y, this.width, 50);
         this.setBackground(Color.BLACK);
