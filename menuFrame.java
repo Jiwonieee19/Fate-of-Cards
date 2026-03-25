@@ -9,7 +9,8 @@ public class MenuFrame extends JFrame implements ActionListener {
     int width = 1200;
     int height = 800;
 
-    FateOfCards Foc = new FateOfCards();
+    FateOfCards FOCs = new FateOfCards();
+    GuidePanel GP = new GuidePanel();
     ExitConfirmationPanel ECP = new ExitConfirmationPanel();
 
     DefaultFont defaultFont = new DefaultFont();
@@ -22,7 +23,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     MenuFrame() {
 
-        setTitle("FoC");
+        setTitle("FC");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(width, height);
         setResizable(false);
@@ -41,8 +42,10 @@ public class MenuFrame extends JFrame implements ActionListener {
         // casualButton.setEnabled(true);
 
         // ADD PANELS TO TOGGLE SETVISIBLE BOOLEAN
-        add(Foc);
-        Foc.setVisible(false);
+        add(FOCs);
+        FOCs.setVisible(false);
+        add(GP);
+        GP.setVisible(false);
         add(ECP);
         ECP.setVisible(false);
 
@@ -73,25 +76,32 @@ public class MenuFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // CASUAL
         if (e.getSource() == casualButton) {
-            Foc.setVisible(true);
-            Foc.requestFocus();
-            Foc.setFocusable(true);
+            FOCs.setVisible(true);
+            FOCs.requestFocus();
+            FOCs.setFocusable(true);
             System.out.println("TRY BUTTON CASUAL");
             // DefaultButton.setVisible(false);
             setButtonsVisibility(false);
+            // COMPE
         } else if (e.getSource() == competitiveButton) {
             System.out.println("Ranked");
             setButtonsVisibility(false);
+            // VSBOT
         } else if (e.getSource() == vsbotButton) {
             System.out.println("VS BOT");
             setButtonsVisibility(false);
+            // OPTION
         } else if (e.getSource() == optionButton) {
             System.out.println("Option");
             setButtonsVisibility(false);
+            // GUIDE
         } else if (e.getSource() == guideButton) {
             System.out.println("Guide");
             setButtonsVisibility(false);
+            GP.setVisible(true);
+            // EXIT
         } else if (e.getSource() == exitButton) {
             System.out.println("Exited");
             ECP.setVisible(true);

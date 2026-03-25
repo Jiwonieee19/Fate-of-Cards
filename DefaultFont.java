@@ -4,7 +4,7 @@ import java.awt.GraphicsEnvironment;
 public class DefaultFont {
 
     Font cormorantBoldFont;
-    Font cormorantRegFont;
+    Font cormorantLightFont;
 
     DefaultFont() {
         // LOAD CUSTOM FONT (BOLD)
@@ -24,12 +24,12 @@ public class DefaultFont {
         try
 
         {
-            cormorantRegFont = Font.createFont(Font.TRUETYPE_FONT,
-                    getClass().getResourceAsStream("/assets/fonts/CormorantGaramond-Bold.ttf"))
+            cormorantLightFont = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getResourceAsStream("/assets/fonts/CormorantGaramond-Light.ttf"))
                     .deriveFont(34f);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(cormorantRegFont);
+            ge.registerFont(cormorantLightFont);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,6 +41,6 @@ public class DefaultFont {
     }
 
     public Font getRegFont() {
-        return cormorantRegFont;
+        return cormorantLightFont;
     }
 }
