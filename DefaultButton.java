@@ -13,7 +13,7 @@ public class DefaultButton extends JButton {
         this.text = text;
         this.y = y;
         // MENU BUTTON SET UP
-        this.setFont(defaultFont.getFont());
+        this.setFont(defaultFont.getBoldFont());
         this.setText(this.text);
         this.setBounds(70, this.y, 220, 50);
         this.setFocusable(false);
@@ -38,7 +38,7 @@ public class DefaultButton extends JButton {
         this.x = x;
         this.y = y;
         // DEFAULT BUTTON SET UP
-        this.setFont(defaultFont.getFont());
+        this.setFont(defaultFont.getBoldFont());
         this.setText(this.text);
         this.setBounds(this.x, this.y, 100, 50);
         this.setFocusable(false);
