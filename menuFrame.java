@@ -97,8 +97,9 @@ public class menuFrame extends JFrame implements ActionListener {
             ECP.setVisible(true);
             ECP.requestFocus();
             ECP.setFocusable(true);
+            setButtonsVisibility(false);
             // this.setEnabled(false);
-            // this.exit();
+            // this.dispose();
         }
     }
 }
