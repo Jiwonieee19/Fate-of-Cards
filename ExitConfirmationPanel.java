@@ -14,14 +14,14 @@ public class ExitConfirmationPanel extends JPanel implements ActionListener {
     // PARA MAKUHA SI PARENT, AND THEN MA ACCESS SIYA THROUGH
     // INSTANCE OF JFRAME FROM PARENT COMPONENT
     Component parentComponent = this.getParent();
-    menuFrame parentFrame = (menuFrame) parentComponent;
+    MenuFrame parentFrame = (MenuFrame) parentComponent;
     // MAS DALI RANI, NO NEED INSTANCE SA COMPONENT PARENT
     // menuFrame parentFrame = (menuFrame) SwingUtilities.getWindowAncestor(this);
 
     // ANI RA DAAY, ANCESTOR AND PARENTS ARE NOT THE SAME
     // PARENTS SI EXTEND, ANCESTOR SI NAG ADD NIMO
     Window window;
-    menuFrame menuOnlyFrame;
+    MenuFrame menuOnlyFrame;
     // GETS NA NAKO UNSAON PAG UTILIZE SA SWINGUTILITIES
 
     DefaultButton yesButton = new DefaultButton("Yes", 0 + margin, 200);
@@ -47,7 +47,7 @@ public class ExitConfirmationPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == yesButton) {
             System.out.println("KASULOD SA YES");
-            // d mo gana if sa instantiation ibutang
+            // d mo gana if sa instantiation ibutang kay ma null ang this.window
             window = SwingUtilities.getWindowAncestor(this);
             if (window != null) {
                 window.dispose();
@@ -56,7 +56,7 @@ public class ExitConfirmationPanel extends JPanel implements ActionListener {
         } else if (e.getSource() == noButton) {
             this.setVisible(false);
             // waw, window ang e retrieve but with () makuha ang any compo
-            menuOnlyFrame = (menuFrame) SwingUtilities.getWindowAncestor(this);
+            menuOnlyFrame = (MenuFrame) SwingUtilities.getWindowAncestor(this);
 
             // pede walay if, but to make it not crash if ever, then do if
             if (menuOnlyFrame != null) {

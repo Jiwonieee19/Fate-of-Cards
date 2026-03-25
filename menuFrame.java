@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class menuFrame extends JFrame implements ActionListener {
+public class MenuFrame extends JFrame implements ActionListener {
 
     int width = 1200;
     int height = 800;
@@ -20,7 +20,7 @@ public class menuFrame extends JFrame implements ActionListener {
     DefaultButton guideButton = new DefaultButton("Guide", 500);
     DefaultButton exitButton = new DefaultButton("Exit", 560);
 
-    menuFrame() {
+    MenuFrame() {
 
         setTitle("FoC");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
