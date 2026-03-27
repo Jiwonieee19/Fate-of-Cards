@@ -9,7 +9,8 @@ public class MenuFrame extends JFrame implements ActionListener {
     int width = 1200;
     int height = 800;
 
-    FateOfCards FOCs = new FateOfCards();
+    // FateOfCards FOCs = new FateOfCards();
+    VSBotPanel FOCs = new VSBotPanel();
     GuidePanel GP = new GuidePanel();
     ExitConfirmationPanel ECP = new ExitConfirmationPanel();
 
