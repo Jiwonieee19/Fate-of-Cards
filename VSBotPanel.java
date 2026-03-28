@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class VSBotPanel extends JPanel implements ActionListener {
+public class VSBotPanel extends JPanel implements ActionListener, MouseListener {
 
     int width = 1200, height = 800, pixel = 20;
 
@@ -28,6 +30,7 @@ public class VSBotPanel extends JPanel implements ActionListener {
         setBounds(0, 0, width, height);
         setFocusable(true);
         setBackground(Color.BLACK);
+        addMouseListener(this);
 
         preparationPhaseObject = new PreparationPhase();
         battlePhaseObject = new BattlePhase();
@@ -58,7 +61,7 @@ public class VSBotPanel extends JPanel implements ActionListener {
             g.drawString("PREPARATION PHASE", 20, 40);
             preparationPhaseObject.draw(g);
             g.setColor(Color.RED);
-            g.setFont(defaultFont.getLightFont());
+            g.setFont(defaultFont.getLightFontCustomSize(10));
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 100);
         }
     }
@@ -69,5 +72,30 @@ public class VSBotPanel extends JPanel implements ActionListener {
             timeCountHolder += fps;
         }
         repaint();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (preparing) {
+            mouseClickCoordinatesPoint = e.getPoint();
+            preparationPhaseObject.PreparationMouseClick(mouseClickCoordinatesPoint);
+            // PARA NAA NA SA DESIGNATED CLASS ANG PAG HANDLE, DRI SA PANEL, IGO RA PASA
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
