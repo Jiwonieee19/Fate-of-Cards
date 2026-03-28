@@ -12,12 +12,24 @@ public class PreparationPhase {
     int cardWidth = 735 / 8; // 92
     int cardHeight = 1208 / 8; // 151
     int margin = 50;
-    int cardY = 700;
+    int cardY = 600;
     int starCardX = 100 + margin;
-    int towerCardX = 192 + (margin * 2);
-    int devilCardX = 284 + (margin * 3);
+    int towerCardX = 100 + (margin * 2);
+    int devilCardX = 100 + (margin * 3);
 
     Random randomizer;
+
+    MainRunes rockRune;
+    MainRunes paperRune;
+    MainRunes scissorsRune;
+
+    // MATHS MATHS MATHS
+    int runesWH = 120;
+    int runesY = 600;
+    int scissorsRuneY = 600 - ((runesWH + 90) / 2);
+    int rockRuneX = 850;
+    int paperRuneX = rockRuneX + runesWH;
+    int scissorsRuneX = rockRuneX + (runesWH / 2);
 
     PreparationPhase() {
 
@@ -30,6 +42,14 @@ public class PreparationPhase {
         devilCard = new MainCards("devil", devilCardX, cardY, cardWidth, cardHeight, devilImg);
 
         randomizer = new Random();
+
+        Image rockImage = new ImageIcon(getClass().getResource("assets/runes/rockRune.png")).getImage();
+        Image paperImage = new ImageIcon(getClass().getResource("assets/runes/paperRune.png")).getImage();
+        Image scissorsImage = new ImageIcon(getClass().getResource("assets/runes/scissorsRune.png")).getImage();
+
+        rockRune = new MainRunes("rock", rockRuneX, runesY, runesWH, runesWH, rockImage);
+        paperRune = new MainRunes("paper", paperRuneX, runesY, runesWH, runesWH, paperImage);
+        scissorsRune = new MainRunes("scissors", scissorsRuneX, scissorsRuneY, runesWH, runesWH, scissorsImage);
     }
 
     public void PreparationFunction() {
@@ -93,11 +113,26 @@ public class PreparationPhase {
     // }
 
     public void draw(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.fillRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
+        g.drawLine(0, 800 / 2, 1200, 800 / 2);
+
         g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(), starCard.getWidth(), starCard.getHeight(),
                 null);
         g.drawImage(towerCard.getImg(), towerCard.getX(), towerCard.getY(), towerCard.getWidth(), towerCard.getHeight(),
                 null);
         g.drawImage(devilCard.getImg(), devilCard.getX(), devilCard.getY(), devilCard.getWidth(), devilCard.getHeight(),
+                null);
+
+        // DRAW RUNES
+        g.drawImage(rockRune.getImage(), rockRune.getX(), rockRune.getY(), rockRune.getWidth(),
+                rockRune.getHeight(),
+                null);
+        g.drawImage(paperRune.getImage(), paperRune.getX(), paperRune.getY(), paperRune.getWidth(),
+                paperRune.getHeight(),
+                null);
+        g.drawImage(scissorsRune.getImage(), scissorsRune.getX(), scissorsRune.getY(), scissorsRune.getWidth(),
+                scissorsRune.getHeight(),
                 null);
     }
     // PLANNING TO REVISION THIS DRAFT

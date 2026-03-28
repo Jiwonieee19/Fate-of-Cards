@@ -52,7 +52,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     public void draw(Graphics g) {
         // HEADER IN ALL PHASE
         g.setColor(Color.WHITE);
-        g.setFont(defaultFont.getBoldFont());
+        g.setFont(defaultFont.getBoldFontCustomSize(25));
         if (battling)
             g.drawString("BATTLE PHASE", 20, 40);
 
@@ -61,8 +61,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.drawString("PREPARATION PHASE", 20, 40);
             preparationPhaseObject.draw(g);
             g.setColor(Color.RED);
-            g.setFont(defaultFont.getLightFontCustomSize(10));
-            g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 100);
+            g.setFont(defaultFont.getLightFontCustomSize(20));
+            g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
         }
     }
 
