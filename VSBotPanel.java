@@ -84,7 +84,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             timeCountHolder += fps;
             System.out.println("CURRENT COUNT: " + timeCountHolder);
         }
-        if (!initialDraw && timeCountHolder > 3000) {
+        if (initialDraw && timeCountHolder > 3000) {
             initialDraw = false;
             preparing = true;
             System.out.println("NAKASULOD BUT WAIII");
