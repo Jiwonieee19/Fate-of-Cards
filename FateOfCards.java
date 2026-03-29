@@ -16,7 +16,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
     Timer roundPrepTimer;
     Timer roundBattleTimer;
 
-    PreparationPhase prepPhaseObj;
+    PreparationPhase_copy prepPhaseObj;
     BattlePhase batPhaseObj;
 
     int timeCountHolder;
@@ -37,7 +37,7 @@ public class FateOfCards extends JPanel implements ActionListener, MouseListener
         setBackground(Color.BLACK);
         addMouseListener(this);
 
-        prepPhaseObj = new PreparationPhase();
+        prepPhaseObj = new PreparationPhase_copy();
         batPhaseObj = new BattlePhase();
         aVelocityY = 700;
         bVelocityY = 300;

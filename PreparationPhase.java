@@ -12,13 +12,14 @@ public class PreparationPhase {
     int cardWidth = 735 / 8; // 92
     int cardHeight = 1208 / 8; // 151
     int margin = 50;
-    int cardY = 600;
-    int starCardX = 100 + margin;
-    int towerCardX = 100 + (margin * 2);
-    int devilCardX = 100 + (margin * 3);
+    int cardY = 550;
+    // int starCardX = margin;
+    // int towerCardX = margin * 2;
+    // int devilCardX = margin * 3;
 
     Random randomizer;
 
+    // REFACTORS START HERE
     MainRunes rockRune;
     MainRunes paperRune;
     MainRunes scissorsRune;
@@ -31,18 +32,26 @@ public class PreparationPhase {
     int paperRuneX = rockRuneX + runesWH;
     int scissorsRuneX = rockRuneX + (runesWH / 2);
 
+    MainCards deckCards;
+
     PreparationPhase() {
+
+        // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
+        // e.g. g.drawImage(instantiateCards.starCard.getImage(), , , , )
+        // i dont want that
 
         Image starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
         Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
         Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
 
-        starCard = new MainCards("star", starCardX, cardY, cardWidth, cardHeight, starImg);
-        towerCard = new MainCards("tower", towerCardX, cardY, cardWidth, cardHeight, towerImg);
-        devilCard = new MainCards("devil", devilCardX, cardY, cardWidth, cardHeight, devilImg);
+        // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
+        starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg);
+        towerCard = new MainCards("tower", margin, cardY, cardWidth, cardHeight, towerImg);
+        devilCard = new MainCards("devil", margin, cardY, cardWidth, cardHeight, devilImg);
 
         randomizer = new Random();
 
+        // REFACTOR STARTS HERE
         Image rockImage = new ImageIcon(getClass().getResource("assets/runes/rockRune.png")).getImage();
         Image paperImage = new ImageIcon(getClass().getResource("assets/runes/paperRune.png")).getImage();
         Image scissorsImage = new ImageIcon(getClass().getResource("assets/runes/scissorsRune.png")).getImage();
@@ -50,6 +59,13 @@ public class PreparationPhase {
         rockRune = new MainRunes("rock", rockRuneX, runesY, runesWH, runesWH, rockImage);
         paperRune = new MainRunes("paper", paperRuneX, runesY, runesWH, runesWH, paperImage);
         scissorsRune = new MainRunes("scissors", scissorsRuneX, scissorsRuneY, runesWH, runesWH, scissorsImage);
+
+        Image deckCardsImage = new ImageIcon(getClass().getResource("assets/backOfCard.jpg")).getImage();
+
+        deckCards = new MainCards("deck", 1200 - (cardWidth + margin), (800 / 2) - (cardHeight / 2), cardWidth,
+                cardHeight,
+                deckCardsImage);
+
     }
 
     public void PreparationFunction() {
@@ -66,9 +82,9 @@ public class PreparationPhase {
 
             System.out.println("try nakasulod ba greater than y ni Star"); // works perfectly
 
-            starCard.setAllCardsDetails(starCardX - 30, cardY - 30, cardWidth + 60, cardHeight + 60);
-            towerCard.setAllCardsDetails(towerCardX, cardY, cardWidth, cardHeight);
-            devilCard.setAllCardsDetails(devilCardX, cardY, cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCard.getX() - 30, cardY - 30, cardWidth + 60, cardHeight + 60);
+            towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
+            devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
 
         } else if (mouseClickedCoordinates.y > towerCard.getY()
                 && mouseClickedCoordinates.y < towerCard.getY() + towerCard.getHeight()
@@ -76,10 +92,10 @@ public class PreparationPhase {
                 && mouseClickedCoordinates.x < towerCard.getX() + towerCard.getWidth()) {
 
             System.out.println("in Tower");
-            towerCard.setAllCardsDetails(towerCardX - 30, cardY - 30, cardWidth + 60,
+            towerCard.setAllCardsDetails(towerCard.getX() - 30, cardY - 30, cardWidth + 60,
                     cardHeight + 60);
-            devilCard.setAllCardsDetails(devilCardX, cardY, cardWidth, cardHeight);
-            starCard.setAllCardsDetails(starCardX, cardY, cardWidth, cardHeight);
+            devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
 
         } else if (mouseClickedCoordinates.y > devilCard.getY()
                 && mouseClickedCoordinates.y < devilCard.getY() + devilCard.getHeight()
@@ -88,10 +104,10 @@ public class PreparationPhase {
 
             System.out.println("in Devil");
 
-            devilCard.setAllCardsDetails(devilCardX - 30, cardY - 30, cardWidth + 60,
+            devilCard.setAllCardsDetails(devilCard.getX() - 30, cardY - 30, cardWidth + 60,
                     cardHeight + 60);
-            towerCard.setAllCardsDetails(towerCardX, cardY, cardWidth, cardHeight);
-            starCard.setAllCardsDetails(starCardX, cardY, cardWidth, cardHeight);
+            towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
+            starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
 
         }
     }
@@ -113,6 +129,7 @@ public class PreparationPhase {
     // }
 
     public void draw(Graphics g) {
+        // LINES AND BOUNDARIES
         g.setColor(Color.WHITE);
         g.fillRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
         g.drawLine(0, 800 / 2, 1200, 800 / 2);
@@ -124,6 +141,7 @@ public class PreparationPhase {
         g.drawImage(devilCard.getImg(), devilCard.getX(), devilCard.getY(), devilCard.getWidth(), devilCard.getHeight(),
                 null);
 
+        // REFACTOR STARTS HERE
         // DRAW RUNES
         g.drawImage(rockRune.getImage(), rockRune.getX(), rockRune.getY(), rockRune.getWidth(),
                 rockRune.getHeight(),
@@ -133,6 +151,10 @@ public class PreparationPhase {
                 null);
         g.drawImage(scissorsRune.getImage(), scissorsRune.getX(), scissorsRune.getY(), scissorsRune.getWidth(),
                 scissorsRune.getHeight(),
+                null);
+
+        // DRAW DECK
+        g.drawImage(deckCards.getImg(), deckCards.getX(), deckCards.getY(), deckCards.getWidth(), deckCards.getHeight(),
                 null);
     }
     // PLANNING TO REVISION THIS DRAFT

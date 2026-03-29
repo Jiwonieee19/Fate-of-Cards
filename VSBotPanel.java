@@ -22,7 +22,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     int fps = 24, timeCountHolder;
     int roundPreparingTimer = 8000;
 
-    Boolean preparing, battling;
+    Boolean initialDraw, preparing, battling;
 
     Point mouseClickCoordinatesPoint;
 
@@ -37,6 +37,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         defaultFont = new DefaultFont();
 
         timeCountHolder = 0;
+        initialDraw = true;
         preparing = true;
         battling = false;
 

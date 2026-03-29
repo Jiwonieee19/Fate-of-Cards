@@ -16,8 +16,8 @@ public class FateOfCards_copy extends JPanel implements ActionListener, MouseLis
     Timer roundPrepTimer;
     Timer roundBattleTimer;
 
-    PreparationPhase prepPhaseObj;
-    BattlePhase batPhaseObj;
+    PreparationPhase_copy prepPhaseObj;
+    BattlePhase_copy batPhaseObj;
 
     int timeCountHolder;
     boolean startGameBool;
@@ -35,8 +35,8 @@ public class FateOfCards_copy extends JPanel implements ActionListener, MouseLis
         setBackground(Color.BLACK);
         addMouseListener(this);
 
-        prepPhaseObj = new PreparationPhase();
-        batPhaseObj = new BattlePhase();
+        prepPhaseObj = new PreparationPhase_copy();
+        batPhaseObj = new BattlePhase_copy();
         aVelocityY = 700;
         bVelocityY = 300;
 
