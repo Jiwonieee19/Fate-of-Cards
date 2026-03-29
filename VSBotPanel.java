@@ -12,6 +12,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     int width = 1200, height = 800, pixel = 20;
 
+    DrawPhase drawPhaseObject;
     PreparationPhase preparationPhaseObject;
     BattlePhase battlePhaseObject;
 
@@ -32,17 +33,18 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         setBackground(Color.BLACK);
         addMouseListener(this);
 
+        drawPhaseObject = new DrawPhase();
         preparationPhaseObject = new PreparationPhase();
         battlePhaseObject = new BattlePhase();
         defaultFont = new DefaultFont();
 
         timeCountHolder = 0;
         initialDraw = true;
-        preparing = true;
+        preparing = false;
         battling = false;
 
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
-        drawFPS.start();
+        // drawFPS.start();
     }
 
     public void paintComponent(Graphics g) {
@@ -54,8 +56,12 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // HEADER IN ALL PHASE
         g.setColor(Color.WHITE);
         g.setFont(defaultFont.getBoldFontCustomSize(25));
-        if (battling)
-            g.drawString("BATTLE PHASE", 20, 40);
+
+        // FIRST DRAW
+        if (initialDraw) {
+            g.drawString("STARTING DRAW PHASE", 20, 40);
+            drawPhaseObject.draw(g);
+        }
 
         // PREPARATION
         if (preparing) {
@@ -65,10 +71,24 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.setFont(defaultFont.getLightFontCustomSize(20));
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
         }
+
+        // BATTLE
+        if (battling) {
+            g.drawString("BATTLE PHASE", 20, 40);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (initialDraw) {
+            timeCountHolder += fps;
+            System.out.println("CURRENT COUNT: " + timeCountHolder);
+        }
+        if (!initialDraw && timeCountHolder > 3000) {
+            initialDraw = false;
+            preparing = true;
+            System.out.println("NAKASULOD BUT WAIII");
+        }
         if (preparing) {
             timeCountHolder += fps;
         }

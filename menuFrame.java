@@ -102,6 +102,8 @@ public class MenuFrame extends JFrame implements ActionListener {
             openVSBot();
             System.out.println("VS BOT");
             setButtonsVisibility(false);
+            // HAHAAH huli ka, ddto pa mag start run fps if ma click
+            FOCs.drawFPS.start();
             // OPTION
         } else if (e.getSource() == optionButton) {
             System.out.println("Option");
