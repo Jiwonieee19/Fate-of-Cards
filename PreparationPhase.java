@@ -34,6 +34,9 @@ public class PreparationPhase {
 
         MainCards deckCards;
 
+        // int playerCardCount;
+        int botCardCount;
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -65,7 +68,6 @@ public class PreparationPhase {
                 deckCards = new MainCards("deck", margin, (800 / 2) - (cardHeight / 2), cardWidth,
                                 cardHeight,
                                 deckCardsImage);
-
         }
 
         public void PreparationFunction() {
@@ -128,21 +130,70 @@ public class PreparationPhase {
         // draw(g);
         // }
 
-        public void draw(Graphics g) {
+        public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand, int playerCardCount) {
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
                 g.drawLine(0, 800 / 2, 1200, 800 / 2);
 
-                g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(), starCard.getWidth(),
-                                starCard.getHeight(),
-                                null);
-                g.drawImage(towerCard.getImg(), towerCard.getX(), towerCard.getY(), towerCard.getWidth(),
-                                towerCard.getHeight(),
-                                null);
-                g.drawImage(devilCard.getImg(), devilCard.getX(), devilCard.getY(), devilCard.getWidth(),
-                                devilCard.getHeight(),
-                                null);
+                // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
+                // starCard.getWidth(),
+                // starCard.getHeight(),
+                // null);
+                // g.drawImage(towerCard.getImg(), towerCard.getX(), towerCard.getY(),
+                // towerCard.getWidth(),
+                // towerCard.getHeight(),
+                // null);
+                // g.drawImage(devilCard.getImg(), devilCard.getX(), devilCard.getY(),
+                // devilCard.getWidth(),
+                // devilCard.getHeight(),
+                // null);
+
+                // 5 lang ka cards max per hand
+                // System.out.println(playerCardCount);
+                // KAY IF 2 OR NUMBER DYUD NAA SA FORLOOP LIMIT, GOODS RA
+                // BUT PLAYERCARDCOUNT DO THE SAME NGANU MANGITA PA NIG I NGA WALA YAWA
+                // AHHH NGANU GA DAGAN NIG BY 2 ANG PLAYERCOUNT
+                // AYY KADA FRAME NIYA IHATAG ANG ONHAND PALA
+
+                // SA DRAWPHASE NI IPHON TAS PASA AS PARAMETER
+                // PEDE RA SA PANEL TAS SYA NA DIRECTLY NAG ACCESS SA DRAW UG SA PREP
+                // OKEY D NA GA ADD BY 2, COMMENT THAT SHIT playerCount sysout
+                if (playerCardCount != 0) {
+                        // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
+                        // for (int i = 0; i < playerOnHand.length; i++) {
+                        for (int i = 0; i < playerCardCount; i++) {
+                                g.drawImage(playerOnHand[i].getImg(),
+                                                playerOnHand[i].getX() + (i * 50),
+                                                playerOnHand[i].getY(),
+                                                playerOnHand[i].getWidth(),
+                                                playerOnHand[i].getHeight(),
+                                                null);
+                        }
+                } else {
+                        g.drawString("NO CARDS LEFT", starCard.getX(), starCard.getY() + (cardHeight / 2));
+                }
+
+                if (botCardCount != 0) {
+                        // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
+                        // for (int i = 0; i < playerOnHand.length; i++) {
+                        for (int i = 0; i < playerCardCount; i++) {
+                                g.drawImage(botOnHand[i].getImg(),
+                                                botOnHand[i].getX() + (i * 50),
+                                                // MATHS MATHS MATHS
+                                                deckCards.getY() -
+                                                                (botOnHand[i].getY() - deckCards.getY()),
+                                                botOnHand[i].getWidth(),
+                                                botOnHand[i].getHeight(),
+                                                null);
+                        }
+                } else {
+                        g.drawString("NO CARDS LEFT", starCard.getX(),
+                                        // starCard.getY() + (cardHeight / 2));
+                                        // MATHS MATHS MATHS
+                                        deckCards.getY() - (starCard.getY()
+                                                        - (deckCards.getY() + (cardHeight / 2))));
+                }
 
                 // REFACTOR STARTS HERE
                 // DRAW RUNES

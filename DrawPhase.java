@@ -30,6 +30,8 @@ public class DrawPhase {
     Boolean playerDraw;
     Boolean botDraw;
 
+    int playerCardCount;
+
     DrawPhase() {
 
         // MAO NI NAMING KAY DDTO MAN SA PREPPHASE KUHAON
@@ -60,8 +62,6 @@ public class DrawPhase {
 
         deckCardVelocityX = deckCards.getX();
         deckCardVelocityY = deckCards.getY();
-
-        drawCount = 0;
 
         // PANG TOGGLE NI KUNG KINSA NA MO DRAW, first permi si player
         playerDraw = true;
@@ -117,6 +117,9 @@ public class DrawPhase {
 
                 // AFTER MA REACH OR MAKA ISAG DRAW, THEN DDTO PA MAG MINUS
                 drawCount -= 1;
+                if (playerCardCount < 6) {
+                    playerCardCount++;
+                }
                 playerDrawCard();
             }
             // KANG BOT NI, KAY - ANG Y MEANS PASAKA ANIMATION
@@ -159,7 +162,9 @@ public class DrawPhase {
     }
 
     public void draw(Graphics g) {
-        cardsObject.draw(g); // HAHAHAH kuha ra in.ani, naka separate bitaw tong String nga phase chuchu
+        cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount); // HAHAHAH kuha ra in.ani, naka
+        // separate bitaw tong String nga
+        // phase chuchu
         // startingDrawBoth();
         drawingCardsAnimation(g);
     }
