@@ -85,8 +85,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             System.out.println("CURRENT COUNT: " + timeCountHolder);
         }
         if (initialDraw && timeCountHolder > 3000) {
-            initialDraw = false;
-            preparing = true;
+            // initialDraw = false;
+            // preparing = true;
             System.out.println("NAKASULOD BUT WAIII");
         }
         if (preparing) {

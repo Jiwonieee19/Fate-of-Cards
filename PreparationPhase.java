@@ -62,7 +62,7 @@ public class PreparationPhase {
 
                 Image deckCardsImage = new ImageIcon(getClass().getResource("assets/backOfCard.jpg")).getImage();
 
-                deckCards = new MainCards("deck", 1200 - (cardWidth + margin), (800 / 2) - (cardHeight / 2), cardWidth,
+                deckCards = new MainCards("deck", margin, (800 / 2) - (cardHeight / 2), cardWidth,
                                 cardHeight,
                                 deckCardsImage);
 

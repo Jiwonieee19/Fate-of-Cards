@@ -27,6 +27,9 @@ public class DrawPhase {
     int drawFirstCount;
     int drawCount;
 
+    Boolean playerDraw;
+    Boolean botDraw;
+
     DrawPhase() {
 
         // MAO NI NAMING KAY DDTO MAN SA PREPPHASE KUHAON
@@ -58,27 +61,46 @@ public class DrawPhase {
         deckCardVelocityX = deckCards.getX();
         deckCardVelocityY = deckCards.getY();
 
-        drawFirstCount = 3 * 5;
-        drawCount = 1;
+        drawCount = 0;
+
+        playerDraw = true;
+        botDraw = false;
 
     }
 
     public void startingDrawBoth() {
         // MEANS PLAYER AND BOT PICK 2 INITIAL CARDS
         playerOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
-        playerOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
+        // playerOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
         botOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
-        botOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
+        // botOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
     }
 
     public void drawCardVelocityChanger() {
         // MATCH MY FREAK (INSTEAD OF PLAIN DRAW, ANIMATE USING VELOCITY AND SCALE ONLY)
-        if (deckCardVelocityX < 400) {
-            deckCardVelocityX -= 12;
-            deckCardVelocityY += 5;
+        if (deckCardVelocityX > 200 && playerDraw) {
+            deckCardVelocityY += 8;
+            if (deckCardVelocityY > cardsObject.cardY) {
+                // RESTART ANIMATION FOR NEXT DRAW
+                deckCardVelocityX = cardsObject.deckCards.getX();
+                deckCardVelocityY = cardsObject.deckCards.getY();
+                playerDraw = false;
+                botDraw = true;
+                // diff between y of deck and y of playercard to use for bot limit animation
+                int diff = (cardsObject.deckCards.getY() - cardsObject.devilCard.getY()); // 225
+                System.out.println("BASIC RESTART DRAW ANIMATION " + diff);
+            }
+        } else if (deckCardVelocityX > 200 && botDraw) {
+            deckCardVelocityY -= 8;
+            if (deckCardVelocityY < (cardsObject.deckCards.getY() - 225)) {
+                // RESTART ANIMATION FOR NEXT DRAW
+                deckCardVelocityX = cardsObject.deckCards.getX();
+                deckCardVelocityY = cardsObject.deckCards.getY();
+                playerDraw = true;
+                botDraw = false;
+            }
         } else {
-            deckCardVelocityX -= 12;
-
+            deckCardVelocityX += 7;
         }
     }
 
