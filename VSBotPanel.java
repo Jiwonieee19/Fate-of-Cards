@@ -68,7 +68,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         if (preparing) {
             g.drawString("PREPARATION PHASE", 20, 40);
             preparationPhaseObject.draw(g, drawPhaseObject.playerOnHand, drawPhaseObject.botOnHand,
-                    drawPhaseObject.playerCardCount);
+                    drawPhaseObject.playerCardCount,
+                    drawPhaseObject.botCardCount);
             g.setColor(Color.RED);
             g.setFont(defaultFont.getLightFontCustomSize(20));
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
@@ -87,16 +88,6 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // System.out.println("CURRENT COUNT: " + timeCountHolder);
         // }
         if (drawing && drawPhaseObject.drawCount == 0) {
-            // for (MainCards playerCard : drawPhaseObject.playerOnHand) {
-            // if (playerCard != null) {
-            // preparationPhaseObject.playerCardCount++;
-            // }
-            // }
-            for (MainCards botCard : drawPhaseObject.botOnHand) {
-                if (botCard != null) {
-                    preparationPhaseObject.botCardCount++;
-                }
-            }
             drawing = false;
             preparing = true;
             System.out.println("MANA DRAW");

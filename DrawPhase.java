@@ -31,6 +31,7 @@ public class DrawPhase {
     Boolean botDraw;
 
     int playerCardCount;
+    int botCardCount;
 
     DrawPhase() {
 
@@ -132,6 +133,9 @@ public class DrawPhase {
                 playerDraw = true;
                 botDraw = false;
                 drawCount -= 1;
+                if (botCardCount < 6) {
+                    botCardCount++;
+                }
                 botDrawCard();
             }
         } else {
@@ -162,7 +166,7 @@ public class DrawPhase {
     }
 
     public void draw(Graphics g) {
-        cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount); // HAHAHAH kuha ra in.ani, naka
+        cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount, botCardCount); // HAHAHAH kuha ra in.ani, naka
         // separate bitaw tong String nga
         // phase chuchu
         // startingDrawBoth();

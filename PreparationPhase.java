@@ -34,9 +34,6 @@ public class PreparationPhase {
 
         MainCards deckCards;
 
-        // int playerCardCount;
-        int botCardCount;
-
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -130,7 +127,8 @@ public class PreparationPhase {
         // draw(g);
         // }
 
-        public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand, int playerCardCount) {
+        public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand,
+                        int playerCardCount, int botCardCount) {
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
@@ -177,7 +175,7 @@ public class PreparationPhase {
                 if (botCardCount != 0) {
                         // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
                         // for (int i = 0; i < playerOnHand.length; i++) {
-                        for (int i = 0; i < playerCardCount; i++) {
+                        for (int i = 0; i < botCardCount; i++) {
                                 g.drawImage(botOnHand[i].getImg(),
                                                 botOnHand[i].getX() + (i * 50),
                                                 // MATHS MATHS MATHS
