@@ -23,7 +23,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     int fps = 24, timeCountHolder;
     int roundPreparingTimer = 8000;
 
-    Boolean initialDraw, preparing, battling;
+    Boolean drawing, preparing, battling;
 
     Point mouseClickCoordinatesPoint;
 
@@ -39,12 +39,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         defaultFont = new DefaultFont();
 
         timeCountHolder = 0;
-        initialDraw = true;
+        drawing = true;
         preparing = false;
         battling = false;
 
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
         // drawFPS.start();
+
     }
 
     public void paintComponent(Graphics g) {
@@ -58,7 +59,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         g.setFont(defaultFont.getBoldFontCustomSize(25));
 
         // FIRST DRAW
-        if (initialDraw) {
+        if (drawing) {
             g.drawString("STARTING DRAW PHASE", 20, 40);
             drawPhaseObject.draw(g);
         }
@@ -80,14 +81,14 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (initialDraw) {
-            timeCountHolder += fps;
-            System.out.println("CURRENT COUNT: " + timeCountHolder);
-        }
-        if (initialDraw && timeCountHolder > 3000) {
-            // initialDraw = false;
-            // preparing = true;
-            System.out.println("NAKASULOD BUT WAIII");
+        // if (drawing) {
+        // // timeCountHolder += fps;
+        // System.out.println("CURRENT COUNT: " + timeCountHolder);
+        // }
+        if (drawing && drawPhaseObject.drawCount == 0) {
+            drawing = false;
+            preparing = true;
+            System.out.println("MANA DRAW");
         }
         if (preparing) {
             timeCountHolder += fps;

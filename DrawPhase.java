@@ -63,17 +63,42 @@ public class DrawPhase {
 
         drawCount = 0;
 
+        // PANG TOGGLE NI KUNG KINSA NA MO DRAW, first permi si player
         playerDraw = true;
         botDraw = false;
 
+        // initial kay 2 man, so 2 cards sa 2 players = 4 ka cards ma draw
+        drawCount = 4;
     }
 
-    public void startingDrawBoth() {
-        // MEANS PLAYER AND BOT PICK 2 INITIAL CARDS
-        playerOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
-        // playerOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
-        botOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
-        // botOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
+    // public void startingDrawBoth() {
+    // // MEANS PLAYER AND BOT PICK 2 INITIAL CARDS
+    // playerOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
+    // // playerOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
+    // botOnHand[0] = drawPossibility[picker.nextInt(0, 3)];
+    // // botOnHand[1] = drawPossibility[picker.nextInt(0, 3)];
+    // }
+
+    // MUCH BETTER AND FLEXIBLE NI, PARA LATER FOR CARD EFFECTS NGA BLOCK DRAW
+    public void playerDrawCard() {
+        for (int i = 0; i < 5; i++) {
+            // MUCH FLEXIBLE PARA MA RECORD RA DRAW IF DLI PA MAX ANG ONHAND
+            if (playerOnHand[i] == null) {
+                playerOnHand[i] = drawPossibility[picker.nextInt(0, 3)];
+                System.out.println("NA DRAW NI PLAYER: " + playerOnHand[i].getName());
+                break;
+            }
+        }
+    }
+
+    public void botDrawCard() {
+        for (int i = 0; i < 5; i++) {
+            if (botOnHand[i] == null) {
+                botOnHand[i] = drawPossibility[picker.nextInt(0, 3)];
+                System.out.println("NA DRAW NI BOT: " + botOnHand[i].getName());
+                break;
+            }
+        }
     }
 
     public void drawCardVelocityChanger() {
@@ -89,7 +114,12 @@ public class DrawPhase {
                 // diff between y of deck and y of playercard to use for bot limit animation
                 int diff = (cardsObject.deckCards.getY() - cardsObject.devilCard.getY()); // 225
                 System.out.println("BASIC RESTART DRAW ANIMATION " + diff);
+
+                // AFTER MA REACH OR MAKA ISAG DRAW, THEN DDTO PA MAG MINUS
+                drawCount -= 1;
+                playerDrawCard();
             }
+            // KANG BOT NI, KAY - ANG Y MEANS PASAKA ANIMATION
         } else if (deckCardVelocityX > 200 && botDraw) {
             deckCardVelocityY -= 8;
             if (deckCardVelocityY < (cardsObject.deckCards.getY() - 225)) {
@@ -98,6 +128,8 @@ public class DrawPhase {
                 deckCardVelocityY = cardsObject.deckCards.getY();
                 playerDraw = true;
                 botDraw = false;
+                drawCount -= 1;
+                botDrawCard();
             }
         } else {
             deckCardVelocityX += 7;
@@ -128,7 +160,7 @@ public class DrawPhase {
 
     public void draw(Graphics g) {
         cardsObject.draw(g); // HAHAHAH kuha ra in.ani, naka separate bitaw tong String nga phase chuchu
-        startingDrawBoth();
+        // startingDrawBoth();
         drawingCardsAnimation(g);
     }
 }
