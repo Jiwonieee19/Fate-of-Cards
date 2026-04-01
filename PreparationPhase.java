@@ -34,6 +34,8 @@ public class PreparationPhase {
 
         MainCards deckCards;
 
+        DefaultFont defaultFont;
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -65,6 +67,8 @@ public class PreparationPhase {
                 deckCards = new MainCards("deck", margin, (800 / 2) - (cardHeight / 2), cardWidth,
                                 cardHeight,
                                 deckCardsImage);
+
+                defaultFont = new DefaultFont();
         }
 
         public void PreparationFunction() {
@@ -134,6 +138,9 @@ public class PreparationPhase {
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
                 g.drawLine(0, 800 / 2, 1200, 800 / 2);
 
+                g.setFont(defaultFont.getLightFontCustomSize(20));
+                g.drawString("total card: " + playerCardCount + "/3", starCard.getX(), starCard.getY() - 12);
+
                 // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
                 // starCard.getWidth(),
                 // starCard.getHeight(),
@@ -162,7 +169,7 @@ public class PreparationPhase {
                         // for (int i = 0; i < playerOnHand.length; i++) {
                         for (int i = 0; i < playerCardCount; i++) {
                                 g.drawImage(playerOnHand[i].getImg(),
-                                                playerOnHand[i].getX() + (i * 50),
+                                                playerOnHand[i].getX() + (i * 100),
                                                 playerOnHand[i].getY(),
                                                 playerOnHand[i].getWidth(),
                                                 playerOnHand[i].getHeight(),
@@ -177,7 +184,7 @@ public class PreparationPhase {
                         // for (int i = 0; i < playerOnHand.length; i++) {
                         for (int i = 0; i < botCardCount; i++) {
                                 g.drawImage(botOnHand[i].getImg(),
-                                                botOnHand[i].getX() + (i * 50),
+                                                botOnHand[i].getX() + (i * 100),
                                                 // MATHS MATHS MATHS
                                                 deckCards.getY() -
                                                                 (botOnHand[i].getY() - deckCards.getY()),

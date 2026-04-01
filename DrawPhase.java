@@ -70,6 +70,7 @@ public class DrawPhase {
 
         // initial kay 2 man, so 2 cards sa 2 players = 4 ka cards ma draw
         drawCount = 4;
+        // done draw > 5, no error
     }
 
     // public void startingDrawBoth() {
@@ -105,7 +106,7 @@ public class DrawPhase {
     public void drawCardVelocityChanger() {
         // MATCH MY FREAK (INSTEAD OF PLAIN DRAW, ANIMATE USING VELOCITY AND SCALE ONLY)
         if (deckCardVelocityX > 200 && playerDraw) {
-            deckCardVelocityY += 8;
+            deckCardVelocityY += 12;
             if (deckCardVelocityY > cardsObject.cardY) {
                 // RESTART ANIMATION FOR NEXT DRAW
                 deckCardVelocityX = cardsObject.deckCards.getX();
@@ -118,14 +119,15 @@ public class DrawPhase {
 
                 // AFTER MA REACH OR MAKA ISAG DRAW, THEN DDTO PA MAG MINUS
                 drawCount -= 1;
-                if (playerCardCount < 6) {
+                // para dli mag error pag nalapas
+                if (playerCardCount < 3) {
                     playerCardCount++;
                 }
                 playerDrawCard();
             }
             // KANG BOT NI, KAY - ANG Y MEANS PASAKA ANIMATION
         } else if (deckCardVelocityX > 200 && botDraw) {
-            deckCardVelocityY -= 8;
+            deckCardVelocityY -= 12;
             if (deckCardVelocityY < (cardsObject.deckCards.getY() - 225)) {
                 // RESTART ANIMATION FOR NEXT DRAW
                 deckCardVelocityX = cardsObject.deckCards.getX();
@@ -133,13 +135,13 @@ public class DrawPhase {
                 playerDraw = true;
                 botDraw = false;
                 drawCount -= 1;
-                if (botCardCount < 6) {
+                if (botCardCount < 3) {
                     botCardCount++;
                 }
                 botDrawCard();
             }
         } else {
-            deckCardVelocityX += 7;
+            deckCardVelocityX += 12;
         }
     }
 
