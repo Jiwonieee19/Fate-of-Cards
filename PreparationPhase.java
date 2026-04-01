@@ -36,6 +36,10 @@ public class PreparationPhase {
 
         DefaultFont defaultFont;
 
+        Image activeCardImage;
+        MainCards activeCard;
+        Boolean isActive;
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -69,6 +73,11 @@ public class PreparationPhase {
                                 deckCardsImage);
 
                 defaultFont = new DefaultFont();
+
+                activeCardImage = new ImageIcon(getClass().getResource("assets/activeCard.png")).getImage();
+                activeCard = new MainCards("active", margin, margin, cardWidth, cardHeight, activeCardImage);
+
+                isActive = false;
         }
 
         public void PreparationFunction() {
@@ -76,42 +85,82 @@ public class PreparationPhase {
         }
 
         // HANDLES HOVER/CLICK TO ACTIVE A CARD
-        public void PreparationMouseClick(Point mouseClickedCoordinates) {
+        public void PreparationMouseClick(Point mouseClickedCoordinates,
+                        MainCards[] playerOnHand, int playerCardCount) {
 
-                if (mouseClickedCoordinates.y > starCard.getY()
-                                && mouseClickedCoordinates.y < starCard.getY() + starCard.getHeight()
-                                && mouseClickedCoordinates.x > starCard.getX()
-                                && mouseClickedCoordinates.x < starCard.getX() + starCard.getWidth()) {
+                // if (mouseClickedCoordinates.y > starCard.getY()
+                // && mouseClickedCoordinates.y < starCard.getY() + starCard.getHeight()
+                // && mouseClickedCoordinates.x > starCard.getX()
+                // && mouseClickedCoordinates.x < starCard.getX() + starCard.getWidth()) {
 
-                        System.out.println("try nakasulod ba greater than y ni Star"); // works perfectly
+                // System.out.println("try nakasulod ba greater than y ni Star"); // works
+                // perfectly
 
-                        starCard.setAllCardsDetails(starCard.getX() - 30, cardY - 30, cardWidth + 60, cardHeight + 60);
-                        towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
-                        devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
+                // starCard.setAllCardsDetails(starCard.getX() - 30, cardY - 30, cardWidth + 60,
+                // cardHeight + 60);
+                // towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
+                // devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
 
-                } else if (mouseClickedCoordinates.y > towerCard.getY()
-                                && mouseClickedCoordinates.y < towerCard.getY() + towerCard.getHeight()
-                                && mouseClickedCoordinates.x > towerCard.getX()
-                                && mouseClickedCoordinates.x < towerCard.getX() + towerCard.getWidth()) {
+                // } else if (mouseClickedCoordinates.y > towerCard.getY()
+                // && mouseClickedCoordinates.y < towerCard.getY() + towerCard.getHeight()
+                // && mouseClickedCoordinates.x > towerCard.getX()
+                // && mouseClickedCoordinates.x < towerCard.getX() + towerCard.getWidth()) {
 
-                        System.out.println("in Tower");
-                        towerCard.setAllCardsDetails(towerCard.getX() - 30, cardY - 30, cardWidth + 60,
-                                        cardHeight + 60);
-                        devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
-                        starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
+                // System.out.println("in Tower");
+                // towerCard.setAllCardsDetails(towerCard.getX() - 30, cardY - 30, cardWidth +
+                // 60,
+                // cardHeight + 60);
+                // devilCard.setAllCardsDetails(devilCard.getX(), cardY, cardWidth, cardHeight);
+                // starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
 
-                } else if (mouseClickedCoordinates.y > devilCard.getY()
-                                && mouseClickedCoordinates.y < devilCard.getY() + devilCard.getHeight()
-                                && mouseClickedCoordinates.x > devilCard.getX()
-                                && mouseClickedCoordinates.x < devilCard.getX() + devilCard.getWidth()) {
+                // } else if (mouseClickedCoordinates.y > devilCard.getY()
+                // && mouseClickedCoordinates.y < devilCard.getY() + devilCard.getHeight()
+                // && mouseClickedCoordinates.x > devilCard.getX()
+                // && mouseClickedCoordinates.x < devilCard.getX() + devilCard.getWidth()) {
 
-                        System.out.println("in Devil");
+                // System.out.println("in Devil");
 
-                        devilCard.setAllCardsDetails(devilCard.getX() - 30, cardY - 30, cardWidth + 60,
-                                        cardHeight + 60);
-                        towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
-                        starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
+                // devilCard.setAllCardsDetails(devilCard.getX() - 30, cardY - 30, cardWidth +
+                // 60,
+                // cardHeight + 60);
+                // towerCard.setAllCardsDetails(towerCard.getX(), cardY, cardWidth, cardHeight);
+                // starCard.setAllCardsDetails(starCard.getX(), cardY, cardWidth, cardHeight);
 
+                // }
+
+                for (int i = 0; i < playerCardCount; i++) {
+                        if (mouseClickedCoordinates.x > (playerOnHand[i].getX() + (i * 100)) &&
+                                        mouseClickedCoordinates.y > playerOnHand[i].getY() &&
+                                        mouseClickedCoordinates.x < ((playerOnHand[i].getX() + +(i * 100)) + cardWidth)
+                                        && mouseClickedCoordinates.y < (playerOnHand[i].getY() + cardHeight)) {
+                                System.out.println("NAKASULOD BA ET?");
+                                // playerOnHand[i].setAllCardsDetails(100, 500, 100, 100);
+                                System.out.println(playerOnHand[i].getName());
+
+                                // ON FRAME IF KNSA ACTIVE
+                                if (!isActive) {
+                                        activeCard.setX(playerOnHand[i].getX() + (i * 100));
+                                        activeCard.setY(playerOnHand[i].getY());
+                                        isActive = true;
+                                        System.out.println("NAKA TRUE NA " + isActive);
+                                        // BASIC TOGGLES
+                                } else if (isActive
+                                                // && mouseClickedCoordinates.x >= (activeCard.getX() + (i * 100))
+                                                // && mouseClickedCoordinates.x <= ((activeCard.getX() + (i * 100))
+                                                // + cardWidth)
+                                                // && mouseClickedCoordinates.x >= activeCard.getY()
+                                                // && mouseClickedCoordinates.x <= (activeCard.getY() + cardHeight)) {
+                                                && playerOnHand[i].getX() + (i * 100) == (activeCard.getX())
+                                                && playerOnHand[i].getY() == activeCard.getY()) {
+                                        isActive = false;
+                                        System.out.println("DAPAT NA OFF ACTIVE");
+                                } else if (isActive) {
+                                        activeCard.setX(playerOnHand[i].getX() + (i * 100));
+                                        activeCard.setY(playerOnHand[i].getY());
+                                        System.out.println("REKTA SWITCH");
+                                }
+
+                        }
                 }
         }
 
@@ -125,6 +174,10 @@ public class PreparationPhase {
                 } else {
                         return devilCard;
                 }
+        }
+
+        public void storeOnHandDetails() {
+
         }
 
         // public void paintComponent(Graphics g) {
@@ -216,6 +269,12 @@ public class PreparationPhase {
                 g.drawImage(deckCards.getImg(), deckCards.getX(), deckCards.getY(), deckCards.getWidth(),
                                 deckCards.getHeight(),
                                 null);
+
+                // DRAW WHERE IS THE ACTIVE CARD
+                if (isActive) {
+                        g.drawImage(activeCard.getImg(), activeCard.getX(), activeCard.getY(), activeCard.getWidth(),
+                                        activeCard.getHeight(), null);
+                }
         }
         // PLANNING TO REVISION THIS DRAFT
 }

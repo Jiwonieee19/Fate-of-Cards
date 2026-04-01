@@ -107,7 +107,9 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     public void mouseClicked(MouseEvent e) {
         if (preparing) {
             mouseClickCoordinatesPoint = e.getPoint();
-            preparationPhaseObject.PreparationMouseClick(mouseClickCoordinatesPoint);
+            preparationPhaseObject.PreparationMouseClick(mouseClickCoordinatesPoint,
+                    drawPhaseObject.playerOnHand,
+                    drawPhaseObject.playerCardCount);
             // PARA NAA NA SA DESIGNATED CLASS ANG PAG HANDLE, DRI SA PANEL, IGO RA PASA
         }
     }
