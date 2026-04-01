@@ -111,6 +111,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                     drawPhaseObject.playerOnHand,
                     drawPhaseObject.playerCardCount);
             // PARA NAA NA SA DESIGNATED CLASS ANG PAG HANDLE, DRI SA PANEL, IGO RA PASA
+
+            // separate class nalang ang active runes yati ky d mani array,
+            // para dli na mo taas samot parameter anang isa
+            preparationPhaseObject.PreparationMouseClickRunes(mouseClickCoordinatesPoint);
+
         }
     }
 

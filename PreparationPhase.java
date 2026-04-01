@@ -38,7 +38,13 @@ public class PreparationPhase {
 
         Image activeCardImage;
         MainCards activeCard;
-        Boolean isActive;
+        Boolean isActiveCard;
+
+        Image activeRuneImage;
+        MainRunes activeRune;
+        Boolean isActiveRune;
+
+        MainRunes[] runesArray;
 
         PreparationPhase() {
 
@@ -75,9 +81,14 @@ public class PreparationPhase {
                 defaultFont = new DefaultFont();
 
                 activeCardImage = new ImageIcon(getClass().getResource("assets/activeCard.png")).getImage();
-                activeCard = new MainCards("active", margin, margin, cardWidth, cardHeight, activeCardImage);
+                activeCard = new MainCards("activeCard", margin, margin, cardWidth, cardHeight, activeCardImage);
+                isActiveCard = false;
 
-                isActive = false;
+                activeRuneImage = new ImageIcon(getClass().getResource("assets/runes/activeRune.png")).getImage();
+                activeRune = new MainRunes("activeRune", margin, margin, runesWH, runesWH, activeRuneImage);
+                isActiveRune = false;
+
+                runesArray = new MainRunes[] { rockRune, paperRune, scissorsRune };
         }
 
         public void PreparationFunction() {
@@ -134,17 +145,21 @@ public class PreparationPhase {
                                         mouseClickedCoordinates.x < ((playerOnHand[i].getX() + +(i * 100)) + cardWidth)
                                         && mouseClickedCoordinates.y < (playerOnHand[i].getY() + cardHeight)) {
                                 System.out.println("NAKASULOD BA ET?");
+                                // PANG CHECK SA LOGIC ERROR, NGA TANAN SAME OBJECT ONHAND KAY MA MANIPULATE
                                 // playerOnHand[i].setAllCardsDetails(100, 500, 100, 100);
+                                // NO NEED NA NGA INDIVIDUAL OBJECT ANG NAA SA ON HAND, PEDE RA ANG ACTIVECARD
+                                // E REFERENCE SA BATTLEPHASE
+
                                 System.out.println(playerOnHand[i].getName());
 
                                 // ON FRAME IF KNSA ACTIVE
-                                if (!isActive) {
+                                if (!isActiveCard) {
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
-                                        isActive = true;
-                                        System.out.println("NAKA TRUE NA " + isActive);
+                                        isActiveCard = true;
+                                        System.out.println("NAKA TRUE NA " + isActiveCard);
                                         // BASIC TOGGLES
-                                } else if (isActive
+                                } else if (isActiveCard
                                                 // && mouseClickedCoordinates.x >= (activeCard.getX() + (i * 100))
                                                 // && mouseClickedCoordinates.x <= ((activeCard.getX() + (i * 100))
                                                 // + cardWidth)
@@ -152,12 +167,39 @@ public class PreparationPhase {
                                                 // && mouseClickedCoordinates.x <= (activeCard.getY() + cardHeight)) {
                                                 && playerOnHand[i].getX() + (i * 100) == (activeCard.getX())
                                                 && playerOnHand[i].getY() == activeCard.getY()) {
-                                        isActive = false;
+                                        isActiveCard = false;
                                         System.out.println("DAPAT NA OFF ACTIVE");
-                                } else if (isActive) {
+                                } else if (isActiveCard) {
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
                                         System.out.println("REKTA SWITCH");
+                                }
+
+                        }
+                }
+        }
+
+        public void PreparationMouseClickRunes(Point mouseClickedCoordinates) {
+                // E ARRAY NALANG NI PARA MAS LIMPYO, BUHAT KO ARRAY NI RUNES
+                for (int i = 0; i < 3; i++) {
+                        // same sa taas, if dli active then active
+                        if (mouseClickedCoordinates.x >= runesArray[i].getX() &&
+                                        mouseClickedCoordinates.x <= (runesArray[i].getX() + runesWH) &&
+                                        mouseClickedCoordinates.y >= runesArray[i].getY() &&
+                                        mouseClickedCoordinates.y <= (runesArray[i].getY() + runesWH)) {
+                                if (!isActiveRune) {
+                                        activeRune.setX(runesArray[i].getX());
+                                        activeRune.setY(runesArray[i].getY());
+                                        isActiveRune = true;
+
+                                        // if active then gi click usab, mahimong inactive
+                                } else if (isActiveRune && runesArray[i].getX() == activeRune.getX() &&
+                                                runesArray[i].getY() == activeRune.getY()) {
+                                        isActiveRune = false;
+                                } else if (isActiveRune) {
+                                        activeRune.setX(runesArray[i].getX());
+                                        activeRune.setY(runesArray[i].getY());
+                                        System.out.println("REKTA SWITCH PUD SA RUNES");
                                 }
 
                         }
@@ -174,10 +216,6 @@ public class PreparationPhase {
                 } else {
                         return devilCard;
                 }
-        }
-
-        public void storeOnHandDetails() {
-
         }
 
         // public void paintComponent(Graphics g) {
@@ -271,9 +309,15 @@ public class PreparationPhase {
                                 null);
 
                 // DRAW WHERE IS THE ACTIVE CARD
-                if (isActive) {
+                if (isActiveCard) {
                         g.drawImage(activeCard.getImg(), activeCard.getX(), activeCard.getY(), activeCard.getWidth(),
                                         activeCard.getHeight(), null);
+                }
+
+                // DRAW WHERE IS THE ACTIVE RUNE
+                if (isActiveRune) {
+                        g.drawImage(activeRune.getImage(), activeRune.getX(), activeRune.getY(), activeRune.getWidth(),
+                                        activeRune.getHeight(), null);
                 }
         }
         // PLANNING TO REVISION THIS DRAFT
