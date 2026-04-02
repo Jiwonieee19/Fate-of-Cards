@@ -140,9 +140,10 @@ public class PreparationPhase {
                 // }
 
                 for (int i = 0; i < playerCardCount; i++) {
-                        if (mouseClickedCoordinates.x > (playerOnHand[i].getX() + (i * 100)) &&
+                        // MAKA ACTIVE RAG CARD IF NAA KAY RUNES GIPILI
+                        if (isActiveRune && mouseClickedCoordinates.x > (playerOnHand[i].getX() + (i * 100)) &&
                                         mouseClickedCoordinates.y > playerOnHand[i].getY() &&
-                                        mouseClickedCoordinates.x < ((playerOnHand[i].getX() + +(i * 100)) + cardWidth)
+                                        mouseClickedCoordinates.x < ((playerOnHand[i].getX() + (i * 100)) + cardWidth)
                                         && mouseClickedCoordinates.y < (playerOnHand[i].getY() + cardHeight)) {
                                 System.out.println("NAKASULOD BA ET?");
                                 // PANG CHECK SA LOGIC ERROR, NGA TANAN SAME OBJECT ONHAND KAY MA MANIPULATE
@@ -154,10 +155,12 @@ public class PreparationPhase {
 
                                 // ON FRAME IF KNSA ACTIVE
                                 if (!isActiveCard) {
+                                        // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
+                                        activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
                                         isActiveCard = true;
-                                        System.out.println("NAKA TRUE NA " + isActiveCard);
+                                        System.out.println("NAKA TRUE NA " + activeCard.getName());
                                         // BASIC TOGGLES
                                 } else if (isActiveCard
                                                 // && mouseClickedCoordinates.x >= (activeCard.getX() + (i * 100))
@@ -169,10 +172,14 @@ public class PreparationPhase {
                                                 && playerOnHand[i].getY() == activeCard.getY()) {
                                         isActiveCard = false;
                                         System.out.println("DAPAT NA OFF ACTIVE");
+                                        // SETNAME TO OG
+                                        activeCard.setName("activeCard");
                                 } else if (isActiveCard) {
+                                        // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
+                                        activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
-                                        System.out.println("REKTA SWITCH");
+                                        System.out.println("REKTA SWITCH " + activeCard.getName());
                                 }
 
                         }
@@ -188,18 +195,27 @@ public class PreparationPhase {
                                         mouseClickedCoordinates.y >= runesArray[i].getY() &&
                                         mouseClickedCoordinates.y <= (runesArray[i].getY() + runesWH)) {
                                 if (!isActiveRune) {
+                                        // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
+                                        activeRune.setName(runesArray[i].getName());
                                         activeRune.setX(runesArray[i].getX());
                                         activeRune.setY(runesArray[i].getY());
                                         isActiveRune = true;
-
+                                        System.out.println("ACTIVE: " + activeRune.getName());
                                         // if active then gi click usab, mahimong inactive
                                 } else if (isActiveRune && runesArray[i].getX() == activeRune.getX() &&
                                                 runesArray[i].getY() == activeRune.getY()) {
                                         isActiveRune = false;
+                                        // pati active card madamay since ang rules ky no active runes no play
+                                        isActiveCard = false;
+                                        System.out.println("OFF BOTH");
+                                        // SETNAME TO OG
+                                        activeRune.setName("activeRune");
                                 } else if (isActiveRune) {
+                                        // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
+                                        activeRune.setName(runesArray[i].getName());
                                         activeRune.setX(runesArray[i].getX());
                                         activeRune.setY(runesArray[i].getY());
-                                        System.out.println("REKTA SWITCH PUD SA RUNES");
+                                        System.out.println("REKTA SWITCH PUD SA RUNES: " + activeRune.getName());
                                 }
 
                         }
@@ -224,6 +240,11 @@ public class PreparationPhase {
 
         public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand,
                         int playerCardCount, int botCardCount) {
+
+                // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY
+                g.setColor(Color.GREEN);
+
+                g.fillRect((1200 - 400), (800 / 2), 300, 40);
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
