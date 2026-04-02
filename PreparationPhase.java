@@ -28,7 +28,7 @@ public class PreparationPhase {
         int runesWH = 120;
         int runesY = 600;
         int scissorsRuneY = 600 - ((runesWH + 90) / 2);
-        int rockRuneX = 850;
+        int rockRuneX = 810;
         int paperRuneX = rockRuneX + runesWH;
         int scissorsRuneX = rockRuneX + (runesWH / 2);
 
@@ -45,6 +45,11 @@ public class PreparationPhase {
         Boolean isActiveRune;
 
         MainRunes[] runesArray;
+
+        int playerCurrentHp, botCurrentHp;
+
+        Image energyImage;
+        int playerEnergyCount, botEnergyCount;
 
         PreparationPhase() {
 
@@ -89,6 +94,13 @@ public class PreparationPhase {
                 isActiveRune = false;
 
                 runesArray = new MainRunes[] { rockRune, paperRune, scissorsRune };
+
+                playerCurrentHp = 200;
+                botCurrentHp = 200;
+
+                energyImage = new ImageIcon(getClass().getResource("assets/runes/energy.png")).getImage();
+                playerEnergyCount = 2;
+                botEnergyCount = 2;
         }
 
         public void PreparationFunction() {
@@ -243,8 +255,25 @@ public class PreparationPhase {
 
                 // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY
                 g.setColor(Color.GREEN);
+                g.fillRect((1200 - 400) + 150, (800 / 2) + 20, playerCurrentHp, 30);
+                g.setColor(Color.WHITE);
+                // ((Graphics2D) g).setStroke(new BasicStroke(5));
+                g.drawRect((1200 - 400) + 150, (800 / 2) + 20, playerCurrentHp, 30);
+                g.drawString("HP: " + playerCurrentHp, (1200 - 400) + 60, (800 / 2) + 41);
 
-                g.fillRect((1200 - 400), (800 / 2), 300, 40);
+                // BOT HP
+                g.setColor(Color.RED);
+                g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), playerCurrentHp, 30);
+                g.setColor(Color.WHITE);
+                // ((Graphics2D) g).setStroke(new BasicStroke(5));
+                g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
+                g.drawString("Bot HP: " + botCurrentHp, (1200 - 400) + 20, (800 / 2) - 30);
+
+                // PLAYER ENERGY, AND JUST LIKE AXIE, D NMO MAKITA ENERGY SA KALABAN SOO PREDICT
+                g.drawImage(energyImage, 1092, 478, 60, 60, null);
+                g.drawString(playerEnergyCount + "/5", 1108, 512);
+                g.drawString("Energy: ", 1010, 512);
+
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
