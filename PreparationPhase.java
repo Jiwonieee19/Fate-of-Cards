@@ -57,9 +57,9 @@ public class PreparationPhase {
                 // e.g. g.drawImage(instantiateCards.starCard.getImage(), , , , )
                 // i dont want that
 
-                Image starImg = new ImageIcon(getClass().getResource("assets/star.jpg")).getImage();
+                Image starImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
                 Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
-                Image devilImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
+                Image devilImg = new ImageIcon(getClass().getResource("assets/devil.png")).getImage();
 
                 // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
                 starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg);
@@ -263,7 +263,7 @@ public class PreparationPhase {
 
                 // BOT HP
                 g.setColor(Color.RED);
-                g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), playerCurrentHp, 30);
+                g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
                 g.setColor(Color.WHITE);
                 // ((Graphics2D) g).setStroke(new BasicStroke(5));
                 g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
@@ -277,7 +277,7 @@ public class PreparationPhase {
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
-                g.drawLine(0, 800 / 2, 1200, 800 / 2);
+                g.drawLine(margin + cardWidth + margin, 800 / 2, 1200, 800 / 2);
 
                 g.setFont(defaultFont.getLightFontCustomSize(20));
                 g.drawString("total card: " + playerCardCount + "/3", starCard.getX(), starCard.getY() - 12);

@@ -96,9 +96,9 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             timeCountHolder += fps;
         }
         if (timeCountHolder >= roundPreparingTimer) {
-            preparing = false;
-            battling = true;
-            System.out.println("MANA PREP");
+            preparing = true;
+            // battling = true;
+            // System.out.println("MANA PREP");
         }
         repaint();
     }
