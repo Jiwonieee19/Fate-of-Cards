@@ -57,9 +57,9 @@ public class PreparationPhase {
                 // e.g. g.drawImage(instantiateCards.starCard.getImage(), , , , )
                 // i dont want that
 
-                Image starImg = new ImageIcon(getClass().getResource("assets/star.png")).getImage();
-                Image towerImg = new ImageIcon(getClass().getResource("assets/tower.png")).getImage();
-                Image devilImg = new ImageIcon(getClass().getResource("assets/devil.png")).getImage();
+                Image starImg = new ImageIcon(getClass().getResource("assets/cards/star.png")).getImage();
+                Image towerImg = new ImageIcon(getClass().getResource("assets/cards/tower.png")).getImage();
+                Image devilImg = new ImageIcon(getClass().getResource("assets/cards/devil.png")).getImage();
 
                 // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
                 starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg);
@@ -69,15 +69,18 @@ public class PreparationPhase {
                 randomizer = new Random();
 
                 // REFACTOR STARTS HERE
-                Image rockImage = new ImageIcon(getClass().getResource("assets/runes/rockRune.png")).getImage();
-                Image paperImage = new ImageIcon(getClass().getResource("assets/runes/paperRune.png")).getImage();
-                Image scissorsImage = new ImageIcon(getClass().getResource("assets/runes/scissorsRune.png")).getImage();
+                Image rockImage = new ImageIcon(getClass().getResource("assets/runes/rockRuneWhite.png")).getImage();
+                Image paperImage = new ImageIcon(getClass().getResource("assets/runes/paperRuneWhite.png"))
+                                .getImage();
+                Image scissorsImage = new ImageIcon(getClass().getResource("assets/runes/scissorsRuneWhite.png"))
+                                .getImage();
 
                 rockRune = new MainRunes("rock", rockRuneX, runesY, runesWH, runesWH, rockImage);
                 paperRune = new MainRunes("paper", paperRuneX, runesY, runesWH, runesWH, paperImage);
                 scissorsRune = new MainRunes("scissors", scissorsRuneX, scissorsRuneY, runesWH, runesWH, scissorsImage);
 
-                Image deckCardsImage = new ImageIcon(getClass().getResource("assets/backOfCard.jpg")).getImage();
+                Image deckCardsImage = new ImageIcon(getClass().getResource("assets/cards/backOfCardTarot.png"))
+                                .getImage();
 
                 deckCards = new MainCards("deck", margin, (800 / 2) - (cardHeight / 2), cardWidth,
                                 cardHeight,
@@ -85,11 +88,11 @@ public class PreparationPhase {
 
                 defaultFont = new DefaultFont();
 
-                activeCardImage = new ImageIcon(getClass().getResource("assets/activeCard.png")).getImage();
+                activeCardImage = new ImageIcon(getClass().getResource("assets/cards/activeCard.png")).getImage();
                 activeCard = new MainCards("activeCard", margin, margin, cardWidth, cardHeight, activeCardImage);
                 isActiveCard = false;
 
-                activeRuneImage = new ImageIcon(getClass().getResource("assets/runes/activeRune.png")).getImage();
+                activeRuneImage = new ImageIcon(getClass().getResource("assets/runes/activeRuneTarot.png")).getImage();
                 activeRune = new MainRunes("activeRune", margin, margin, runesWH, runesWH, activeRuneImage);
                 isActiveRune = false;
 
@@ -98,7 +101,7 @@ public class PreparationPhase {
                 playerCurrentHp = 200;
                 botCurrentHp = 200;
 
-                energyImage = new ImageIcon(getClass().getResource("assets/runes/energy.png")).getImage();
+                energyImage = new ImageIcon(getClass().getResource("assets/runes/energyTarot.png")).getImage();
                 playerEnergyCount = 2;
                 botEnergyCount = 2;
         }

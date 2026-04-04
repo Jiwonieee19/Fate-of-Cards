@@ -152,7 +152,7 @@ public class DrawPhase {
         // for (int i = 0; i < drawTimes; i++) {
         // // EZ MARGIN SA VISUAL, 5 FRAMES BEFORE MO SUNOD ANG DRAWCARD
         // if (drawTimes % 5 == 0) {
-        g.drawImage(devilCard.getImg(), deckCardVelocityX, deckCardVelocityY,
+        g.drawImage(deckCards.getImg(), deckCardVelocityX, deckCardVelocityY,
                 deckCards.getWidth(),
                 deckCards.getHeight(),
                 null);
