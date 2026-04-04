@@ -57,8 +57,8 @@ public class PreparationPhase {
                 // e.g. g.drawImage(instantiateCards.starCard.getImage(), , , , )
                 // i dont want that
 
-                Image starImg = new ImageIcon(getClass().getResource("assets/devil.jpg")).getImage();
-                Image towerImg = new ImageIcon(getClass().getResource("assets/tower.jpg")).getImage();
+                Image starImg = new ImageIcon(getClass().getResource("assets/star.png")).getImage();
+                Image towerImg = new ImageIcon(getClass().getResource("assets/tower.png")).getImage();
                 Image devilImg = new ImageIcon(getClass().getResource("assets/devil.png")).getImage();
 
                 // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
