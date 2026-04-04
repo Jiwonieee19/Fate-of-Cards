@@ -311,6 +311,9 @@ public class PreparationPhase {
                 g.drawString(playerEnergyCount + "/5", 1108, 504);
                 g.drawString("Energy: ", 1010, 504);
 
+                g.drawImage(energyImage, 1092, (800 / 2) - (50 + 50 + 32), 60, 60, null);
+                g.drawString("?/5", 1108, (800 / 2) - (50 + 48));
+
                 // HOLDER OF CHOICE RUNE&CARD FOR BATTLE
                 g.drawImage(holderCard.getImg(), holderCard.getX(), holderCard.getY(), holderCard.getWidth(),
                                 holderCard.getHeight(), null);
@@ -401,6 +404,20 @@ public class PreparationPhase {
                                 paperRune.getHeight(),
                                 null);
                 g.drawImage(scissorsRune.getImage(), scissorsRune.getX(), scissorsRune.getY(), scissorsRune.getWidth(),
+                                scissorsRune.getHeight(),
+                                null);
+
+                // RUNES NI BOT BUT ONLY FOR VISUAL, ANG ARRAY SA PAGPILI NAKA RANDOMIZER
+                g.drawImage(rockRune.getImage(), rockRune.getX(), (800 - runesWH) - rockRune.getY(),
+                                rockRune.getWidth(),
+                                rockRune.getHeight(),
+                                null);
+                g.drawImage(paperRune.getImage(), paperRune.getX(), (800 - runesWH) - paperRune.getY(),
+                                paperRune.getWidth(),
+                                paperRune.getHeight(),
+                                null);
+                g.drawImage(scissorsRune.getImage(), scissorsRune.getX(), (800 - runesWH) - scissorsRune.getY(),
+                                scissorsRune.getWidth(),
                                 scissorsRune.getHeight(),
                                 null);
 
