@@ -51,6 +51,17 @@ public class PreparationPhase {
         Image energyImage;
         int playerEnergyCount, botEnergyCount;
 
+        Image cardHolderImage, runeHolderImage;
+        MainCards holderCard;
+        MainRunes holderRune;
+
+        // MATHS MATHS MATHS
+        int holderCardX = (1200 / 2) - (cardWidth + (margin / 2));
+        int holderCardY = (800 / 2) + margin;
+        // i forgot naa mn daay extra pixel pa nang pagbuhat sa runes, so /2 to /4
+        int holderRuneX = (1200 / 2) + (margin / 4);
+        int holderRuneY = (800 / 2) + margin + ((cardHeight - runesWH) / 2);
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -104,6 +115,13 @@ public class PreparationPhase {
                 energyImage = new ImageIcon(getClass().getResource("assets/runes/energyTarot.png")).getImage();
                 playerEnergyCount = 2;
                 botEnergyCount = 2;
+
+                cardHolderImage = new ImageIcon(getClass().getResource("assets/cards/cardHolder.png")).getImage();
+                runeHolderImage = new ImageIcon(getClass().getResource("assets/runes/runeHolder.png")).getImage();
+
+                holderCard = new MainCards("holderCard", holderCardX, holderCardY, cardWidth, cardHeight,
+                                cardHolderImage);
+                holderRune = new MainRunes("holderRune", holderRuneX, holderRuneY, runesWH, runesWH, runeHolderImage);
         }
 
         public void PreparationFunction() {
@@ -257,7 +275,7 @@ public class PreparationPhase {
                         int playerCardCount, int botCardCount) {
 
                 // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY
-                g.setColor(Color.GREEN);
+                g.setColor(Color.decode("#C1B59F"));
                 g.fillRect((1200 - 400) + 150, (800 / 2) + 20, playerCurrentHp, 30);
                 g.setColor(Color.WHITE);
                 // ((Graphics2D) g).setStroke(new BasicStroke(5));
@@ -265,7 +283,7 @@ public class PreparationPhase {
                 g.drawString("HP: " + playerCurrentHp, (1200 - 400) + 60, (800 / 2) + 41);
 
                 // BOT HP
-                g.setColor(Color.RED);
+                g.setColor(Color.decode("#9A4B3A"));
                 g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
                 g.setColor(Color.WHITE);
                 // ((Graphics2D) g).setStroke(new BasicStroke(5));
@@ -277,10 +295,17 @@ public class PreparationPhase {
                 g.drawString(playerEnergyCount + "/5", 1108, 504);
                 g.drawString("Energy: ", 1010, 504);
 
+                // HOLDER OF CHOICE RUNE&CARD FOR BATTLE
+                g.drawImage(holderCard.getImg(), holderCard.getX(), holderCard.getY(), holderCard.getWidth(),
+                                holderCard.getHeight(), null);
+                g.drawImage(holderRune.getImage(), holderRune.getX(), holderRune.getY(), holderRune.getWidth(),
+                                holderRune.getHeight(), null);
+
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
                 g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
                 g.drawLine(margin + cardWidth + margin, 800 / 2, 1200, 800 / 2);
+                g.drawLine(1200 / 2, 0, 1200 / 2, 800);
 
                 g.setFont(defaultFont.getLightFontCustomSize(20));
                 g.drawString("total card: " + playerCardCount + "/3", starCard.getX(), starCard.getY() - 12);
