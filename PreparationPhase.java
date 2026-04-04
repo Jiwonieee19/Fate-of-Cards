@@ -26,9 +26,9 @@ public class PreparationPhase {
 
         // MATHS MATHS MATHS
         int runesWH = 120;
-        int runesY = 600;
-        int scissorsRuneY = 600 - ((runesWH + 90) / 2);
-        int rockRuneX = 810;
+        int runesY = 630;
+        int scissorsRuneY = 630 - ((runesWH + 90) / 2);
+        int rockRuneX = 900;
         int paperRuneX = rockRuneX + runesWH;
         int scissorsRuneX = rockRuneX + (runesWH / 2);
 
@@ -270,9 +270,9 @@ public class PreparationPhase {
                 g.drawString("Bot HP: " + botCurrentHp, (1200 - 400) + 20, (800 / 2) - 30);
 
                 // PLAYER ENERGY, AND JUST LIKE AXIE, D NMO MAKITA ENERGY SA KALABAN SOO PREDICT
-                g.drawImage(energyImage, 1092, 478, 60, 60, null);
-                g.drawString(playerEnergyCount + "/5", 1108, 512);
-                g.drawString("Energy: ", 1010, 512);
+                g.drawImage(energyImage, 1092, 470, 60, 60, null);
+                g.drawString(playerEnergyCount + "/5", 1108, 504);
+                g.drawString("Energy: ", 1010, 504);
 
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
