@@ -62,6 +62,9 @@ public class PreparationPhase {
         int holderRuneX = (1200 / 2) + (margin / 4);
         int holderRuneY = (800 / 2) + margin + ((cardHeight - runesWH) / 2);
 
+        MainCards botHolderCard;
+        MainRunes botHolderRune;
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -122,6 +125,19 @@ public class PreparationPhase {
                 holderCard = new MainCards("holderCard", holderCardX, holderCardY, cardWidth, cardHeight,
                                 cardHolderImage);
                 holderRune = new MainRunes("holderRune", holderRuneX, holderRuneY, runesWH, runesWH, runeHolderImage);
+
+                // NEED NAKA OBJECT PUD KA BOT KAY IBUTANG BAYA DRIA NGA X AND Y ANG ACTIVE
+                // CARD&RUNES SA BOT
+                botHolderCard = new MainCards("botHolderCard", holderCardX, holderCardY - (cardHeight + (margin * 2)),
+                                cardWidth,
+                                cardHeight,
+                                cardHolderImage);
+                botHolderRune = new MainRunes("botHolderRune", holderRuneX, holderRuneY - (cardHeight + (margin * 2)),
+                                runesWH,
+                                runesWH, runeHolderImage);
+
+                // BUT FOR RUNES CHOICES, IT WILL DIFFER, IBUTANG SA DRAW SAME OBJECT, PERO
+                // IBUTANG SA ACTIVE NI BOT, RANDOMIZER SA BACKEND RA
         }
 
         public void PreparationFunction() {
@@ -300,6 +316,13 @@ public class PreparationPhase {
                                 holderCard.getHeight(), null);
                 g.drawImage(holderRune.getImage(), holderRune.getX(), holderRune.getY(), holderRune.getWidth(),
                                 holderRune.getHeight(), null);
+
+                g.drawImage(botHolderCard.getImg(), botHolderCard.getX(), botHolderCard.getY(),
+                                botHolderCard.getWidth(),
+                                botHolderCard.getHeight(), null);
+                g.drawImage(botHolderRune.getImage(), botHolderRune.getX(), botHolderRune.getY(),
+                                botHolderRune.getWidth(),
+                                botHolderRune.getHeight(), null);
 
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
