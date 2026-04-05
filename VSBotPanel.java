@@ -67,6 +67,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // PREPARATION
         if (preparing) {
             g.drawString("PREPARATION PHASE", 20, 40);
+            // PARA AFTER DYNAMIC DRAW G DURING DRAWPHASE, MA KEEP DIRIA DURING PREPHASE
             preparationPhaseObject.draw(g, drawPhaseObject.playerOnHand, drawPhaseObject.botOnHand,
                     drawPhaseObject.playerCardCount,
                     drawPhaseObject.botCardCount);

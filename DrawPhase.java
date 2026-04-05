@@ -56,8 +56,8 @@ public class DrawPhase {
         // drawPossibility[0] = starCard; // HOOO tama dghn manig ways ang array diay
         // dara to mas tipid and flexibile
         drawPossibility = new MainCards[] { starCard, towerCard, devilCard };
-        playerOnHand = new MainCards[5];
-        botOnHand = new MainCards[5];
+        playerOnHand = new MainCards[3];
+        botOnHand = new MainCards[3];
 
         picker = new Random();
 
@@ -83,7 +83,7 @@ public class DrawPhase {
 
     // MUCH BETTER AND FLEXIBLE NI, PARA LATER FOR CARD EFFECTS NGA BLOCK DRAW
     public void playerDrawCard() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             // MUCH FLEXIBLE PARA MA RECORD RA DRAW IF DLI PA MAX ANG ONHAND
             if (playerOnHand[i] == null) {
                 playerOnHand[i] = drawPossibility[picker.nextInt(0, 3)];
@@ -94,7 +94,7 @@ public class DrawPhase {
     }
 
     public void botDrawCard() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             if (botOnHand[i] == null) {
                 botOnHand[i] = drawPossibility[picker.nextInt(0, 3)];
                 System.out.println("NA DRAW NI BOT: " + botOnHand[i].getName());
@@ -168,9 +168,10 @@ public class DrawPhase {
     }
 
     public void draw(Graphics g) {
+        // KANI ANG PAG DRAW SA G DURING DRAWPHASE,
+        // SA VSPANEL MAO NATO MAG STAY SA PREPPHASE NGA DRAW
         cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount, botCardCount); // HAHAHAH kuha ra in.ani, naka
-        // separate bitaw tong String nga
-        // phase chuchu
+        // separate bitaw tong String nga phase chuchu
         // startingDrawBoth();
         drawingCardsAnimation(g);
     }
