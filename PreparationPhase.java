@@ -299,7 +299,7 @@ public class PreparationPhase {
 
                 // NAME LANG ANG GINA CHANGE HA, PRA MAO GAMITON AS BASIS
                 // IMAGE IS A NEED, VISUAL ANG BREAD AND BUTTER RA ANI
-                if (isActiveRune) {
+                if (isActiveRune && isActiveCard) {
                         holderCard.setImg(activeCard.getImgOfActiveCard());
                         holderRune.setImage(activeRune.getImageOfActiveRune());
 
@@ -307,6 +307,11 @@ public class PreparationPhase {
                         // g.drawImage(activeCard.getImgOfActiveCard(), holderCard.getX(),
                         // holderCard.getY(), cardWidth,
                         // cardHeight, null);
+                } else if (isActiveRune) {
+                        holderRune.setImage(activeRune.getImageOfActiveRune());
+                } else {
+                        holderCard.setImg(cardHolderImage);
+                        holderRune.setImage(runeHolderImage);
                 }
 
                 // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY
