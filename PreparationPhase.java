@@ -208,6 +208,7 @@ public class PreparationPhase {
                                         activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
+                                        activeCard.setImgOfActiveCard(playerOnHand[i].getImg());
                                         isActiveCard = true;
                                         System.out.println("NAKA TRUE NA " + activeCard.getName());
                                         // BASIC TOGGLES
@@ -223,11 +224,13 @@ public class PreparationPhase {
                                         System.out.println("DAPAT NA OFF ACTIVE");
                                         // SETNAME TO OG
                                         activeCard.setName("activeCard");
+                                        activeCard.setImgOfActiveCard(null);
                                 } else if (isActiveCard) {
                                         // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
                                         activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
+                                        activeCard.setImgOfActiveCard(playerOnHand[i].getImg());
                                         System.out.println("REKTA SWITCH " + activeCard.getName());
                                 }
 
@@ -248,6 +251,7 @@ public class PreparationPhase {
                                         activeRune.setName(runesArray[i].getName());
                                         activeRune.setX(runesArray[i].getX());
                                         activeRune.setY(runesArray[i].getY());
+                                        activeRune.setImageOfActiveRune(runesArray[i].getImage());
                                         isActiveRune = true;
                                         System.out.println("ACTIVE: " + activeRune.getName());
                                         // if active then gi click usab, mahimong inactive
@@ -259,11 +263,14 @@ public class PreparationPhase {
                                         System.out.println("OFF BOTH");
                                         // SETNAME TO OG
                                         activeRune.setName("activeRune");
+                                        activeRune.setImageOfActiveRune(null);
                                 } else if (isActiveRune) {
                                         // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
+                                        // SORRY BUT NEEDED KUHAON SD ANG IMAGE, PRA NO NEED FORLOOP SA HOLDER
                                         activeRune.setName(runesArray[i].getName());
                                         activeRune.setX(runesArray[i].getX());
                                         activeRune.setY(runesArray[i].getY());
+                                        activeRune.setImageOfActiveRune(runesArray[i].getImage());
                                         System.out.println("REKTA SWITCH PUD SA RUNES: " + activeRune.getName());
                                 }
 
@@ -289,6 +296,18 @@ public class PreparationPhase {
 
         public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand,
                         int playerCardCount, int botCardCount) {
+
+                // NAME LANG ANG GINA CHANGE HA, PRA MAO GAMITON AS BASIS
+                // IMAGE IS A NEED, VISUAL ANG BREAD AND BUTTER RA ANI
+                if (isActiveRune) {
+                        holderCard.setImg(activeCard.getImgOfActiveCard());
+                        holderRune.setImage(activeRune.getImageOfActiveRune());
+
+                        // GOODS ALTERNATIVE IF WANT PA NAKOG EFFECTS SA HOLDER ACTIVE CARD/RUNE
+                        // g.drawImage(activeCard.getImgOfActiveCard(), holderCard.getX(),
+                        // holderCard.getY(), cardWidth,
+                        // cardHeight, null);
+                }
 
                 // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY
                 g.setColor(Color.decode("#C1B59F"));

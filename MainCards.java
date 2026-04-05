@@ -6,7 +6,7 @@ public class MainCards {
     // INITIALIZE / INSTANTIATE
     private String name;
     private int x, y, width, height;
-    private Image img;
+    private Image img, imgOfActiveCard;
     // private Color standard = Color.WHITE;
 
     // CONSTRUCTORS
@@ -53,6 +53,10 @@ public class MainCards {
         this.img = img;
     }
 
+    public void setImgOfActiveCard(Image imgOfActiveCard) {
+        this.imgOfActiveCard = imgOfActiveCard;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -75,5 +79,9 @@ public class MainCards {
 
     public Image getImg() {
         return this.img;
+    }
+
+    public Image getImgOfActiveCard() {
+        return this.imgOfActiveCard;
     }
 }

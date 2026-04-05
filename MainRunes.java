@@ -4,7 +4,7 @@ public class MainRunes {
     // INITIALIZE / INSTANTIATE
     private String name;
     private int x, y, width, height;
-    private Image image;
+    private Image image, imageOfActiveRune;
 
     // CONSTRUCTOR
     MainRunes(String name, int x, int y, int width, int height, Image image) {
@@ -45,6 +45,11 @@ public class MainRunes {
         this.image = image;
     }
 
+    public void setImageOfActiveRune(Image imageOfActiveRune) {
+        this.imageOfActiveRune = imageOfActiveRune;
+
+    }
+
     public String getName() {
         return this.name;
     }
@@ -67,5 +72,9 @@ public class MainRunes {
 
     public Image getImage() {
         return this.image;
+    }
+
+    public Image getImageOfActiveRune() {
+        return this.imageOfActiveRune;
     }
 }
