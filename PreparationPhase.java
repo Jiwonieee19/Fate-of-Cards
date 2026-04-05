@@ -307,7 +307,8 @@ public class PreparationPhase {
                         // g.drawImage(activeCard.getImgOfActiveCard(), holderCard.getX(),
                         // holderCard.getY(), cardWidth,
                         // cardHeight, null);
-                } else if (isActiveRune) {
+                } else if (!isActiveCard && isActiveRune) {
+                        holderCard.setImg(cardHolderImage);
                         holderRune.setImage(activeRune.getImageOfActiveRune());
                 } else {
                         holderCard.setImg(cardHolderImage);
