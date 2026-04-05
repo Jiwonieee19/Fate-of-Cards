@@ -278,15 +278,51 @@ public class PreparationPhase {
                 }
         }
 
-        public MainCards BotChoice() {
-                int botchoice = randomizer.nextInt(0, 3);
+        // REFACTORING...
+        public void BotCardChoice(MainCards[] botOnHand, int botCardCount) {
+                // card can be based on how many onhnd card, but rune is statically 3 only
+                int botCardChoice = randomizer.nextInt(0, botCardCount);
                 // dli ga properly work ang karaan na ways (2) + 1 // {0,1,2} + 1 = 1,2,3
-                if (botchoice == 1) {
-                        return starCard;
-                } else if (botchoice == 2) {
-                        return towerCard;
-                } else {
-                        return devilCard;
+                // if (botchoice == 1) {
+                // return starCard;
+                // } else if (botchoice == 2) {
+                // return towerCard;
+                // } else {
+                // return devilCard;
+                // }
+
+                // SALO DTSO IF WALA NAY CARD SI BOT,
+                // ANYWYS, PEDE RANI WALAY IF THEN SA LAST NAA GHPON NANG RETURN NULL,
+                // WORKS THE SAME
+                // if (botCardCount == 0) {
+                // return null;
+                // } else {
+
+                // PARA NI EACH BALIK DIRIA, E RESTART NIYA SA OG NAME,
+                // PRA DLI MA STOCK ANG LAST ROUND NAME WHICH IS NAME GINAGAMIT TO TRACE THE
+                // EFFECT OF CARD& RUNE
+                botHolderCard.setName("botHolderCard");
+                botHolderCard.setImg(cardHolderImage);
+                for (int i = 0; i < botCardCount; i++) {
+                        if (botCardChoice == i) {
+                                botHolderCard.setName(botOnHand[i].getName());
+                                botHolderCard.setImg(botOnHand[i].getImg());
+                        }
+                }
+                // }
+                // VOID METHOD WILL DO RA DAAY SINCE NAA RA SA BABA ANG DRAW ANI
+        }
+
+        public void BotRuneChoice() {
+                botHolderRune.setName("botHolderRune");
+                botHolderRune.setImage(runeHolderImage);
+                int botRuneChoice = randomizer.nextInt(0, 3);
+                for (int i = 0; i < runesArray.length; i++) {
+                        // forever and always dyud naay mag pair dri means naay runes every round si bot
+                        if (botRuneChoice == i) {
+                                botHolderRune.setName(runesArray[i].getName());
+                                botHolderRune.setImage(runesArray[i].getImage());
+                        }
                 }
         }
 

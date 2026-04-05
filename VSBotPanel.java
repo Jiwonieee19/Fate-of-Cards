@@ -27,6 +27,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     Point mouseClickCoordinatesPoint;
 
+    Boolean botPicking;
+
     VSBotPanel() {
         setBounds(0, 0, width, height);
         setFocusable(true);
@@ -42,6 +44,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         drawing = true;
         preparing = false;
         battling = false;
+        botPicking = true;
 
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
         // drawFPS.start();
@@ -71,6 +74,17 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             preparationPhaseObject.draw(g, drawPhaseObject.playerOnHand, drawPhaseObject.botOnHand,
                     drawPhaseObject.playerCardCount,
                     drawPhaseObject.botCardCount);
+            if (botPicking) {
+                // PASS THE BOT ON HAND HERE TOO TO PICK A PLAY
+                preparationPhaseObject.BotCardChoice(drawPhaseObject.botOnHand, drawPhaseObject.botCardCount);
+                preparationPhaseObject.BotRuneChoice();
+                // TAMA AKO HINALA, IF WALAY BOOLEAN, THEN REPAINT = NEW CHOICE,
+                // WHICH IS STILL GOOD, LOOKS LIKE A LOT MACHINE THEN END OF TIME MA BUNOT NA
+                // NIYA
+                botPicking = true;
+                // e true rani balik after result,
+                // pra dli every repaint mag change ang choice ni bot
+            }
             g.setColor(Color.RED);
             g.setFont(defaultFont.getLightFontCustomSize(20));
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
