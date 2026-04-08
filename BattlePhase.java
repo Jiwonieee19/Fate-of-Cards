@@ -98,14 +98,18 @@ public class BattlePhase {
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
     public void CollisionRune(MainRunes player, MainRunes bot) {
-        if (player.getY() < bot.getY() + bot.getHeight()) {
+        if (player.getY() < bot.getY() + (bot.getHeight() / 3)) {
             System.out.println("collide rune");
         } else {
             // player.setY(player.getY() - 10);
             // nigana, pero yw si holder nsd ato controllon dri, kalibog not consistent
             // cardObject.holderRune.setY(
             // cardObject.holderRune.getY() - 5);
+            bot.setY(bot.getY() + 5);
+            bot.setX(bot.getX() + 1);
             player.setY(player.getY() - 5);
+            player.setX(player.getX() - 1);
+            // ((Graphics2D) g).rotate(0); // NEXT TIME NALANG NI
         }
     }
 
