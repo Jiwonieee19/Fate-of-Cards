@@ -21,7 +21,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     Timer drawFPS;
 
     int fps = 24, timeCountHolder;
-    int roundPreparingTimer = 15000;
+    int roundPreparingTimer = 5000;
 
     Boolean drawing, preparing, battling;
 
@@ -97,10 +97,14 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             // battlePhaseObject.draw(g, preparationPhaseObject.activeCard,
             // preparationPhaseObject.)
             battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject);
+            battlePhaseObject.draw(g);
+            // COLLIDE SA BEFORE RESULT, MAO NAA SA BABA BATTLE RUNE
+            battlePhaseObject.CollisionRune(
+                    preparationPhaseObject.holderRune,
+                    preparationPhaseObject.botHolderRune);
             battlePhaseObject.BattleRunes(
                     preparationPhaseObject.activeRune,
                     preparationPhaseObject.botHolderRune);
-            battlePhaseObject.draw(g);
         }
     }
 
@@ -116,7 +120,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             System.out.println("MANA DRAW");
         }
         if (preparing) {
-            timeCountHolder += 10 * fps;
+            timeCountHolder += fps;
         }
         if (timeCountHolder >= roundPreparingTimer) {
             preparing = false;
