@@ -92,7 +92,15 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // BATTLE
         if (battling) {
+            g.setColor(Color.WHITE);
             g.drawString("BATTLE PHASE", 20, 40);
+            // battlePhaseObject.draw(g, preparationPhaseObject.activeCard,
+            // preparationPhaseObject.)
+            battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject);
+            battlePhaseObject.BattleRunes(
+                    preparationPhaseObject.activeRune,
+                    preparationPhaseObject.botHolderRune);
+            battlePhaseObject.draw(g);
         }
     }
 
@@ -108,11 +116,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             System.out.println("MANA DRAW");
         }
         if (preparing) {
-            timeCountHolder += fps;
+            timeCountHolder += 10 * fps;
         }
         if (timeCountHolder >= roundPreparingTimer) {
-            preparing = true;
-            // battling = true;
+            preparing = false;
+            battling = true;
             // System.out.println("MANA PREP");
         }
         repaint();

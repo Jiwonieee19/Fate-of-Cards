@@ -4,13 +4,13 @@ import javax.swing.ImageIcon;
 
 public class BattlePhase {
 
-    PreparationPhase prepPhaseObj;
-    MainCards winner;
+    PreparationPhase cardObject;
+    DrawPhase drawObject;
+    MainRunes runeWinner;
     Boolean drawXALoser, drawXBLoser;
     Image X;
 
     BattlePhase() {
-        prepPhaseObj = new PreparationPhase();
         drawXALoser = false;
         drawXBLoser = false;
         X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
@@ -20,75 +20,89 @@ public class BattlePhase {
 
     }
 
-    public void BattleCards(MainCards a, MainCards b) {
+    // PEDE RA DAAY NI YW PARA ISA RA KA OBJECT DALA NNYU
+    // HAHAHAHAH WORKING, NA FIX ANG BUG NGA DILI MO GAWAS ANG RESULT SA RUNES
+    // IF NAA ANG DRAW, PLUS BANTUG EMPTY ANG NEW DRAW KAY TUNGOD NEW MAN TONG 2
+    // OBJECT PAG INITIALIZE SA TAAS
+    public void PassingObjects(PreparationPhase preparationPhase, DrawPhase drawPhase) {
+        this.cardObject = preparationPhase;
+        this.drawObject = drawPhase;
+    }
 
-        if (a.getName().equals(prepPhaseObj.starCard.getName()) &&
-                b.getName().equals(prepPhaseObj.devilCard.getName())) {
+    public void BattleRunes(MainRunes player, MainRunes bot) {
 
-            System.out.println("star A, devil B winner: DEVIL B {CHECKER}");
-            winner = b;
+        // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
+        // if (a.getName().equals(cardObject.rockRune.getName())) {
+        if (player.getName().equals("rock")) {
 
-        } else if (a.getName().equals(prepPhaseObj.starCard.getName()) &&
-                b.getName().equals(prepPhaseObj.towerCard.getName())) {
-
-            System.out.println("star A, tower B winner: STAR A {CHECKER}");
-            winner = a;
-
-            // TOWER PLAYER A
-        } else if (a.getName().equals(prepPhaseObj.towerCard.getName()) &&
-                b.getName().equals(prepPhaseObj.starCard.getName())) {
-
-            System.out.println("tower A, star B winner: STAR B {CHECKER}");
-            winner = b;
-
-        } else if (a.getName().equals(prepPhaseObj.towerCard.getName()) &&
-                b.getName().equals(prepPhaseObj.devilCard.getName())) {
-
-            System.out.println("tower A, devil B winner: TOWER A {CHECKER}");
-            winner = a;
-
-            // DEVIL PLAYER A
-        } else if (a.getName().equals(prepPhaseObj.devilCard.getName()) &&
-                b.getName().equals(prepPhaseObj.towerCard.getName())) {
-
-            System.out.println("devil A, tower B winner: TOWER B {CHECKER}");
-            winner = b;
-
-        } else if (a.getName().equals(prepPhaseObj.devilCard.getName()) &&
-                b.getName().equals(prepPhaseObj.starCard.getName())) {
-
-            System.out.println("devil A, star B winner: DEVIL A {CHECKER}");
-            winner = a;
-
+            if (bot.getName().equals("scissors")) {
+                runeWinner = player;
+            } else if (bot.getName().equals("paper")) {
+                runeWinner = bot;
+            }
+        } else if (player.getName().equals("paper")) {
+            if (bot.getName().equals("rock")) {
+                runeWinner = player;
+            } else if (bot.getName().equals("scissors")) {
+                runeWinner = bot;
+            }
+        } else if (player.getName().equals("scissors")) {
+            if (bot.getName().equals("paper")) {
+                runeWinner = player;
+            } else if (bot.getName().equals("rock")) {
+                runeWinner = bot;
+            }
         } else {
             System.out.println("TIE 2");
-            winner = null;
+            runeWinner = null;
+        }
+        if (runeWinner != null) {
+            System.out.println(
+                    "player :" + player.getName() + "\nbot: " + bot.getName() + "\nwinner: " + runeWinner.getName());
         }
     }
 
     public void collideResult(MainCards a, MainCards b) {
-        System.out.println("COllide");
-        if (winner == a) {
-            System.out.println("Compared two Mainclass successfully"); // works fine
-            drawXBLoser = true;
-        } else if (winner == b) {
-            drawXALoser = true;
-        }
+        // System.out.println("COllide");
+        // if (winner == a) {
+        // System.out.println("Compared two Mainclass successfully"); // works fine
+        // drawXBLoser = true;
+        // } else if (winner == b) {
+        // drawXALoser = true;
+        // }
     }
 
-    public void draw(Graphics g, MainCards a, int aVelocityY, MainCards b, int bVelocityY) {
-        g.drawImage(a.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), aVelocityY, a.getWidth() - 60,
-                a.getHeight() - 60,
-                null);
-        // -60 ka player since every a ky active card, which is nidako sad if active
-        g.drawImage(b.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), bVelocityY, prepPhaseObj.cardWidth,
-                prepPhaseObj.cardHeight, null);
-        // prep nagkuha width and height, pra dli active width ug height makuha tie
-        if (drawXBLoser) {
-            // kaya pala mali ang b.getX(), kto daay sa og nga x coordinates gina retrieve
-            g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, bVelocityY, 180, 180, null);
-        } else if (drawXALoser) {
-            g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, aVelocityY, 180, 180, null);
-        }
+    // public void draw(Graphics g, MainCards a, int aVelocityY, MainCards b, int
+    // bVelocityY) {
+    // g.drawImage(a.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), aVelocityY,
+    // a.getWidth() - 60,
+    // a.getHeight() - 60,
+    // null);
+    // // -60 ka player since every a ky active card, which is nidako sad if active
+    // g.drawImage(b.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), bVelocityY,
+    // prepPhaseObj.cardWidth,
+    // prepPhaseObj.cardHeight, null);
+    // // prep nagkuha width and height, pra dli active width ug height makuha tie
+    // if (drawXBLoser) {
+    // // kaya pala mali ang b.getX(), kto daay sa og nga x coordinates gina
+    // retrieve
+    // g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, bVelocityY, 180,
+    // 180, null);
+    // } else if (drawXALoser) {
+    // g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, aVelocityY, 180,
+    // 180, null);
+    // }
+    // }
+    // }
+
+    public void CollisionRune() {
+
     }
+
+    public void draw(Graphics g) {
+        cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
+                drawObject.playerCardCount,
+                drawObject.botCardCount);
+    }
+
 }
