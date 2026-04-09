@@ -22,6 +22,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     int fps = 24, timeCountHolder;
     int roundPreparingTimer = 5000;
+    int roundIncrement;
 
     Boolean drawing, preparing, battling;
 
@@ -46,6 +47,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         battling = false;
         botPicking = true;
 
+        roundIncrement = 1;
+
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
         // drawFPS.start();
 
@@ -59,11 +62,14 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     public void draw(Graphics g) {
         // HEADER IN ALL PHASE
         g.setColor(Color.WHITE);
+        g.setFont(defaultFont.getBoldFontCustomSize(40));
+        g.drawString("Round " + roundIncrement, (width / 2) - (132 / 2), 50);
+
         g.setFont(defaultFont.getBoldFontCustomSize(25));
 
         // FIRST DRAW
         if (drawing) {
-            g.drawString("STARTING DRAW PHASE", 20, 40);
+            g.drawString("DRAW PHASE", 20, 40);
             drawPhaseObject.draw(g);
         }
 
