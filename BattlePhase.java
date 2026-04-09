@@ -10,10 +10,21 @@ public class BattlePhase {
     Boolean drawXALoser, drawXBLoser;
     Image X;
 
+    // REFACTOR INIT
+    int backAnimationTimer;
+    int incrementSpeed;
+    Boolean stopAfterBack;
+    int stopAfterBackTimer;
+
+    // COLLISION = ANIMATION, BATTLE = RESULT (FUNCTION/METHOD)
     BattlePhase() {
         drawXALoser = false;
         drawXBLoser = false;
         X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
+        backAnimationTimer = 120;
+        incrementSpeed = 10;
+        stopAfterBack = false;
+        stopAfterBackTimer = 250;
     }
 
     public void Function() {
@@ -98,17 +109,31 @@ public class BattlePhase {
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
     public void CollisionRune(MainRunes player, MainRunes bot) {
-        if (player.getY() < bot.getY() + (bot.getHeight() / 3)) {
+        if (player.getY() < bot.getY() + (bot.getHeight() - 19)) {
             System.out.println("collide rune");
+        } else if (backAnimationTimer >= 0) {
+            backAnimationTimer -= 24;
+            bot.setY(bot.getY() - 13);
+            player.setY(player.getY() + 13);
+            if (backAnimationTimer <= 0) {
+                stopAfterBack = true;
+            }
+        } else if (stopAfterBack) {
+            // stop ngani, wlay buhaton si rune pang momentum sa smash
+            stopAfterBackTimer -= 24;
+            if (stopAfterBackTimer < 0) {
+                stopAfterBack = false;
+            }
         } else {
             // player.setY(player.getY() - 10);
             // nigana, pero yw si holder nsd ato controllon dri, kalibog not consistent
             // cardObject.holderRune.setY(
             // cardObject.holderRune.getY() - 5);
-            bot.setY(bot.getY() + 5);
+            bot.setY(bot.getY() + incrementSpeed);
             bot.setX(bot.getX() + 1);
-            player.setY(player.getY() - 5);
+            player.setY(player.getY() - incrementSpeed);
             player.setX(player.getX() - 1);
+            incrementSpeed += 4;
             // ((Graphics2D) g).rotate(0); // NEXT TIME NALANG NI
         }
     }
