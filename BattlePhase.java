@@ -154,8 +154,21 @@ public class BattlePhase {
         }
     }
 
-    public void ResultRunes() {
-        // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA VISUAL
+    public void ResultRunes(Graphics g) {
+        // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA TEXT, ANG SA VISUAL DIRI
+
+        // ayg kalibog, if dli si player winner (means siya loser)
+        if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
+            // KUHA
+            g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
+                    120, 120, null);
+        } else {
+            g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
+                    120, 120, null);
+        }
+        // CHECK IF MO X IF BOT ANG PILDI
+        // g.drawImage(X, cardObject.botHolderRune.getX(),
+        // cardObject.botHolderRune.getY(), 120, 120, null);
     }
 
     public void draw(Graphics g) {
@@ -175,6 +188,9 @@ public class BattlePhase {
                 result = "IT'S ATAY :>";
             }
 
+            ResultRunes(g); // RESULT VISUAL DIRI
+
+            // MESSAGE FOR THE RESULTS PLUS ACCURATE CENTER (FM)
             FontMetrics fm = g.getFontMetrics();
             int resultTextWidth = fm.stringWidth(result);
 
