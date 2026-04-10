@@ -55,12 +55,11 @@ public class BattlePhase {
     public void BattleRunes(MainRunes player, MainRunes bot) {
 
         // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
-        if (player == null) {
+        if (player.getName().equals("activeRune")) {
             runeWinner = bot;
-        }
-        // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
-        // if (a.getName().equals(cardObject.rockRune.getName())) {
-        if (player.getName().equals("rock")) {
+            // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
+            // if (a.getName().equals(cardObject.rockRune.getName())) {
+        } else if (player.getName().equals("rock")) {
 
             if (bot.getName().equals("scissors")) {
                 runeWinner = player;
@@ -80,7 +79,7 @@ public class BattlePhase {
                 runeWinner = bot;
             }
         } else {
-            System.out.println("TIE 2");
+            System.out.println("TIE ETOH");
             runeWinner = null;
         }
         if (runeWinner != null) {
@@ -164,7 +163,6 @@ public class BattlePhase {
                 drawObject.playerCardCount,
                 drawObject.botCardCount);
 
-        // TODO: IF NULL ANG PLAYER, ITS A TIE INSTEAD NA LOSE
         if (animationRuneCollideDone) {
             g.setFont(defaultFont.getBoldFontCustomSize(35));
             // DRAW RESULT TEXT AND RESULT ART EFFECTS (GIF/ARRAY OF IMG)
