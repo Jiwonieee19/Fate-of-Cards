@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.net.URL;
 import java.awt.FontMetrics;
 
 import javax.swing.ImageIcon;
@@ -23,6 +24,8 @@ public class BattlePhase {
 
     Boolean animationRuneCollideDone;
 
+    int secondCounter;
+
     // COLLISION = COLLISION OF RUNES ANIMATION,
     // BATTLE = BATTLE OF RUNES LOGIC RESULT,
     // RESULT = RESULTS VISUAL
@@ -30,13 +33,16 @@ public class BattlePhase {
     BattlePhase() {
         drawXALoser = false;
         drawXBLoser = false;
-        X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
+        URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIFfinalfinall.gif");
+        X = new ImageIcon(gifUrl).getImage();
+        // X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
         backAnimationTimer = 120;
         incrementSpeed = 10;
         stopAfterBack = false;
         stopAfterBackTimer = 250;
         defaultFont = new DefaultFont();
         animationRuneCollideDone = false;
+        secondCounter = 1000; // 1sec
     }
 
     public void Function() {
@@ -156,15 +162,18 @@ public class BattlePhase {
 
     public void ResultRunes(Graphics g) {
         // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA TEXT, ANG SA VISUAL DIRI
-
-        // ayg kalibog, if dli si player winner (means siya loser)
-        if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
-            // KUHA
-            g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
-                    120, 120, null);
-        } else {
-            g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
-                    120, 120, null);
+        if (secondCounter > 0) {
+            // ayg kalibog, if dli si player winner (means siya loser)
+            if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
+                // KUHA
+                g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
+                        120, 120, null);
+            } else {
+                g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
+                        120, 120, null);
+            }
+            secondCounter -= (820 / 16); // after 24th run (1sec) hurot na, wa ni gana
+            // SOBRA GAMAY FRAME, sakto ang 820 / 16 as 1sec ka gif nga 12fps
         }
         // CHECK IF MO X IF BOT ANG PILDI
         // g.drawImage(X, cardObject.botHolderRune.getX(),
