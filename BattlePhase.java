@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.FontMetrics;
+
 import javax.swing.ImageIcon;
 
 public class BattlePhase {
@@ -7,6 +9,7 @@ public class BattlePhase {
     PreparationPhase cardObject;
     DrawPhase drawObject;
     MainRunes runeWinner;
+
     Boolean drawXALoser, drawXBLoser;
     Image X;
 
@@ -16,7 +19,14 @@ public class BattlePhase {
     Boolean stopAfterBack;
     int stopAfterBackTimer;
 
-    // COLLISION = ANIMATION, BATTLE = RESULT (FUNCTION/METHOD)
+    DefaultFont defaultFont;
+
+    Boolean animationRuneCollideDone;
+
+    // COLLISION = COLLISION OF RUNES ANIMATION,
+    // BATTLE = BATTLE OF RUNES LOGIC RESULT,
+    // RESULT = RESULTS VISUAL
+    // (FUNCTION/METHOD)
     BattlePhase() {
         drawXALoser = false;
         drawXBLoser = false;
@@ -25,6 +35,8 @@ public class BattlePhase {
         incrementSpeed = 10;
         stopAfterBack = false;
         stopAfterBackTimer = 250;
+        defaultFont = new DefaultFont();
+        animationRuneCollideDone = false;
     }
 
     public void Function() {
@@ -42,6 +54,10 @@ public class BattlePhase {
 
     public void BattleRunes(MainRunes player, MainRunes bot) {
 
+        // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
+        if (player == null) {
+            runeWinner = bot;
+        }
         // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
         // if (a.getName().equals(cardObject.rockRune.getName())) {
         if (player.getName().equals("rock")) {
@@ -108,9 +124,10 @@ public class BattlePhase {
 
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
-    public void CollisionRune(MainRunes player, MainRunes bot) {
+    public void CollisionRunes(MainRunes player, MainRunes bot) {
         if (player.getY() < bot.getY() + (bot.getHeight() - 19)) {
             System.out.println("collide rune");
+            animationRuneCollideDone = true;
         } else if (backAnimationTimer >= 0) {
             backAnimationTimer -= 24;
             bot.setY(bot.getY() - 13);
@@ -138,10 +155,33 @@ public class BattlePhase {
         }
     }
 
+    public void ResultRunes() {
+        // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA VISUAL
+    }
+
     public void draw(Graphics g) {
         cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
                 drawObject.playerCardCount,
                 drawObject.botCardCount);
+
+        // TODO: IF NULL ANG PLAYER, ITS A TIE INSTEAD NA LOSE
+        if (animationRuneCollideDone) {
+            g.setFont(defaultFont.getBoldFontCustomSize(35));
+            // DRAW RESULT TEXT AND RESULT ART EFFECTS (GIF/ARRAY OF IMG)
+            String result = "";
+            if (runeWinner == cardObject.activeRune) {
+                result = "YOU WIN DUMBASS!";
+            } else if (runeWinner == cardObject.botHolderRune) {
+                result = "DUHH ALWAYS A LOSER!";
+            } else {
+                result = "IT'S ATAY :>";
+            }
+
+            FontMetrics fm = g.getFontMetrics();
+            int resultTextWidth = fm.stringWidth(result);
+
+            g.drawString(result, (1200 / 2) - (resultTextWidth / 2), 700);
+        }
     }
 
 }

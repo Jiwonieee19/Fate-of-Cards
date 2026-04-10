@@ -105,7 +105,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject);
             battlePhaseObject.draw(g);
             // COLLIDE SA BEFORE RESULT, MAO NAA SA BABA BATTLE RUNE
-            battlePhaseObject.CollisionRune(
+            battlePhaseObject.CollisionRunes(
                     preparationPhaseObject.holderRune,
                     preparationPhaseObject.botHolderRune);
             battlePhaseObject.BattleRunes(
