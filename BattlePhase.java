@@ -33,7 +33,7 @@ public class BattlePhase {
     BattlePhase() {
         drawXALoser = false;
         drawXBLoser = false;
-        URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIFfinalfinall.gif");
+        URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIF.gif");
         X = new ImageIcon(gifUrl).getImage();
         // X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
         backAnimationTimer = 120;
@@ -174,6 +174,7 @@ public class BattlePhase {
             }
             secondCounter -= (820 / 16); // after 24th run (1sec) hurot na, wa ni gana
             // SOBRA GAMAY FRAME, sakto ang 820 / 16 as 1sec ka gif nga 12fps
+            // secondCounter = -1;
         }
         // CHECK IF MO X IF BOT ANG PILDI
         // g.drawImage(X, cardObject.botHolderRune.getX(),
