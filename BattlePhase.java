@@ -163,14 +163,22 @@ public class BattlePhase {
     public void ResultRunes(Graphics g) {
         // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA TEXT, ANG SA VISUAL DIRI
         if (secondCounter > 0) {
-            // ayg kalibog, if dli si player winner (means siya loser)
-            if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
-                // KUHA
+            if (runeWinner == null) {
+                // DIRIA PAG TIE
                 g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
                         120, 120, null);
-            } else {
                 g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
                         120, 120, null);
+            } else {
+                // ayg kalibog, if dli si player winner (means siya loser)
+                if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
+                    // KUHA
+                    g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
+                            120, 120, null);
+                } else {
+                    g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
+                            120, 120, null);
+                }
             }
             secondCounter -= (820 / 16); // after 24th run (1sec) hurot na, wa ni gana
             // SOBRA GAMAY FRAME, sakto ang 820 / 16 as 1sec ka gif nga 12fps
