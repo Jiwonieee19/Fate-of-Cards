@@ -11,8 +11,7 @@ public class BattlePhase {
     DrawPhase drawObject;
     MainRunes runeWinner;
 
-    Boolean drawXALoser, drawXBLoser;
-    Image X;
+    Image runeAnimationGIF, cardAnimationGIF;
 
     // REFACTOR INIT
     int backAnimationTimer;
@@ -29,12 +28,12 @@ public class BattlePhase {
     // COLLISION = COLLISION OF RUNES ANIMATION,
     // BATTLE = BATTLE OF RUNES LOGIC RESULT,
     // RESULT = RESULTS VISUAL
+    // EFFECTS CHECKER = CHECK THE CARD IF PERFORM OR NAH
+    // EFFECTS = RESULTS VISUAL
     // (FUNCTION/METHOD)
     BattlePhase() {
-        drawXALoser = false;
-        drawXBLoser = false;
         URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIF.gif");
-        X = new ImageIcon(gifUrl).getImage();
+        runeAnimationGIF = new ImageIcon(gifUrl).getImage();
         // X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
         backAnimationTimer = 120;
         incrementSpeed = 10;
@@ -94,39 +93,6 @@ public class BattlePhase {
         }
     }
 
-    public void collideResult(MainCards a, MainCards b) {
-        // System.out.println("COllide");
-        // if (winner == a) {
-        // System.out.println("Compared two Mainclass successfully"); // works fine
-        // drawXBLoser = true;
-        // } else if (winner == b) {
-        // drawXALoser = true;
-        // }
-    }
-
-    // public void draw(Graphics g, MainCards a, int aVelocityY, MainCards b, int
-    // bVelocityY) {
-    // g.drawImage(a.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), aVelocityY,
-    // a.getWidth() - 60,
-    // a.getHeight() - 60,
-    // null);
-    // // -60 ka player since every a ky active card, which is nidako sad if active
-    // g.drawImage(b.getImg(), 700 / 2 - (prepPhaseObj.cardWidth / 2), bVelocityY,
-    // prepPhaseObj.cardWidth,
-    // prepPhaseObj.cardHeight, null);
-    // // prep nagkuha width and height, pra dli active width ug height makuha tie
-    // if (drawXBLoser) {
-    // // kaya pala mali ang b.getX(), kto daay sa og nga x coordinates gina
-    // retrieve
-    // g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, bVelocityY, 180,
-    // 180, null);
-    // } else if (drawXALoser) {
-    // g.drawImage(X, 700 / 2 - (prepPhaseObj.cardWidth / 2) - 50, aVelocityY, 180,
-    // 180, null);
-    // }
-    // }
-    // }
-
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
     public void CollisionRunes(MainRunes player, MainRunes bot) {
@@ -165,18 +131,18 @@ public class BattlePhase {
         if (secondCounter > 0) {
             if (runeWinner == null) {
                 // DIRIA PAG TIE
-                g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
+                g.drawImage(runeAnimationGIF, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
                         120, 120, null);
-                g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
+                g.drawImage(runeAnimationGIF, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
                         120, 120, null);
             } else {
                 // ayg kalibog, if dli si player winner (means siya loser)
                 if (!(runeWinner.getName().equals(cardObject.activeRune.getName()))) {
                     // KUHA
-                    g.drawImage(X, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
+                    g.drawImage(runeAnimationGIF, cardObject.holderRune.getX(), cardObject.holderRune.getY(),
                             120, 120, null);
                 } else {
-                    g.drawImage(X, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
+                    g.drawImage(runeAnimationGIF, cardObject.botHolderRune.getX(), cardObject.botHolderRune.getY(),
                             120, 120, null);
                 }
             }
@@ -189,6 +155,14 @@ public class BattlePhase {
         // cardObject.botHolderRune.getY(), 120, 120, null);
     }
 
+    public void EffectCardsChecker(MainCards player, MainCards bot, MainRunes runewinner) {
+
+    }
+
+    public void EffectCards(Graphics g) {
+
+    }
+
     public void draw(Graphics g) {
         cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
                 drawObject.playerCardCount,
@@ -197,22 +171,22 @@ public class BattlePhase {
         if (animationRuneCollideDone) {
             g.setFont(defaultFont.getBoldFontCustomSize(35));
             // DRAW RESULT TEXT AND RESULT ART EFFECTS (GIF/ARRAY OF IMG)
-            String result = "";
+            String resultText = "";
             if (runeWinner == cardObject.activeRune) {
-                result = "YOU WIN DUMBASS!";
+                resultText = "YOU WIN DUMBASS!";
             } else if (runeWinner == cardObject.botHolderRune) {
-                result = "DUHH ALWAYS A LOSER!";
+                resultText = "DUHH ALWAYS A LOSER!";
             } else {
-                result = "IT'S ATAY :>";
+                resultText = "IT'S ATAY :>";
             }
 
             ResultRunes(g); // RESULT VISUAL DIRI
 
             // MESSAGE FOR THE RESULTS PLUS ACCURATE CENTER (FM)
             FontMetrics fm = g.getFontMetrics();
-            int resultTextWidth = fm.stringWidth(result);
+            int resultTextWidth = fm.stringWidth(resultText);
 
-            g.drawString(result, (1200 / 2) - (resultTextWidth / 2), 700);
+            g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
         }
     }
 
