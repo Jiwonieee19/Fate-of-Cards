@@ -10,6 +10,7 @@ public class BattlePhase {
     PreparationPhase cardObject;
     DrawPhase drawObject;
     MainRunes runeWinner;
+    CardsEffects cardsEffectsObject;
 
     Image runeAnimationGIF, cardAnimationGIF;
 
@@ -52,9 +53,12 @@ public class BattlePhase {
     // HAHAHAHAH WORKING, NA FIX ANG BUG NGA DILI MO GAWAS ANG RESULT SA RUNES
     // IF NAA ANG DRAW, PLUS BANTUG EMPTY ANG NEW DRAW KAY TUNGOD NEW MAN TONG 2
     // OBJECT PAG INITIALIZE SA TAAS
-    public void PassingObjects(PreparationPhase preparationPhase, DrawPhase drawPhase) {
+    public void PassingObjects(PreparationPhase preparationPhase, DrawPhase drawPhase,
+            CardsEffects cardsEffectsObject) {
         this.cardObject = preparationPhase;
         this.drawObject = drawPhase;
+        // PEDE RA DLI IPASA APIL KY EFFECTS RMN NAA DDTO, PERO PASA NLNG PRA NO BUG
+        this.cardsEffectsObject = cardsEffectsObject;
     }
 
     public void BattleRunes(MainRunes player, MainRunes bot) {
@@ -155,8 +159,8 @@ public class BattlePhase {
         // cardObject.botHolderRune.getY(), 120, 120, null);
     }
 
-    public void EffectCardsChecker(MainCards player, MainCards bot, MainRunes runewinner) {
-
+    public void EffectCardsChecker(MainCards player, MainCards bot, MainRunes runeWinner) {
+        cardsEffectsObject.tryy(player, bot);
     }
 
     public void EffectCards(Graphics g) {
@@ -187,6 +191,9 @@ public class BattlePhase {
             int resultTextWidth = fm.stringWidth(resultText);
 
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
+
+            // NAKASULOD, DRIA MAGPASA FOR CHECKING
+            EffectCardsChecker(cardObject.activeCard, cardObject.botHolderCard, runeWinner);
         }
     }
 

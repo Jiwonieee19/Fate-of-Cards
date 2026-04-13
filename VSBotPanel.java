@@ -16,6 +16,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     PreparationPhase preparationPhaseObject;
     BattlePhase battlePhaseObject;
 
+    CardsEffects cardsEffectsObject;
+
     DefaultFont defaultFont;
 
     Timer drawFPS;
@@ -40,6 +42,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject = new PreparationPhase();
         battlePhaseObject = new BattlePhase();
         defaultFont = new DefaultFont();
+        cardsEffectsObject = new CardsEffects();
 
         timeCountHolder = 0;
         drawing = true;
@@ -102,7 +105,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.drawString("BATTLE PHASE", 20, 40);
             // battlePhaseObject.draw(g, preparationPhaseObject.activeCard,
             // preparationPhaseObject.)
-            battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject);
+            battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject, cardsEffectsObject);
             battlePhaseObject.draw(g);
             // COLLIDE SA BEFORE RESULT, MAO NAA SA BABA BATTLE RUNE
             battlePhaseObject.CollisionRunes(
@@ -111,6 +114,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             battlePhaseObject.BattleRunes(
                     preparationPhaseObject.activeRune,
                     preparationPhaseObject.botHolderRune);
+            // PASS SD KA CARD EFFECTS
+            cardsEffectsObject.PassingObjects(preparationPhaseObject);
         }
     }
 
