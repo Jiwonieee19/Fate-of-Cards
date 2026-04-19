@@ -376,7 +376,7 @@ public class PreparationPhase {
                 g.fillRect((1200 - 400) + 150, (800 / 2) + 20, playerCurrentHp, 30);
                 g.setColor(Color.WHITE);
                 // ((Graphics2D) g).setStroke(new BasicStroke(5));
-                g.drawRect((1200 - 400) + 150, (800 / 2) + 20, playerCurrentHp, 30);
+                g.drawRect((1200 - 400) + 150, (800 / 2) + 20, 200, 30);
                 g.drawString("HP: " + playerCurrentHp, (1200 - 400) + 60, (800 / 2) + 41);
 
                 // BOT HP
@@ -384,7 +384,7 @@ public class PreparationPhase {
                 g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
                 g.setColor(Color.WHITE);
                 // ((Graphics2D) g).setStroke(new BasicStroke(5));
-                g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
+                g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), 200, 30);
                 g.drawString("Bot HP: " + botCurrentHp, (1200 - 400) + 20, (800 / 2) - 30);
 
                 // PLAYER ENERGY, AND JUST LIKE AXIE, D NMO MAKITA ENERGY SA KALABAN SOO PREDICT
