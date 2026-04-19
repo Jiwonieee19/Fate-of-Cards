@@ -1,5 +1,5 @@
 
-    ------- FIRST PATCHNOTE -------
+    ------- GENERAL PATCHNOTE -------
     
     ***** GENERAL CARD EFFECT VARIETY *****
 
@@ -10,12 +10,12 @@
     - 2 energy cost for regardless (either win or lose, takes minor/plain effect)
 
     Power Type of card
-    - 3 energy cost for flexible (both win & lose had diff advantage effect)
+    - 3 energy cost for flexible (both win & lose had diff advantage effect, win = greater effect)
 
     - 1 energycost type has balanced effect for both win/lose condition
      since its still 50% to achieve such condition
 
-    ***** PATCHNOTE 0.0.1 *****
+    ***** PATCHNOTE 0.0.1v *****
 
      OVERVIEW:
     - 3 cards pa, star, tower, devil
@@ -25,3 +25,23 @@
     - star, win: heals 20 hp
     - tower, lose: deals 10 dmg and heals 10 hp
     - devil, win: deals 20 dmg
+
+    // TO BE IMPLEMENTED AFTER ALL REMAINING TODOs
+        ***** PATCHNOTE 0.0.2v *****
+
+     OVERVIEW:
+    - those first 3 cards pala ay POWER type
+        (since 3 energy cost na ang pictures)
+
+     CARDLIST:
+    - star, 
+        win: heals 20 HP , draw 1 CARD
+        lose: heals 10 HP
+
+    - tower, 
+        win: deals 10 DMG , stun opponent 1 ROUND
+        lose: reflect 5 DMG
+
+    - devil, 
+        win: deals 25 DMG , heals 5 HP
+        lose: steal opponent 1 ENERGY
