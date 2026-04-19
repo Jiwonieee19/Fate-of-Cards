@@ -1,0 +1,27 @@
+
+    ------- FIRST PATCHNOTE -------
+    
+    ***** GENERAL CARD EFFECT VARIETY *****
+
+    Base Type of card
+    - 1 energy cost for win/lose card (addvantage effect but condtionally)
+
+    Stable Type of card
+    - 2 energy cost for regardless (either win or lose, takes minor/plain effect)
+
+    Power Type of card
+    - 3 energy cost for flexible (both win & lose had diff advantage effect)
+
+    - 1 energycost type has balanced effect for both win/lose condition
+     since its still 50% to achieve such condition
+
+    ***** PATCHNOTE 0.0.1 *****
+
+     OVERVIEW:
+    - 3 cards pa, star, tower, devil
+    - all 3 cards are 1 energycost type
+
+     CARDLIST:
+    - star, win: heals 20 hp
+    - tower, lose: deals 10 dmg and heals 10 hp
+    - devil, win: deals 20 dmg
