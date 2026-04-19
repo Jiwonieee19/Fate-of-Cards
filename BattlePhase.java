@@ -23,6 +23,7 @@ public class BattlePhase {
     DefaultFont defaultFont;
 
     Boolean animationRuneCollideDone;
+    Boolean playerCardEffectDone, botCardEffectDone;
 
     int secondCounter;
 
@@ -42,6 +43,8 @@ public class BattlePhase {
         stopAfterBackTimer = 250;
         defaultFont = new DefaultFont();
         animationRuneCollideDone = false;
+        playerCardEffectDone = false;
+        botCardEffectDone = false;
         secondCounter = 1000; // 1sec
     }
 
@@ -159,8 +162,16 @@ public class BattlePhase {
         // cardObject.botHolderRune.getY(), 120, 120, null);
     }
 
+    // CHECK MUNA ANF EFFECT NI CARD
+    // (SINCE NAAY CARDS NGA MO EFFECT DURING LOSE CONDTION AND SO ON)
     public void EffectCardsChecker(MainCards player, MainCards bot, MainRunes runeWinner) {
-        cardsEffectsObject.tryy(player, bot);
+        // PARA DLI PER FRAME ANG EFFECT
+        if (!playerCardEffectDone) {
+            // buhat pa other method sa card effect, d pani mao, for storing ni
+            cardsEffectsObject.storeCardsEffects(player, true);
+            playerCardEffectDone = true;
+            // ibalik rani false after the round
+        }
     }
 
     public void EffectCards(Graphics g) {
