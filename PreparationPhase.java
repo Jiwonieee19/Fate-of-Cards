@@ -65,6 +65,8 @@ public class PreparationPhase {
         MainCards botHolderCard;
         MainRunes botHolderRune;
 
+        int beforeDeductionPlayerEnergy;
+
         PreparationPhase() {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -76,9 +78,9 @@ public class PreparationPhase {
                 Image devilImg = new ImageIcon(getClass().getResource("assets/cards/devil.png")).getImage();
 
                 // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
-                starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg);
-                towerCard = new MainCards("tower", margin, cardY, cardWidth, cardHeight, towerImg);
-                devilCard = new MainCards("devil", margin, cardY, cardWidth, cardHeight, devilImg);
+                starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg, 3);
+                towerCard = new MainCards("tower", margin, cardY, cardWidth, cardHeight, towerImg, 3);
+                devilCard = new MainCards("devil", margin, cardY, cardWidth, cardHeight, devilImg, 3);
 
                 randomizer = new Random();
 
@@ -98,12 +100,12 @@ public class PreparationPhase {
 
                 deckCards = new MainCards("deck", margin, (800 / 2) - (cardHeight / 2), cardWidth,
                                 cardHeight,
-                                deckCardsImage);
+                                deckCardsImage, 0);
 
                 defaultFont = new DefaultFont();
 
                 activeCardImage = new ImageIcon(getClass().getResource("assets/cards/activeCard.png")).getImage();
-                activeCard = new MainCards("activeCard", margin, margin, cardWidth, cardHeight, activeCardImage);
+                activeCard = new MainCards("activeCard", margin, margin, cardWidth, cardHeight, activeCardImage, 0);
                 isActiveCard = false;
 
                 activeRuneImage = new ImageIcon(getClass().getResource("assets/runes/activeRuneTarot.png")).getImage();
@@ -116,14 +118,17 @@ public class PreparationPhase {
                 botCurrentHp = 200;
 
                 energyImage = new ImageIcon(getClass().getResource("assets/runes/energyTarot.png")).getImage();
-                playerEnergyCount = 2;
-                botEnergyCount = 2;
+                playerEnergyCount = 3;
+                botEnergyCount = 3;
+                // TEMPO
+                // 2 dyud initial, pero 3 sa para makaplay ug cards since 3cards are power type,
+                // and wla pay implementation for next round which will increment the energy
 
                 cardHolderImage = new ImageIcon(getClass().getResource("assets/cards/cardHolder.png")).getImage();
                 runeHolderImage = new ImageIcon(getClass().getResource("assets/runes/runeHolder.png")).getImage();
 
                 holderCard = new MainCards("holderCard", holderCardX, holderCardY, cardWidth, cardHeight,
-                                cardHolderImage);
+                                cardHolderImage, 0);
                 holderRune = new MainRunes("holderRune", holderRuneX, holderRuneY, runesWH, runesWH, runeHolderImage);
 
                 // NEED NAKA OBJECT PUD KA BOT KAY IBUTANG BAYA DRIA NGA X AND Y ANG ACTIVE
@@ -131,13 +136,15 @@ public class PreparationPhase {
                 botHolderCard = new MainCards("botHolderCard", holderCardX, holderCardY - (cardHeight + (margin * 2)),
                                 cardWidth,
                                 cardHeight,
-                                cardHolderImage);
+                                cardHolderImage, 0);
                 botHolderRune = new MainRunes("botHolderRune", holderRuneX, holderRuneY - (cardHeight + (margin * 2)),
                                 runesWH,
                                 runesWH, runeHolderImage);
 
                 // BUT FOR RUNES CHOICES, IT WILL DIFFER, IBUTANG SA DRAW SAME OBJECT, PERO
                 // IBUTANG SA ACTIVE NI BOT, RANDOMIZER SA BACKEND RA
+
+                beforeDeductionPlayerEnergy = playerEnergyCount;
         }
 
         public void PreparationFunction() {
@@ -194,6 +201,10 @@ public class PreparationPhase {
                                         mouseClickedCoordinates.y > playerOnHand[i].getY() &&
                                         mouseClickedCoordinates.x < ((playerOnHand[i].getX() + (i * 100)) + cardWidth)
                                         && mouseClickedCoordinates.y < (playerOnHand[i].getY() + cardHeight)) {
+                                // CHECK IF KAIGO BA ANG ENERGY TO PLAY THAT SPECIFIC CARD, WORKING
+                                // TRY NATO E 2 ENERGY COST SA ISA KA CARD (STAR) IF MA PLAY NIYA, WORKING
+                                // ENDPOINT: MA PLAY LANG ANG CARDS IF KAIGO ENERGY, SO FAR NO BUG
+                                // NO CHOICE, DLI PA MAG MINUS VISUALLY SA PREPPHASE
                                 System.out.println("NAKASULOD BA ET?");
                                 // PANG CHECK SA LOGIC ERROR, NGA TANAN SAME OBJECT ONHAND KAY MA MANIPULATE
                                 // playerOnHand[i].setAllCardsDetails(100, 500, 100, 100);
@@ -211,6 +222,8 @@ public class PreparationPhase {
                                         activeCard.setImgOfActiveCard(playerOnHand[i].getImg());
                                         isActiveCard = true;
                                         System.out.println("NAKA TRUE NA " + activeCard.getName());
+                                        // NICE, DONE ENERGY SWITCHING CARD
+                                        playerEnergyCount -= playerOnHand[i].getEnergy();
                                         // BASIC TOGGLES
                                 } else if (isActiveCard
                                                 // && mouseClickedCoordinates.x >= (activeCard.getX() + (i * 100))
@@ -225,13 +238,19 @@ public class PreparationPhase {
                                         // SETNAME TO OG
                                         activeCard.setName("activeCard");
                                         activeCard.setImgOfActiveCard(null);
-                                } else if (isActiveCard) {
+                                        // IF GI CLICK ANG ACTIVE CARD, MEANS IBALIK TONG ENERGY DDTO KAY E CANCEL MAN
+                                        playerEnergyCount = beforeDeductionPlayerEnergy;
+                                        // IF LANG KAIGO IYANG PREVIOUS(OG ENERGY), SA BALHINAN NA CARD
+                                } else if (isActiveCard && beforeDeductionPlayerEnergy >= playerOnHand[i].getEnergy()) {
                                         // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
                                         activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
                                         activeCard.setY(playerOnHand[i].getY());
                                         activeCard.setImgOfActiveCard(playerOnHand[i].getImg());
                                         System.out.println("REKTA SWITCH " + activeCard.getName());
+                                        // RESTART SA OG VALUE, B4 MINUS SA GIBALHINAN NA CARD
+                                        playerEnergyCount = beforeDeductionPlayerEnergy;
+                                        playerEnergyCount -= playerOnHand[i].getEnergy();
                                 }
 
                         }
@@ -324,6 +343,7 @@ public class PreparationPhase {
                                 botHolderRune.setImage(runesArray[i].getImage());
                         }
                 }
+
         }
 
         // public void paintComponent(Graphics g) {

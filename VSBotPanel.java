@@ -103,8 +103,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         if (battling) {
             g.setColor(Color.WHITE);
             g.drawString("BATTLE PHASE", 20, 40);
-            // battlePhaseObject.draw(g, preparationPhaseObject.activeCard,
-            // preparationPhaseObject.)
+            // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
+            preparationPhaseObject.beforeDeductionPlayerEnergy = preparationPhaseObject.playerEnergyCount;
             battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject, cardsEffectsObject);
             battlePhaseObject.draw(g);
             // COLLIDE SA BEFORE RESULT, MAO NAA SA BABA BATTLE RUNE

@@ -8,15 +8,17 @@ public class MainCards {
     private int x, y, width, height;
     private Image img, imgOfActiveCard;
     // private Color standard = Color.WHITE;
+    private int energy;
 
     // CONSTRUCTORS
-    MainCards(String name, int x, int y, int width, int height, Image img) {
+    MainCards(String name, int x, int y, int width, int height, Image img, int energy) {
         this.setName(name);
         this.setX(x);
         this.setY(y);
         this.setWidth(width);
         this.setHeight(height);
         this.setImg(img);
+        this.setEnergy(energy);
     }
 
     public void setAllCardsDetails(int x, int y, int width, int height) {
@@ -57,6 +59,10 @@ public class MainCards {
         this.imgOfActiveCard = imgOfActiveCard;
     }
 
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -83,5 +89,9 @@ public class MainCards {
 
     public Image getImgOfActiveCard() {
         return this.imgOfActiveCard;
+    }
+
+    public int getEnergy() {
+        return this.energy;
     }
 }
