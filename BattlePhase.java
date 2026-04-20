@@ -27,6 +27,8 @@ public class BattlePhase {
 
     int secondCounter;
 
+    String winnerName;
+
     // COLLISION = COLLISION OF RUNES ANIMATION,
     // BATTLE = BATTLE OF RUNES LOGIC RESULT,
     // RESULT = RESULTS VISUAL
@@ -45,6 +47,7 @@ public class BattlePhase {
         animationRuneCollideDone = false;
         playerCardEffectDone = false;
         botCardEffectDone = false;
+        winnerName = "tie";
         secondCounter = 1000; // 1sec
     }
 
@@ -69,30 +72,38 @@ public class BattlePhase {
         // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
         if (player.getName().equals("activeRune")) {
             runeWinner = bot;
+            winnerName = "bot";
             // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
             // if (a.getName().equals(cardObject.rockRune.getName())) {
         } else if (player.getName().equals("rock")) {
 
             if (bot.getName().equals("scissors")) {
                 runeWinner = player;
+                winnerName = "player";
             } else if (bot.getName().equals("paper")) {
                 runeWinner = bot;
+                winnerName = "bot";
             }
         } else if (player.getName().equals("paper")) {
             if (bot.getName().equals("rock")) {
                 runeWinner = player;
+                winnerName = "player";
             } else if (bot.getName().equals("scissors")) {
                 runeWinner = bot;
+                winnerName = "bot";
             }
         } else if (player.getName().equals("scissors")) {
             if (bot.getName().equals("paper")) {
                 runeWinner = player;
+                winnerName = "player";
             } else if (bot.getName().equals("rock")) {
                 runeWinner = bot;
+                winnerName = "bot";
             }
         } else {
             System.out.println("TIE ETOH");
             runeWinner = null;
+            winnerName = "tie";
         }
         if (runeWinner != null) {
             System.out.println(
@@ -164,11 +175,10 @@ public class BattlePhase {
 
     // CHECK MUNA ANF EFFECT NI CARD
     // (SINCE NAAY CARDS NGA MO EFFECT DURING LOSE CONDTION AND SO ON)
-    public void EffectCardsChecker(MainCards player, MainCards bot, MainRunes runeWinner) {
+    public void EffectCardsChecker(MainCards player, MainCards bot) {
         // PARA DLI PER FRAME ANG EFFECT
         if (!playerCardEffectDone) {
-            // buhat pa other method sa card effect, d pani mao, for storing ni
-            cardsEffectsObject.storeCardsEffects(player, true);
+            cardsEffectsObject.cardEffectValidator(player, bot, winnerName);
             playerCardEffectDone = true;
             // ibalik rani false after the round
         }
@@ -204,7 +214,7 @@ public class BattlePhase {
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
 
             // NAKASULOD, DRIA MAGPASA FOR CHECKING
-            EffectCardsChecker(cardObject.activeCard, cardObject.botHolderCard, runeWinner);
+            EffectCardsChecker(cardObject.activeCard, cardObject.botHolderCard);
         }
     }
 
