@@ -66,8 +66,6 @@ public class CardsEffects {
     // TODO: SEQUENCE OF CARD EFFECTS (WINNER EFFECT FIRST THEN LOSER
     // (SO HEALS EFFECT MAKE SINCE))
 
-    // TODO: CLEAN/REPHRASE SYSOUTS OF ALL FILE TO UNIFORM AND UNDERSTAND BETTER
-
     // CHECK BOTH CARD AND SEE ITS CONDITION (WIN/LOSE/EITHER)
     public void cardEffectValidator(MainCards player, MainCards bot, String winnerName) {
 

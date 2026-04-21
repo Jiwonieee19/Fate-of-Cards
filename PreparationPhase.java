@@ -205,13 +205,12 @@ public class PreparationPhase {
                                 // TRY NATO E 2 ENERGY COST SA ISA KA CARD (STAR) IF MA PLAY NIYA, WORKING
                                 // ENDPOINT: MA PLAY LANG ANG CARDS IF KAIGO ENERGY, SO FAR NO BUG
                                 // NO CHOICE, DLI PA MAG MINUS VISUALLY SA PREPPHASE
+                                // MAG MINUS NA, EZ
                                 System.out.println("NAKASULOD BA ET?");
                                 // PANG CHECK SA LOGIC ERROR, NGA TANAN SAME OBJECT ONHAND KAY MA MANIPULATE
                                 // playerOnHand[i].setAllCardsDetails(100, 500, 100, 100);
                                 // NO NEED NA NGA INDIVIDUAL OBJECT ANG NAA SA ON HAND, PEDE RA ANG ACTIVECARD
                                 // E REFERENCE SA BATTLEPHASE
-
-                                System.out.println(playerOnHand[i].getName());
 
                                 // ON FRAME IF KNSA ACTIVE
                                 if (!isActiveCard) {
@@ -279,7 +278,7 @@ public class PreparationPhase {
                                         isActiveRune = false;
                                         // pati active card madamay since ang rules ky no active runes no play
                                         isActiveCard = false;
-                                        System.out.println("OFF BOTH");
+                                        System.out.println("OFF BOTH RUNES AND CARD");
                                         // SETNAME TO OG
                                         activeRune.setName("activeRune");
                                         activeRune.setImageOfActiveRune(null);

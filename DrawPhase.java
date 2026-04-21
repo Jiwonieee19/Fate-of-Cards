@@ -114,8 +114,8 @@ public class DrawPhase {
                 playerDraw = false;
                 botDraw = true;
                 // diff between y of deck and y of playercard to use for bot limit animation
-                int diff = (cardsObject.deckCards.getY() - cardsObject.devilCard.getY()); // 225
-                System.out.println("BASIC RESTART DRAW ANIMATION " + diff);
+                // (cardsObject.deckCards.getY() - cardsObject.devilCard.getY()); // 225
+                System.out.println("BASIC RESTART DRAW ANIMATION ");
 
                 // AFTER MA REACH OR MAKA ISAG DRAW, THEN DDTO PA MAG MINUS
                 drawCount -= 1;

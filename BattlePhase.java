@@ -101,17 +101,19 @@ public class BattlePhase {
             runeWinner = null;
             winnerName = "tie";
         }
-        if (runeWinner != null) {
-            System.out.println(
-                    "player :" + player.getName() + "\nbot: " + bot.getName() + "\nwinner: " + runeWinner.getName());
-        }
+        // // CHECKER RA SA RUNES AND EVERY FRAME MO RUN
+        // if (runeWinner != null) {
+        // System.out.println(
+        // "player :" + player.getName() + "\nbot: " + bot.getName() + "\nwinner: " +
+        // runeWinner.getName());
+        // }
     }
 
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
     public void collisionRunes(MainRunes player, MainRunes bot) {
         if (player.getY() < bot.getY() + (bot.getHeight() - 19)) {
-            System.out.println("collide rune");
+            // System.out.println("collide rune"); // CHECKER RA IF NAG COLLIDE, PERFRAME
             animationRuneCollideDone = true;
         } else if (backAnimationTimer >= 0) {
             backAnimationTimer -= 24;
