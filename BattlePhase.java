@@ -182,7 +182,7 @@ public class BattlePhase {
             playerCardEffectDone = true;
             // ibalik rani false after the round
         }
-    }
+    } // redundant, but its fine para dili gubot sa draw function
 
     public void EffectCards(Graphics g) {
 
