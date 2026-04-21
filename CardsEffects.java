@@ -8,7 +8,7 @@ public class CardsEffects {
         winnerName = "tie";
     }
 
-    public void PassingObjects(PreparationPhase preparationPhaseObject) {
+    public void passingObjects(PreparationPhase preparationPhaseObject) {
         // PARA ATONG E MANIPULATE KY KATONG EXISTING NGA PREPHASE
         // WHICH IS NAA DDTO TANAN, HP, ENERGY, CHUCHU
         this.preparationPhaseObject = preparationPhaseObject;

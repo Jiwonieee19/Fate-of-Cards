@@ -105,17 +105,17 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.drawString("BATTLE PHASE", 20, 40);
             // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
             preparationPhaseObject.beforeDeductionPlayerEnergy = preparationPhaseObject.playerEnergyCount;
-            battlePhaseObject.PassingObjects(preparationPhaseObject, drawPhaseObject, cardsEffectsObject);
+            battlePhaseObject.passingObjects(preparationPhaseObject, drawPhaseObject, cardsEffectsObject);
             battlePhaseObject.draw(g);
             // COLLIDE SA BEFORE RESULT, MAO NAA SA BABA BATTLE RUNE
-            battlePhaseObject.CollisionRunes(
+            battlePhaseObject.collisionRunes(
                     preparationPhaseObject.holderRune,
                     preparationPhaseObject.botHolderRune);
-            battlePhaseObject.BattleRunes(
+            battlePhaseObject.battleRunes(
                     preparationPhaseObject.activeRune,
                     preparationPhaseObject.botHolderRune);
             // PASS SD KA CARD EFFECTS
-            cardsEffectsObject.PassingObjects(preparationPhaseObject);
+            cardsEffectsObject.passingObjects(preparationPhaseObject);
         }
     }
 

@@ -51,15 +51,11 @@ public class BattlePhase {
         secondCounter = 1000; // 1sec
     }
 
-    public void Function() {
-
-    }
-
     // PEDE RA DAAY NI YW PARA ISA RA KA OBJECT DALA NNYU
     // HAHAHAHAH WORKING, NA FIX ANG BUG NGA DILI MO GAWAS ANG RESULT SA RUNES
     // IF NAA ANG DRAW, PLUS BANTUG EMPTY ANG NEW DRAW KAY TUNGOD NEW MAN TONG 2
     // OBJECT PAG INITIALIZE SA TAAS
-    public void PassingObjects(PreparationPhase preparationPhase, DrawPhase drawPhase,
+    public void passingObjects(PreparationPhase preparationPhase, DrawPhase drawPhase,
             CardsEffects cardsEffectsObject) {
         this.cardObject = preparationPhase;
         this.drawObject = drawPhase;
@@ -67,7 +63,7 @@ public class BattlePhase {
         this.cardsEffectsObject = cardsEffectsObject;
     }
 
-    public void BattleRunes(MainRunes player, MainRunes bot) {
+    public void battleRunes(MainRunes player, MainRunes bot) {
 
         // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
         if (player.getName().equals("activeRune")) {
@@ -113,7 +109,7 @@ public class BattlePhase {
 
     // INSTEAD NG ACTIVE VS BOTHOLLDER, BOTH HOLDER NALANG KY MAO MN TO
     // E MANIPULATE PAG DRAW
-    public void CollisionRunes(MainRunes player, MainRunes bot) {
+    public void collisionRunes(MainRunes player, MainRunes bot) {
         if (player.getY() < bot.getY() + (bot.getHeight() - 19)) {
             System.out.println("collide rune");
             animationRuneCollideDone = true;
@@ -144,7 +140,7 @@ public class BattlePhase {
         }
     }
 
-    public void ResultRunes(Graphics g) {
+    public void resultRunes(Graphics g) {
         // SA DRAW NA DAAY TA MAGBUTANG SA RESULT NGA TEXT, ANG SA VISUAL DIRI
         if (secondCounter > 0) {
             if (runeWinner == null) {
@@ -175,7 +171,7 @@ public class BattlePhase {
 
     // CHECK MUNA ANF EFFECT NI CARD
     // (SINCE NAAY CARDS NGA MO EFFECT DURING LOSE CONDTION AND SO ON)
-    public void EffectCardsChecker(MainCards player, MainCards bot) {
+    public void effectCardsChecker(MainCards player, MainCards bot) {
         // PARA DLI PER FRAME ANG EFFECT
         if (!playerCardEffectDone) {
             cardsEffectsObject.cardEffectValidator(player, bot, winnerName);
@@ -183,10 +179,6 @@ public class BattlePhase {
             // ibalik rani false after the round
         }
     } // redundant, but its fine para dili gubot sa draw function
-
-    public void EffectCards(Graphics g) {
-
-    }
 
     public void draw(Graphics g) {
         cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
@@ -205,7 +197,7 @@ public class BattlePhase {
                 resultText = "IT'S ATAY :>";
             }
 
-            ResultRunes(g); // RESULT VISUAL DIRI
+            resultRunes(g); // RESULT VISUAL DIRI
 
             // MESSAGE FOR THE RESULTS PLUS ACCURATE CENTER (FM)
             FontMetrics fm = g.getFontMetrics();
@@ -214,7 +206,7 @@ public class BattlePhase {
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
 
             // NAKASULOD, DRIA MAGPASA FOR CHECKING
-            EffectCardsChecker(cardObject.activeCard, cardObject.botHolderCard);
+            effectCardsChecker(cardObject.activeCard, cardObject.botHolderCard);
         }
     }
 
