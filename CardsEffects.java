@@ -14,17 +14,24 @@ public class CardsEffects {
         this.preparationPhaseObject = preparationPhaseObject;
     }
 
+    // GOLDEN RULE:
+    // (MUCH EASIER SOLUTION BUT NOT RECOMMENDABLE, SINCE LIBOG IN LONG RUN)
+    // IF !ISWINNER ANG CARD EFFECT (MEANS MO EFFECT PAG PILDI), SIYA SI OPPONENT
+    // TAKE TOWER CARD AS EXAMPLE
     public void storeCardsEffects(MainCards card, Boolean isWinner) {
 
+        String loserName = "";
         int opponentCurrentHp = 0, ownCurrentHp = 0;
 
         // PARA DLI MAPUNO IF ELSE, AND ISA RA KA FUNCTION ANG EFFECTS
 
         // E STORE SA VARAIBLE ILA CURRENT NUMBERS OF SHITS
-        if (winnerName.equals("player")) {
+        if (this.winnerName.equals("player")) {
+            loserName = "bot";
             opponentCurrentHp = preparationPhaseObject.botCurrentHp;
             ownCurrentHp = preparationPhaseObject.playerCurrentHp;
         } else {
+            loserName = "player";
             opponentCurrentHp = preparationPhaseObject.playerCurrentHp;
             ownCurrentHp = preparationPhaseObject.botCurrentHp;
         }
@@ -36,25 +43,31 @@ public class CardsEffects {
         if (card.getName().equals("star") && isWinner) {
             // System.out.println("star == star"); // NAKASULOD
             ownCurrentHp += 20;
-            System.out.println("HEALED 20");
+            System.out.println(winnerName + ": HEALED 20");
         }
         // TOWER
         else if (card.getName().equals("tower") && !isWinner) {
             // WORKING, PERO PER FRAME MAG MINUS BHWHAHAH // fixed
-            opponentCurrentHp -= 10;
-            ownCurrentHp += 10;
-            System.out.println("HEALED 10 AND DAMAGED DEALT 10");
+            // DRAFT FIX, ACTUALLY WORKING,
+            // TO THINK NGA IF DLI KA WINNER (!isWinner) THEN IKAW SI OPPONENT: ANA LANG
+            // PERO LIBOG NI LONG RUN, SO CLEANUP NLNG IF ELSE SA TAAS
+            // KANI NLNG SA, MAS DALI FOR ME
+            opponentCurrentHp += 10;
+            ownCurrentHp -= 10;
+            System.out.println(loserName + ": HEALED 10 AND DAMAGED DEALT 10");
+            // AHHHHH THATS WHY, KAY SI OPPONNENT KAY AS OF NOW SI BOT,
+            // KAY NA SET UP DDTOAS VARIABLES FOR WINNER RA BWHAHAHA GETS
         }
         // DEVIL
         else if (card.getName().equals("devil") && isWinner) {
             opponentCurrentHp -= 20;
-            System.out.println("DAMAGED DEALT 20");
+            System.out.println(winnerName + ": DAMAGED DEALT 20");
         }
 
         // AFTER MA STORE, I PASA SA ORIGINAL TO CHANGE IT,
         // THIS SOLUTION MAKES IT SIMPLIER FOR BOTH PLAYER KESA NAKA LAHI2 ILANG
         // FUNCTION
-        if (winnerName.equals("player")) {
+        if (this.winnerName.equals("player")) {
             preparationPhaseObject.botCurrentHp = opponentCurrentHp;
             preparationPhaseObject.playerCurrentHp = ownCurrentHp;
         } else {

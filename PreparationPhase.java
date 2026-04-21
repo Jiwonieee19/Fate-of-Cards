@@ -206,7 +206,7 @@ public class PreparationPhase {
                                 // ENDPOINT: MA PLAY LANG ANG CARDS IF KAIGO ENERGY, SO FAR NO BUG
                                 // NO CHOICE, DLI PA MAG MINUS VISUALLY SA PREPPHASE
                                 // MAG MINUS NA, EZ
-                                System.out.println("NAKASULOD BA ET?");
+                                // System.out.println("NAKASULOD BA ET?");
                                 // PANG CHECK SA LOGIC ERROR, NGA TANAN SAME OBJECT ONHAND KAY MA MANIPULATE
                                 // playerOnHand[i].setAllCardsDetails(100, 500, 100, 100);
                                 // NO NEED NA NGA INDIVIDUAL OBJECT ANG NAA SA ON HAND, PEDE RA ANG ACTIVECARD
