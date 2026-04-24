@@ -115,7 +115,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                     preparationPhaseObject.activeRune,
                     preparationPhaseObject.botHolderRune);
             // PASS SD KA CARD EFFECTS
-            cardsEffectsObject.passingObjects(preparationPhaseObject);
+            cardsEffectsObject.passingObjects(preparationPhaseObject, battlePhaseObject);
         }
     }
 

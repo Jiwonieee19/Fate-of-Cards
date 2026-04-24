@@ -5,21 +5,20 @@ public class CardsEffects {
     PreparationPhase preparationPhaseObject;
     String winnerName;
     int winnerCardDuration, loserCardDuration;
-    Boolean winnerCardEffectDone, loserCardEffectDone;
+    BattlePhase battlePhaseObject;
 
     CardsEffects() {
         preparationPhaseObject = new PreparationPhase();
         winnerName = "tie";
         winnerCardDuration = 5000;
         loserCardDuration = 5000;
-        winnerCardEffectDone = false;
-        loserCardEffectDone = false;
     }
 
-    public void passingObjects(PreparationPhase preparationPhaseObject) {
+    public void passingObjects(PreparationPhase preparationPhaseObject, BattlePhase battlePhaseObject) {
         // PARA ATONG E MANIPULATE KY KATONG EXISTING NGA PREPHASE
         // WHICH IS NAA DDTO TANAN, HP, ENERGY, CHUCHU
         this.preparationPhaseObject = preparationPhaseObject;
+        this.battlePhaseObject = battlePhaseObject;
     }
 
     // GOLDEN RULE:
@@ -90,48 +89,35 @@ public class CardsEffects {
         }
     }
 
-    // TODO: SEQUENCE OF CARD EFFECTS (WINNER EFFECT FIRST THEN LOSER
-    // (SO HEALS EFFECT MAKE SINCE))
-
-    // CHECK BOTH CARD AND SEE ITS CONDITION (WIN/LOSE/EITHER)
-    public void cardEffectValidator(MainCards player, MainCards bot, String winnerName) {
-
-        this.winnerName = winnerName;
-
-        if (winnerName.equals("player")) {
-            // ANI DAPAT, PRA MA PLAY GIHAPON ANG CARD NI LOSER TO CHECK IF PASOK
-            storeCardsEffects(player, true);
-            storeCardsEffects(bot, false);
-
-        } else if (winnerName.equals("bot")) {
-            storeCardsEffects(bot, true);
-            storeCardsEffects(player, false);
-        } else {
-            // DIRIA PADUNG IF WALAY DAOG, MEANS TIE, DILI NA MAGPASA PA IF TIE
-            // PAG TIE, BOTH CARDS REKTA BURN
-        }
-
-    } // THIS IS A SHIT, NOT DOING ITS THING, VOID VOID VOID
-      // BECOME MESSY AFTER THINKING HOW TO INSERT THE DRAW/ANIMATION
-
     public void cardEffectCheckerAndVisual(MainCards card, Boolean isWinner, Graphics g) {
-        if (isWinner && !winnerCardEffectDone) {
+        // si winner sa
+        if (isWinner) {
             if (winnerCardDuration > 0) {
-                drawPerCardEffects(g);
+                drawPerCardEffects(g, "winner");
                 winnerCardDuration -= 1000 / 24;
             } else {
                 storeCardsEffects(card, true);
-                winnerCardEffectDone = true;
+                battlePhaseObject.winnerCardEffectDone = true;
             }
-        } else {
-            storeCardsEffects(card, false);
+        }
+
+        // si loser na
+        else if (!isWinner) {
+            if (loserCardDuration > 0) {
+                drawPerCardEffects(g, "loser");
+                loserCardDuration -= 1000 / 24;
+            } else {
+                storeCardsEffects(card, true);
+                battlePhaseObject.loserCardEffectDone = true;
+            }
         }
     }
 
-    public void drawPerCardEffects(Graphics g) {
+    public void drawPerCardEffects(Graphics g, String whos) {
         // MainCards cardEffectVisual
         // if (winnerName.equals("player")) {
 
         // }
+        g.drawString("null" + whos, 50, 50);
     }
 }

@@ -28,6 +28,8 @@ public class BattlePhase {
 
     String winnerName;
 
+    Boolean winnerCardEffectDone, loserCardEffectDone;
+
     // COLLISION = COLLISION OF RUNES ANIMATION,
     // BATTLE = BATTLE OF RUNES LOGIC RESULT,
     // RESULT = RESULTS VISUAL
@@ -46,6 +48,8 @@ public class BattlePhase {
         animationRuneCollideDone = false;
         winnerName = "tie";
         secondCounter = 1000; // 1sec
+        winnerCardEffectDone = false;
+        loserCardEffectDone = false;
     }
 
     // PEDE RA DAAY NI YW PARA ISA RA KA OBJECT DALA NNYU
@@ -173,10 +177,20 @@ public class BattlePhase {
     // CHECK AND DRAW NA NI, IN ANI PAGKA CODE DA
     public void effectCardsVisual(MainCards player, MainCards bot, Graphics g) {
 
-        if (winnerName.equals("player")) {
-            cardsEffectsObject.cardEffectCheckerAndVisual(player, true, g);
+        if (!winnerCardEffectDone) {
+            if (winnerName.equals("player")) {
+                cardsEffectsObject.cardEffectCheckerAndVisual(player, true, g);
+            } else {
+                cardsEffectsObject.cardEffectCheckerAndVisual(bot, true, g);
+            }
+        } else if (!loserCardEffectDone) {
+            if (winnerName.equals("player")) {
+                cardsEffectsObject.cardEffectCheckerAndVisual(bot, false, g);
+            } else {
+                cardsEffectsObject.cardEffectCheckerAndVisual(player, false, g);
+            }
         } else {
-            cardsEffectsObject.cardEffectCheckerAndVisual(bot, true, g);
+            // D NAMAN GURO MAABOT DIRI, OR SA TIE NI SLASH PAG NULL SI WINNER
         }
 
         // // PARA DLI PER FRAME ANG EFFECT
