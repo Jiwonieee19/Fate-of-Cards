@@ -1,11 +1,19 @@
+import java.awt.Graphics;
+
 public class CardsEffects {
 
     PreparationPhase preparationPhaseObject;
     String winnerName;
+    int winnerCardDuration, loserCardDuration;
+    Boolean winnerCardEffectDone, loserCardEffectDone;
 
     CardsEffects() {
         preparationPhaseObject = new PreparationPhase();
         winnerName = "tie";
+        winnerCardDuration = 5000;
+        loserCardDuration = 5000;
+        winnerCardEffectDone = false;
+        loserCardEffectDone = false;
     }
 
     public void passingObjects(PreparationPhase preparationPhaseObject) {
@@ -103,5 +111,27 @@ public class CardsEffects {
             // PAG TIE, BOTH CARDS REKTA BURN
         }
 
+    } // THIS IS A SHIT, NOT DOING ITS THING, VOID VOID VOID
+      // BECOME MESSY AFTER THINKING HOW TO INSERT THE DRAW/ANIMATION
+
+    public void cardEffectCheckerAndVisual(MainCards card, Boolean isWinner, Graphics g) {
+        if (isWinner && !winnerCardEffectDone) {
+            if (winnerCardDuration > 0) {
+                drawPerCardEffects(g);
+                winnerCardDuration -= 1000 / 24;
+            } else {
+                storeCardsEffects(card, true);
+                winnerCardEffectDone = true;
+            }
+        } else {
+            storeCardsEffects(card, false);
+        }
+    }
+
+    public void drawPerCardEffects(Graphics g) {
+        // MainCards cardEffectVisual
+        // if (winnerName.equals("player")) {
+
+        // }
     }
 }

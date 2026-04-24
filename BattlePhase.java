@@ -23,7 +23,6 @@ public class BattlePhase {
     DefaultFont defaultFont;
 
     Boolean animationRuneCollideDone;
-    Boolean playerCardEffectDone, botCardEffectDone;
 
     int secondCounter;
 
@@ -45,8 +44,6 @@ public class BattlePhase {
         stopAfterBackTimer = 250;
         defaultFont = new DefaultFont();
         animationRuneCollideDone = false;
-        playerCardEffectDone = false;
-        botCardEffectDone = false;
         winnerName = "tie";
         secondCounter = 1000; // 1sec
     }
@@ -173,13 +170,21 @@ public class BattlePhase {
 
     // CHECK MUNA ANF EFFECT NI CARD
     // (SINCE NAAY CARDS NGA MO EFFECT DURING LOSE CONDTION AND SO ON)
-    public void effectCardsChecker(MainCards player, MainCards bot) {
-        // PARA DLI PER FRAME ANG EFFECT
-        if (!playerCardEffectDone) {
-            cardsEffectsObject.cardEffectValidator(player, bot, winnerName);
-            playerCardEffectDone = true;
-            // ibalik rani false after the round
+    // CHECK AND DRAW NA NI, IN ANI PAGKA CODE DA
+    public void effectCardsVisual(MainCards player, MainCards bot, Graphics g) {
+
+        if (winnerName.equals("player")) {
+            cardsEffectsObject.cardEffectCheckerAndVisual(player, true, g);
+        } else {
+            cardsEffectsObject.cardEffectCheckerAndVisual(bot, true, g);
         }
+
+        // // PARA DLI PER FRAME ANG EFFECT
+        // if (!winnerCardEffectDone) {
+        // cardsEffectsObject.cardEffectValidator(player, bot, winnerName);
+        // winnerCardEffectDone = true;
+        // // ibalik rani false after the round
+        // }
     } // redundant, but its fine para dili gubot sa draw function
 
     public void draw(Graphics g) {
@@ -208,7 +213,7 @@ public class BattlePhase {
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
 
             // NAKASULOD, DRIA MAGPASA FOR CHECKING
-            effectCardsChecker(cardObject.activeCard, cardObject.botHolderCard);
+            effectCardsVisual(cardObject.activeCard, cardObject.botHolderCard, g);
         }
     }
 
