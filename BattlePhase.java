@@ -227,7 +227,7 @@ public class BattlePhase {
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
 
             // NAKASULOD, DRIA MAGPASA FOR CHECKING
-            effectCardsVisual(cardObject.activeCard, cardObject.botHolderCard, g);
+            effectCardsVisual(cardObject.holderCard, cardObject.botHolderCard, g);
         }
     }
 

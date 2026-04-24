@@ -93,7 +93,7 @@ public class CardsEffects {
         // si winner sa
         if (isWinner) {
             if (winnerCardDuration > 0) {
-                drawPerCardEffects(g, "winner");
+                drawPerCardEffects(g, card);
                 winnerCardDuration -= 1000 / 24;
             } else {
                 storeCardsEffects(card, true);
@@ -104,7 +104,7 @@ public class CardsEffects {
         // si loser na
         else if (!isWinner) {
             if (loserCardDuration > 0) {
-                drawPerCardEffects(g, "loser");
+                drawPerCardEffects(g, card);
                 loserCardDuration -= 1000 / 24;
             } else {
                 storeCardsEffects(card, true);
@@ -113,11 +113,19 @@ public class CardsEffects {
         }
     }
 
-    public void drawPerCardEffects(Graphics g, String whos) {
+    public void drawPerCardEffects(Graphics g, MainCards card) {
         // MainCards cardEffectVisual
         // if (winnerName.equals("player")) {
 
         // }
-        g.drawString("null" + whos, 50, 50);
+        g.drawString("null", 50, 50);
+        g.drawImage(card.getImg(),
+                card.getX() - 50, card.getY() - 50,
+                card.getWidth() + 100, card.getHeight() + 100,
+                null);
     }
+
+    // GOOD DRAFT
+    // NOTE: CARD DURATION ANIMATION SHOULD BE ALL EQUAL,
+    // LOSER W/O EFFECT, L W/ E, W W/O E, W W/ E
 }
