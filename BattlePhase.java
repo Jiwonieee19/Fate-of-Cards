@@ -12,7 +12,7 @@ public class BattlePhase {
     MainRunes runeWinner;
     CardsEffects cardsEffectsObject;
 
-    Image runeAnimationGIF, cardAnimationGIF;
+    Image runeAnimationGIF, cardNoEffectAnimationGIF;
 
     // REFACTOR INIT
     int backAnimationTimer;
@@ -40,6 +40,8 @@ public class BattlePhase {
         URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIF.gif");
         runeAnimationGIF = new ImageIcon(gifUrl).getImage();
         // X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
+        URL gifUrl2 = BattlePhase.class.getResource("/assets/animations/cardNoEffectGIF.gif");
+        cardNoEffectAnimationGIF = new ImageIcon(gifUrl2).getImage();
         backAnimationTimer = 120;
         incrementSpeed = 10;
         stopAfterBack = false;
@@ -102,6 +104,10 @@ public class BattlePhase {
             runeWinner = null;
             winnerName = "tie";
         }
+
+        // GAGUE IPASA PA DAAY ANG WINNERNAME, PARAMETER MANI LASTTIME
+        cardsEffectsObject.winnerName = winnerName;
+
         // // CHECKER RA SA RUNES AND EVERY FRAME MO RUN
         // if (runeWinner != null) {
         // System.out.println(
@@ -177,17 +183,18 @@ public class BattlePhase {
     // CHECK AND DRAW NA NI, IN ANI PAGKA CODE DA
     public void effectCardsVisual(MainCards player, MainCards bot, Graphics g) {
 
+        // // PARA DLI PER FRAME ANG EFFECT, SAME LOGIC SA BABA NAKA COMMENT, THE DRAFT
         if (!winnerCardEffectDone) {
             if (winnerName.equals("player")) {
-                cardsEffectsObject.cardEffectCheckerAndVisual(player, true, g);
+                cardsEffectsObject.cardEffectResultAndVisual(player, true, g);
             } else {
-                cardsEffectsObject.cardEffectCheckerAndVisual(bot, true, g);
+                cardsEffectsObject.cardEffectResultAndVisual(bot, true, g);
             }
         } else if (!loserCardEffectDone) {
             if (winnerName.equals("player")) {
-                cardsEffectsObject.cardEffectCheckerAndVisual(bot, false, g);
+                cardsEffectsObject.cardEffectResultAndVisual(bot, false, g);
             } else {
-                cardsEffectsObject.cardEffectCheckerAndVisual(player, false, g);
+                cardsEffectsObject.cardEffectResultAndVisual(player, false, g);
             }
         } else {
             // D NAMAN GURO MAABOT DIRI, OR SA TIE NI SLASH PAG NULL SI WINNER
@@ -225,6 +232,10 @@ public class BattlePhase {
             int resultTextWidth = fm.stringWidth(resultText);
 
             g.drawString(resultText, (1200 / 2) - (resultTextWidth / 2), 700);
+
+            // GAGUE BANTUG RA, NAA SA ACTIVE KA PLAYER ANG NAME NA NEED PANG COMPARE
+            cardObject.holderCard.setName(cardObject.activeCard.getName());
+            // YESSSZZZ WORKING, MAO DYUD DAAY
 
             // NAKASULOD, DRIA MAGPASA FOR CHECKING
             effectCardsVisual(cardObject.holderCard, cardObject.botHolderCard, g);

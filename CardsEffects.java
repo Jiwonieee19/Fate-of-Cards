@@ -10,8 +10,8 @@ public class CardsEffects {
     CardsEffects() {
         preparationPhaseObject = new PreparationPhase();
         winnerName = "tie";
-        winnerCardDuration = 5000;
-        loserCardDuration = 5000;
+        winnerCardDuration = 1000;
+        loserCardDuration = 1000;
     }
 
     public void passingObjects(PreparationPhase preparationPhaseObject, BattlePhase battlePhaseObject) {
@@ -89,13 +89,27 @@ public class CardsEffects {
         }
     }
 
-    public void cardEffectCheckerAndVisual(MainCards card, Boolean isWinner, Graphics g) {
+    public boolean cardEffectChecker(MainCards card, Boolean isWinner) {
+        if (card.getName().equals("star") && isWinner)
+            return true;
+        else if (card.getName().equals("tower") && !isWinner)
+            return true;
+        else if (card.getName().equals("devil") && isWinner)
+            return true;
+        else
+            return false;
+    }
+
+    public void cardEffectResultAndVisual(MainCards card, Boolean isWinner, Graphics g) {
+        // System.out.println(card.getName()); // HOLDER INSTEAD ACTIVE, BUT DONE FIXED
+
         // si winner sa
         if (isWinner) {
             if (winnerCardDuration > 0) {
-                drawPerCardEffects(g, card);
-                winnerCardDuration -= 1000 / 24;
+                drawPerCardEffects(g, card, true);
+                winnerCardDuration -= 50;
             } else {
+                // mosulod pani kas.a sa else before ma true ang bool
                 storeCardsEffects(card, true);
                 battlePhaseObject.winnerCardEffectDone = true;
             }
@@ -104,28 +118,39 @@ public class CardsEffects {
         // si loser na
         else if (!isWinner) {
             if (loserCardDuration > 0) {
-                drawPerCardEffects(g, card);
-                loserCardDuration -= 1000 / 24;
+                drawPerCardEffects(g, card, false);
+                loserCardDuration -= 50;
             } else {
-                storeCardsEffects(card, true);
+                storeCardsEffects(card, false);
                 battlePhaseObject.loserCardEffectDone = true;
             }
         }
     }
 
-    public void drawPerCardEffects(Graphics g, MainCards card) {
+    public void drawPerCardEffects(Graphics g, MainCards card, Boolean isWinner) {
         // MainCards cardEffectVisual
         // if (winnerName.equals("player")) {
 
         // }
-        g.drawString("null", 50, 50);
+        // if (!cardEffectChecker(card, isWinner)) {
+        // g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
+        // card.getX(), card.getY(),
+        // // duha ka get height kay square dyud ni ang animation
+        // card.getHeight(), card.getHeight(),
+        // null);
+        // } else {
         g.drawImage(card.getImg(),
                 card.getX() - 50, card.getY() - 50,
                 card.getWidth() + 100, card.getHeight() + 100,
                 null);
+        // }
+        g.drawString("null", 50, 50);
+
     }
 
     // GOOD DRAFT
     // NOTE: CARD DURATION ANIMATION SHOULD BE ALL EQUAL,
     // LOSER W/O EFFECT, L W/ E, W W/O E, W W/ E
+
+    // TODO: AFTER EFFECT FOR CARD AND RUNE, DISAPPEAR THOSE (BLACK IMG/NULL)
 }
