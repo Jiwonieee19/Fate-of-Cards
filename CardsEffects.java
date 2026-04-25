@@ -143,19 +143,21 @@ public class CardsEffects {
         // MainCards cardEffectVisual
         // if (winnerName.equals("player")) {
         // }
-        // if (!cardEffectChecker(card, isWinner)) {
-        // g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
-        // card.getX(), card.getY(),
-        // // duha ka get height kay square dyud ni ang animation
-        // card.getHeight(), card.getHeight(),
-        // null);
-        // } else {
-        g.drawImage(card.getImg(),
-                card.getX() - 50, card.getY() - 50,
-                card.getWidth() + 100, card.getHeight() + 100,
-                null);
-        // }
-        g.drawString("null", 50, 50);
+
+        if (!cardEffectChecker(card, isWinner)) {
+            g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
+                    card.getX(), card.getY(),
+                    // duha ka get height kay square dyud ni ang animation
+                    card.getHeight(), card.getHeight(),
+                    null);
+        } else {
+            g.drawImage(card.getImg(),
+                    // MATHS MATHS MATHS (PARA SAME RATIO GHPON PAGDAKO SA PIC CARD)
+                    // 92:151 = 1:1.64
+                    card.getX() - 25, card.getY() - 42,
+                    card.getWidth() + 50, card.getHeight() + 84,
+                    null);
+        }
 
     }
 
@@ -164,4 +166,8 @@ public class CardsEffects {
     // LOSER W/O EFFECT, L W/ E, W W/O E, W W/ E
 
     // TODO: AFTER EFFECT FOR CARD AND RUNE, DISAPPEAR THOSE (BLACK IMG/NULL)
+    // TODO: PAG TIE ANG RUNES, MO EFFECT BOTH CARD, AND VISUALLY WINNER BOT, FIX IT
+    // TODO: BOT PLAYED CARDS SHOULD BE VALID IN TERMS OF ENERGY
+    // TODO: PROPER HANDLING OF CARD EFFECT IF WLAY GI PILI ANG PLAYER
+    // TODO: TEXT EFFECTS PER CARD
 }
