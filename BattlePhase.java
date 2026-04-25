@@ -208,6 +208,21 @@ public class BattlePhase {
         // }
     } // redundant, but its fine para dili gubot sa draw function
 
+    // IPA BLACK/NULL/TRANSPARENT ANG LOSERS RUNE AFTER ANIMATION
+    public void runesLoserImage() {
+        if (runeWinner == null) {
+            cardObject.activeRune.setImageOfActiveRune(null);
+            cardObject.botHolderRune.setImage(null);
+        } else {
+            // ayg kalibog, if dli si player winner (means siya loser)
+            if (!runeWinner.getName().equals(cardObject.activeRune.getName())) {
+                cardObject.activeRune.setImageOfActiveRune(null);
+            } else {
+                cardObject.botHolderRune.setImage(null);
+            }
+        }
+    }
+
     public void draw(Graphics g) {
         cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
                 drawObject.playerCardCount,
@@ -223,6 +238,11 @@ public class BattlePhase {
                 resultText = "DUHH ALWAYS A LOSER!";
             } else {
                 resultText = "IT'S ATAY :>";
+            }
+
+            // PAG HUMAN ANIMATION SA RUNE EFFECT
+            if (secondCounter <= 0) {
+                runesLoserImage();
             }
 
             resultRunes(g); // RESULT VISUAL DIRI

@@ -112,6 +112,13 @@ public class CardsEffects {
                 // mosulod pani kas.a sa else before ma true ang bool
                 storeCardsEffects(card, true);
                 battlePhaseObject.winnerCardEffectDone = true;
+                // KUNG SI BOT, CARD = MNULL,
+                // PAG SI PLAYER, IYANG ACTIVECARDIMAGE = NULL
+                if (winnerName.equals("player")) {
+                    preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+                } else {
+                    card.setImg(null);
+                }
             }
         }
 
@@ -123,6 +130,11 @@ public class CardsEffects {
             } else {
                 storeCardsEffects(card, false);
                 battlePhaseObject.loserCardEffectDone = true;
+                if (winnerName.equals("bot")) {
+                    preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+                } else {
+                    card.setImg(null);
+                }
             }
         }
     }
@@ -130,7 +142,6 @@ public class CardsEffects {
     public void drawPerCardEffects(Graphics g, MainCards card, Boolean isWinner) {
         // MainCards cardEffectVisual
         // if (winnerName.equals("player")) {
-
         // }
         // if (!cardEffectChecker(card, isWinner)) {
         // g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
