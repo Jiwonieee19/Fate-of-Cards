@@ -340,11 +340,14 @@ public class PreparationPhase {
                 // FORLOOP IF KNSA LAAST NGA CARD NA AFFORD SA ENERGY NI BOT, MAO NANA IYA PLAY
                 botHolderCard.setName("botHolderCard");
                 botHolderCard.setImg(cardHolderImage);
+                int[] affordIndexHolder = new int[botOnHand.length];
                 for (int i = 0; i < botCardCount; i++) {
-                        if (botEnergyCount == botOnHand[i].getEnergy()) {
+                        if (botEnergyCount >= botOnHand[i].getEnergy()) {
                                 // MA OVERRIDE RANI IF SA NEXT KY AFFORD GHPON, SO PANLAST MAPILI
-                                botHolderCard.setName(botOnHand[i].getName());
-                                botHolderCard.setImg(botOnHand[i].getImg());
+                                // botHolderCard.setName(botOnHand[i].getName());
+                                // botHolderCard.setImg(botOnHand[i].getImg());
+                                affordIndexHolder[i] = i + 1;
+                                // + 1 para later on, ang null/0 ma tanggal sa logic nga -1 > 0
                         }
                         // PEDE NA DAAY WALA HAHAHA SKIP NA SIYA IF WLAY MAPILIAN CARD
                         // else if (i == botCardCount && botCardCount != 1) {
@@ -354,6 +357,18 @@ public class PreparationPhase {
                         // // depende if kaigo ang 1st card energy
                         // }
                 }
+                // ALL THIS SHITTY UPDATES JUST TO RESTORE THE ENDLESS CHOICE BUT NOW ONLY THOSE
+                // AFFORDABLE CARD
+                int randomizerForVisual = randomizer.nextInt(0, botCardCount);
+                for (int i = 0; i < botCardCount; i++) {
+                        if (affordIndexHolder[i] - 1 >= 0 && randomizerForVisual == affordIndexHolder[i] - 1) {
+                                botHolderCard.setName(botOnHand[i].getName());
+                                botHolderCard.setImg(botOnHand[i].getImg());
+
+                        }
+                }
+                // TURNS OUT TO BE GOOD, APIL SA CHOICES NIYA ANG WALA SIYAY PILION NA CARD
+                // (IF ISA RA KA CARD IYA AFFORD) RUN ALL POSSIBLE TESTCASE
         }
 
         public void BotRuneChoice() {
