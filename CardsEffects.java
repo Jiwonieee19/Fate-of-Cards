@@ -103,8 +103,13 @@ public class CardsEffects {
     public void cardEffectResultAndVisual(MainCards card, Boolean isWinner, Graphics g) {
         // System.out.println(card.getName()); // HOLDER INSTEAD ACTIVE, BUT DONE FIXED
 
+        if (winnerName.equals("tie")) {
+            // System.out.println("NO DRAWING KAY TIE"); // WORKING
+            drawTieCardEffect(g);
+        }
+
         // si winner sa
-        if (isWinner) {
+        else if (isWinner) {
             if (winnerCardDuration > 0) {
                 drawPerCardEffects(g, card, true);
                 winnerCardDuration -= 50;
@@ -161,11 +166,33 @@ public class CardsEffects {
 
     }
 
+    public void drawTieCardEffect(Graphics g) {
+
+        // instead magbuhat bag.o pede ra mogamit bisan asa s duha (win/lose)
+        if (loserCardDuration > 0) {
+            g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
+                    preparationPhaseObject.holderCard.getX(), preparationPhaseObject.holderCard.getY(),
+                    // duha ka get height kay square dyud ni ang animation
+                    preparationPhaseObject.holderCard.getHeight(), preparationPhaseObject.holderCard.getHeight(),
+                    null);
+
+            g.drawImage(battlePhaseObject.cardNoEffectAnimationGIF,
+                    preparationPhaseObject.botHolderCard.getX(), preparationPhaseObject.botHolderCard.getY(),
+                    // duha ka get height kay square dyud ni ang animation
+                    preparationPhaseObject.botHolderCard.getHeight(), preparationPhaseObject.botHolderCard.getHeight(),
+                    null);
+
+            loserCardDuration -= 50;
+        } else {
+            preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+            preparationPhaseObject.botHolderCard.setImg(null);
+        }
+    }
+
     // GOOD DRAFT
     // NOTE: CARD DURATION ANIMATION SHOULD BE ALL EQUAL,
     // LOSER W/O EFFECT, L W/ E, W W/O E, W W/ E
 
-    // TODO: PAG TIE ANG RUNES, MO EFFECT BOTH CARD, AND VISUALLY WINNER BOT, FIX IT
     // TODO: BOT PLAYED CARDS SHOULD BE VALID IN TERMS OF ENERGY
     // TODO: PROPER HANDLING OF CARD EFFECT IF WLAY GI PILI ANG PLAYER
     // TODO: TEXT EFFECTS PER CARD
