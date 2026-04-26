@@ -299,7 +299,12 @@ public class PreparationPhase {
         // REFACTORING...
         public void BotCardChoice(MainCards[] botOnHand, int botCardCount) {
                 // card can be based on how many onhnd card, but rune is statically 3 only
-                int botCardChoice = randomizer.nextInt(0, botCardCount);
+                // int botCardChoice = randomizer.nextInt(0, botCardCount);
+                // while (botOnHand[botCardChoice].getEnergy() > botEnergyCount) {
+                // // STUCK FOREVER IF SITUATION ISSS TANAN CARD ONHAND NI BOT KAY GREATER
+                // ENERGY
+                // botCardChoice = randomizer.nextInt(0, botCardCount);
+                // } // I TRIED, MO HANG AFTER DRAWPHASE
                 // dli ga properly work ang karaan na ways (2) + 1 // {0,1,2} + 1 = 1,2,3
                 // if (botchoice == 1) {
                 // return starCard;
@@ -319,16 +324,36 @@ public class PreparationPhase {
                 // PARA NI EACH BALIK DIRIA, E RESTART NIYA SA OG NAME,
                 // PRA DLI MA STOCK ANG LAST ROUND NAME WHICH IS NAME GINAGAMIT TO TRACE THE
                 // EFFECT OF CARD& RUNE
+                // botHolderCard.setName("botHolderCard");
+                // botHolderCard.setImg(cardHolderImage);
+                // for (int i = 0; i < botCardCount; i++) {
+                // if (botCardChoice == i) {
+                // botHolderCard.setName(botOnHand[i].getName());
+                // botHolderCard.setImg(botOnHand[i].getImg());
+                // }
+                // }
+                // }
+                // VOID METHOD WILL DO RA DAAY SINCE NAA RA SA BABA ANG DRAW ANI
+
+                // ACTUALLY (NERD) ...
+                // SINCE RANDOM NAMAN PAGKA DRAW SA CARD, DDTOA NATA MAG BASE SA RANDOM PLAYS,
+                // FORLOOP IF KNSA LAAST NGA CARD NA AFFORD SA ENERGY NI BOT, MAO NANA IYA PLAY
                 botHolderCard.setName("botHolderCard");
                 botHolderCard.setImg(cardHolderImage);
                 for (int i = 0; i < botCardCount; i++) {
-                        if (botCardChoice == i) {
+                        if (botEnergyCount == botOnHand[i].getEnergy()) {
+                                // MA OVERRIDE RANI IF SA NEXT KY AFFORD GHPON, SO PANLAST MAPILI
                                 botHolderCard.setName(botOnHand[i].getName());
                                 botHolderCard.setImg(botOnHand[i].getImg());
                         }
+                        // PEDE NA DAAY WALA HAHAHA SKIP NA SIYA IF WLAY MAPILIAN CARD
+                        // else if (i == botCardCount && botCardCount != 1) {
+                        // // means if i ky panlast card na AND dli ang first
+                        // // (para dli mag true ni if one card nlng si bot)
+                        // // if wala ni, ang else na pansalo if mo play ba card si bot or nah kay mag
+                        // // depende if kaigo ang 1st card energy
+                        // }
                 }
-                // }
-                // VOID METHOD WILL DO RA DAAY SINCE NAA RA SA BABA ANG DRAW ANI
         }
 
         public void BotRuneChoice() {
