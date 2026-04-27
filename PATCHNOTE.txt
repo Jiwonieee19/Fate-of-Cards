@@ -15,7 +15,7 @@
     - 1 energycost type has balanced effect for both win/lose condition
      since its still 50% to achieve such condition
 
-    ***** PATCHNOTE 0.0.1v *****
+        ***** PATCHNOTE 0.0.1v *****
 
      OVERVIEW:
     - 3 cards pa, star, tower, devil

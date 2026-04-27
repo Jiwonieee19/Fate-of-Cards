@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Color;
 
 public class CardsEffects {
 
@@ -6,12 +7,14 @@ public class CardsEffects {
     String winnerName;
     int winnerCardDuration, loserCardDuration;
     BattlePhase battlePhaseObject;
+    DefaultFont defaultFont;
 
     CardsEffects() {
         preparationPhaseObject = new PreparationPhase();
         winnerName = "tie";
         winnerCardDuration = 1000;
         loserCardDuration = 1000;
+        defaultFont = new DefaultFont();
     }
 
     public void passingObjects(PreparationPhase preparationPhaseObject, BattlePhase battlePhaseObject) {
@@ -89,6 +92,18 @@ public class CardsEffects {
         }
     }
 
+    public String storeTextOfCardEffects(MainCards card) {
+        String cardText = "";
+        if (card.getName().equals("star")) {
+            cardText = "heal 20";
+        } else if (card.getName().equals("tower")) {
+            cardText = "heal 10 and deal 10 damage"; // malamang d mogana ang \n
+        } else if (card.getName().equals("devil")) {
+            cardText = "deal 20 damage";
+        }
+        return cardText;
+    }
+
     public boolean cardEffectChecker(MainCards card, Boolean isWinner) {
         if (card.getName().equals("star") && isWinner)
             return true;
@@ -112,7 +127,9 @@ public class CardsEffects {
         else if (isWinner) {
             if (winnerCardDuration > 0) {
                 drawPerCardEffects(g, card, true);
-                winnerCardDuration -= 50;
+                drawTextOfCardEffects(g, card, true);
+                // IF ANG CARD KY FOR LOSER, FIX LOGIC
+                winnerCardDuration -= 24;
             } else {
                 // mosulod pani kas.a sa else before ma true ang bool
                 storeCardsEffects(card, true);
@@ -132,7 +149,9 @@ public class CardsEffects {
         else if (!isWinner) {
             if (loserCardDuration > 0) {
                 drawPerCardEffects(g, card, false);
-                loserCardDuration -= 50;
+                drawTextOfCardEffects(g, card, false);
+                // GANA NANI IF FOR LOSER NGA CARD
+                loserCardDuration -= 24;
             } else {
                 storeCardsEffects(card, false);
                 battlePhaseObject.loserCardEffectDone = true;
@@ -186,13 +205,31 @@ public class CardsEffects {
                     preparationPhaseObject.botHolderCard.getHeight(), preparationPhaseObject.botHolderCard.getHeight(),
                     null);
 
-            loserCardDuration -= 50;
+            loserCardDuration -= 24;
         } else {
             preparationPhaseObject.activeCard.setImgOfActiveCard(null);
-            // FIND OUT NA DLI MAWALA ANG RUNE NI PLAYER IF TIE, SO DRIA NLNG GI TWEAK HAHA
-            preparationPhaseObject.holderRune.setImage(null);
             preparationPhaseObject.holderCard.setImg(null);
             preparationPhaseObject.botHolderCard.setImg(null);
+        }
+    }
+
+    public void drawTextOfCardEffects(Graphics g, MainCards card, Boolean isWinner) {
+        String effectLabel = "";
+        if (cardEffectChecker(card, isWinner)) {
+            // winnerName.equals("player") // TAE THIS ONE WONT MAKE SENSE IF LOSER EFFECT
+            // THIS ONE WILL INDICATE IF KA PLAYER NGA CARD NISULOD OR NOT BWAHAHAH
+            if (card.getY() == preparationPhaseObject.holderCard.getY()) {
+                g.setColor(Color.decode("#C1B59F"));
+                effectLabel = "player: " + storeTextOfCardEffects(card);
+            } else {
+                g.setColor(Color.decode("#9A4B3A"));
+                effectLabel = "bot: " + storeTextOfCardEffects(card);
+            }
+
+            g.setFont(defaultFont.getLightFontCustomSize(20));
+            // int textWidth = g.getFontMetrics().stringWidth(effectLabel);
+            // g.drawString(effectLabel, ((1200 / 2) - (textWidth / 2) - 92), 410);
+            g.drawString(effectLabel, (50 + 92 + 50), 410);
         }
     }
 
@@ -200,5 +237,4 @@ public class CardsEffects {
     // NOTE: CARD DURATION ANIMATION SHOULD BE ALL EQUAL,
     // LOSER W/O EFFECT, L W/ E, W W/O E, W W/ E
 
-    // TODO: TEXT EFFECTS PER CARD
 }

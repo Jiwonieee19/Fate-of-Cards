@@ -213,6 +213,7 @@ public class BattlePhase {
         if (runeWinner == null) {
             cardObject.activeRune.setImageOfActiveRune(null);
             cardObject.botHolderRune.setImage(null);
+            cardObject.holderRune.setImage(null);
         } else {
             // ayg kalibog, if dli si player winner (means siya loser)
             if (!runeWinner.getName().equals(cardObject.activeRune.getName())) {
