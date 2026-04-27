@@ -82,7 +82,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             // PARA AFTER DYNAMIC DRAW G DURING DRAWPHASE, MA KEEP DIRIA DURING PREPHASE
             preparationPhaseObject.draw(g, drawPhaseObject.playerOnHand, drawPhaseObject.botOnHand,
                     drawPhaseObject.playerCardCount,
-                    drawPhaseObject.botCardCount);
+                    drawPhaseObject.botCardCount, false);
             if (botPicking) {
                 // PASS THE BOT ON HAND HERE TOO TO PICK A PLAY
                 preparationPhaseObject.BotCardChoice(drawPhaseObject.botOnHand, drawPhaseObject.botCardCount);

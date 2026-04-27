@@ -217,6 +217,8 @@ public class BattlePhase {
             // ayg kalibog, if dli si player winner (means siya loser)
             if (!runeWinner.getName().equals(cardObject.activeRune.getName())) {
                 cardObject.activeRune.setImageOfActiveRune(null);
+                // WORKS PERFECTLY IF U CHOOSE A RUNE TO
+                cardObject.holderRune.setImage(null);
             } else {
                 cardObject.botHolderRune.setImage(null);
             }
@@ -226,7 +228,8 @@ public class BattlePhase {
     public void draw(Graphics g) {
         cardObject.draw(g, drawObject.playerOnHand, drawObject.botOnHand,
                 drawObject.playerCardCount,
-                drawObject.botCardCount);
+                drawObject.botCardCount, secondCounter <= 0);
+        // NAYS, WORKING
 
         if (animationRuneCollideDone) {
             g.setFont(defaultFont.getBoldFontCustomSize(35));

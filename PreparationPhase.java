@@ -390,24 +390,33 @@ public class PreparationPhase {
         // }
 
         public void draw(Graphics g, MainCards[] playerOnHand, MainCards[] botOnHand,
-                        int playerCardCount, int botCardCount) {
+                        int playerCardCount, int botCardCount, Boolean isDone) {
 
-                // NAME LANG ANG GINA CHANGE HA, PRA MAO GAMITON AS BASIS
-                // IMAGE IS A NEED, VISUAL ANG BREAD AND BUTTER RA ANI
-                if (isActiveRune && isActiveCard) {
-                        holderCard.setImg(activeCard.getImgOfActiveCard());
-                        holderRune.setImage(activeRune.getImageOfActiveRune());
+                // MAS LIMPYO NI NGA IF ELSE, TO ENSURE NGA IF DRAWPHASE PA, SWAP2 IMG
+                if (!isDone) {
+                        // NAME LANG ANG GINA CHANGE HA, PRA MAO GAMITON AS BASIS
+                        // IMAGE IS A NEED, VISUAL ANG BREAD AND BUTTER RA ANI
+                        if (isActiveRune && isActiveCard) {
+                                holderCard.setImg(activeCard.getImgOfActiveCard());
+                                holderRune.setImage(activeRune.getImageOfActiveRune());
 
-                        // GOODS ALTERNATIVE IF WANT PA NAKOG EFFECTS SA HOLDER ACTIVE CARD/RUNE
-                        // g.drawImage(activeCard.getImgOfActiveCard(), holderCard.getX(),
-                        // holderCard.getY(), cardWidth,
-                        // cardHeight, null);
-                } else if (!isActiveCard && isActiveRune) {
-                        holderCard.setImg(cardHolderImage);
-                        holderRune.setImage(activeRune.getImageOfActiveRune());
+                                // GOODS ALTERNATIVE IF WANT PA NAKOG EFFECTS SA HOLDER ACTIVE CARD/RUNE
+                                // g.drawImage(activeCard.getImgOfActiveCard(), holderCard.getX(),
+                                // holderCard.getY(), cardWidth,
+                                // cardHeight, null);
+                        } else if (!isActiveCard && isActiveRune) {
+                                holderCard.setImg(cardHolderImage);
+                                holderRune.setImage(activeRune.getImageOfActiveRune());
+                        } else {
+                                holderCard.setImg(cardHolderImage);
+                                holderRune.setImage(runeHolderImage);
+                        }
                 } else {
-                        holderCard.setImg(cardHolderImage);
-                        holderRune.setImage(runeHolderImage);
+                        // MA NULL NA SIYA SINCE DLI NA PER FRAME HIMOUN UG OG HOLDER UNLIKE LAST TIME,
+                        // NAKA ELSE IF NA TO NGA FUNCTION
+                        // (IF WLAY ACTIVE IBALIK SA OG PRO DURING PREPPHASE LANG)
+                        holderCard.setImg(holderCard.getImg());
+                        holderRune.setImage(holderRune.getImage());
                 }
 
                 // DRAW HP BARS FOR BOTH, THEN PLAYER ENERGY

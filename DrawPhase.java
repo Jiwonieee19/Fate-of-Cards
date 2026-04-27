@@ -170,7 +170,8 @@ public class DrawPhase {
     public void draw(Graphics g) {
         // KANI ANG PAG DRAW SA G DURING DRAWPHASE,
         // SA VSPANEL MAO NATO MAG STAY SA PREPPHASE NGA DRAW
-        cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount, botCardCount); // HAHAHAH kuha ra in.ani, naka
+        cardsObject.draw(g, playerOnHand, botOnHand, playerCardCount, botCardCount, false); // HAHAHAH kuha ra in.ani,
+                                                                                            // naka
         // separate bitaw tong String nga phase chuchu
         // startingDrawBoth();
         drawingCardsAnimation(g);

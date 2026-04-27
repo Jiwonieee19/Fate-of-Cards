@@ -121,6 +121,7 @@ public class CardsEffects {
                 // PAG SI PLAYER, IYANG ACTIVECARDIMAGE = NULL
                 if (winnerName.equals("player")) {
                     preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+                    preparationPhaseObject.holderCard.setImg(null);
                 } else {
                     card.setImg(null);
                 }
@@ -137,11 +138,14 @@ public class CardsEffects {
                 battlePhaseObject.loserCardEffectDone = true;
                 if (winnerName.equals("bot")) {
                     preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+                    preparationPhaseObject.holderCard.setImg(null);
                 } else {
                     card.setImg(null);
                 }
             }
         }
+        // MAG NULL ANG BOOLEAN ISWINNER IF TIE, THATS WHY ITS PERFECT AND DLI MO GANA
+        // ANG LOSE EFFECTS SA CARD
     }
 
     public void drawPerCardEffects(Graphics g, MainCards card, Boolean isWinner) {
@@ -185,6 +189,9 @@ public class CardsEffects {
             loserCardDuration -= 50;
         } else {
             preparationPhaseObject.activeCard.setImgOfActiveCard(null);
+            // FIND OUT NA DLI MAWALA ANG RUNE NI PLAYER IF TIE, SO DRIA NLNG GI TWEAK HAHA
+            preparationPhaseObject.holderRune.setImage(null);
+            preparationPhaseObject.holderCard.setImg(null);
             preparationPhaseObject.botHolderCard.setImg(null);
         }
     }
