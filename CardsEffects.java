@@ -8,18 +8,26 @@ public class CardsEffects {
     int winnerCardDuration, loserCardDuration;
     BattlePhase battlePhaseObject;
     DefaultFont defaultFont;
+    VSBotPanel vsBotPanel;
 
-    CardsEffects() {
-        preparationPhaseObject = new PreparationPhase();
+    int opponentCurrentHp, ownCurrentHp;
+
+    CardsEffects(VSBotPanel vsBotPanel) {
+        preparationPhaseObject = vsBotPanel.preparationPhaseObject;
         winnerName = "tie";
         winnerCardDuration = 1000;
         loserCardDuration = 1000;
         defaultFont = new DefaultFont();
+        opponentCurrentHp = 0;
+        ownCurrentHp = 0;
     }
 
-    public void passingObjects(PreparationPhase preparationPhaseObject, BattlePhase battlePhaseObject) {
+    public void passingObjects(PreparationPhase preparationPhaseObject,
+            BattlePhase battlePhaseObject,
+            VSBotPanel vsBotPanel) {
         // PARA ATONG E MANIPULATE KY KATONG EXISTING NGA PREPHASE
         // WHICH IS NAA DDTO TANAN, HP, ENERGY, CHUCHU
+        this.vsBotPanel = vsBotPanel;
         this.preparationPhaseObject = preparationPhaseObject;
         this.battlePhaseObject = battlePhaseObject;
     }
@@ -29,9 +37,8 @@ public class CardsEffects {
     // IF !ISWINNER ANG CARD EFFECT (MEANS MO EFFECT PAG PILDI), SIYA SI OPPONENT
     // TAKE TOWER CARD AS EXAMPLE
     public void storeCardsEffects(MainCards card, Boolean isWinner) {
-
+        System.out.println(card.getName() + " " + isWinner); // potek d mosulod pag false si iswinner
         String loserName = "";
-        int opponentCurrentHp = 0, ownCurrentHp = 0;
 
         // PARA DLI MAPUNO IF ELSE, AND ISA RA KA FUNCTION ANG EFFECTS
 
@@ -84,11 +91,19 @@ public class CardsEffects {
         // THIS SOLUTION MAKES IT SIMPLIER FOR BOTH PLAYER KESA NAKA LAHI2 ILANG
         // FUNCTION
         if (this.winnerName.equals("player")) {
+            // preparationPhaseObject.botCurrentHp = opponentCurrentHp;
+            // preparationPhaseObject.playerCurrentHp = ownCurrentHp;
             preparationPhaseObject.botCurrentHp = opponentCurrentHp;
             preparationPhaseObject.playerCurrentHp = ownCurrentHp;
+            vsBotPanel.playerCurrentHp = ownCurrentHp;
+            vsBotPanel.botCurrentHp = opponentCurrentHp;
         } else {
+            // preparationPhaseObject.playerCurrentHp = opponentCurrentHp;
+            // preparationPhaseObject.botCurrentHp = ownCurrentHp;
             preparationPhaseObject.playerCurrentHp = opponentCurrentHp;
             preparationPhaseObject.botCurrentHp = ownCurrentHp;
+            vsBotPanel.playerCurrentHp = opponentCurrentHp;
+            vsBotPanel.botCurrentHp = ownCurrentHp;
         }
     }
 
@@ -165,6 +180,21 @@ public class CardsEffects {
         }
         // MAG NULL ANG BOOLEAN ISWINNER IF TIE, THATS WHY ITS PERFECT AND DLI MO GANA
         // ANG LOSE EFFECTS SA CARD
+
+        // DRIA MAG END ANG ROUND, MAO NI LAST RUN SA CODE DBA? oonga
+        // System.out.println("DAW MAABOT BA DIRI EVEN NO CARDS GI PLAY ANG BOTH");
+        if (battlePhaseObject.loserCardEffectDone) {
+            // si loserduration ra basehan, naa mn dyuy loser and if tie, kani man ginagamit
+
+            // if neither sailang hp ky below/equal to 0, then padayun
+            if (!(preparationPhaseObject.playerCurrentHp <= 0) ||
+                    !(preparationPhaseObject.botCurrentHp <= 0)) {
+                vsBotPanel.roundContinue();
+
+            } else {
+                // stop the fps
+            }
+        }
     }
 
     public void drawPerCardEffects(Graphics g, MainCards card, Boolean isWinner) {
@@ -210,6 +240,9 @@ public class CardsEffects {
             preparationPhaseObject.activeCard.setImgOfActiveCard(null);
             preparationPhaseObject.holderCard.setImg(null);
             preparationPhaseObject.botHolderCard.setImg(null);
+            battlePhaseObject.loserCardEffectDone = true;
+            // kani ra ato gamiton pra if tie matarog ghpon ni, and mao rani pang move sa
+            // round instead sa duration ni loser pud, maparehas gaina
         }
     }
 

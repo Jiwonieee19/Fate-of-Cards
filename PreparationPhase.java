@@ -67,7 +67,7 @@ public class PreparationPhase {
 
         int beforeDeductionPlayerEnergy;
 
-        PreparationPhase() {
+        PreparationPhase(VSBotPanel vsBotPanel) {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
                 // e.g. g.drawImage(instantiateCards.starCard.getImage(), , , , )
@@ -114,8 +114,8 @@ public class PreparationPhase {
 
                 runesArray = new MainRunes[] { rockRune, paperRune, scissorsRune };
 
-                playerCurrentHp = 200;
-                botCurrentHp = 200;
+                playerCurrentHp = vsBotPanel.playerCurrentHp;
+                botCurrentHp = vsBotPanel.botCurrentHp;
 
                 energyImage = new ImageIcon(getClass().getResource("assets/runes/energyTarot.png")).getImage();
                 playerEnergyCount = 3;
@@ -374,7 +374,7 @@ public class PreparationPhase {
         public void BotRuneChoice() {
                 botHolderRune.setName("botHolderRune");
                 botHolderRune.setImage(runeHolderImage);
-                int botRuneChoice = randomizer.nextInt(0, 3);
+                int botRuneChoice = randomizer.nextInt(0, 1);
                 for (int i = 0; i < runesArray.length; i++) {
                         // forever and always dyud naay mag pair dri means naay runes every round si bot
                         if (botRuneChoice == i) {
@@ -441,7 +441,7 @@ public class PreparationPhase {
                 g.drawString("Energy: ", 1010, 504);
 
                 g.drawImage(energyImage, 1092, (800 / 2) - (50 + 50 + 32), 60, 60, null);
-                g.drawString("?/5", 1108, (800 / 2) - (50 + 48));
+                g.drawString(botEnergyCount + "/5", 1108, (800 / 2) - (50 + 48));
 
                 // HOLDER OF CHOICE RUNE&CARD FOR BATTLE
                 g.drawImage(holderCard.getImg(), holderCard.getX(), holderCard.getY(), holderCard.getWidth(),

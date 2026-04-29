@@ -33,10 +33,10 @@ public class DrawPhase {
     int playerCardCount;
     int botCardCount;
 
-    DrawPhase() {
+    DrawPhase(VSBotPanel vsBotPanel) {
 
         // MAO NI NAMING KAY DDTO MAN SA PREPPHASE KUHAON
-        cardsObject = new PreparationPhase();
+        cardsObject = vsBotPanel.preparationPhaseObject;
 
         // HAHAHAHAAH PEDE DAAY NI
         starCard = cardsObject.starCard;

@@ -32,17 +32,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     Boolean botPicking;
 
+    int playerCurrentHp, botCurrentHp;
+
     VSBotPanel() {
         setBounds(0, 0, width, height);
         setFocusable(true);
         setBackground(Color.BLACK);
         addMouseListener(this);
-
-        drawPhaseObject = new DrawPhase();
-        preparationPhaseObject = new PreparationPhase();
-        battlePhaseObject = new BattlePhase();
-        defaultFont = new DefaultFont();
-        cardsEffectsObject = new CardsEffects();
 
         timeCountHolder = 0;
         drawing = true;
@@ -51,6 +47,15 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         botPicking = true;
 
         roundIncrement = 1;
+
+        playerCurrentHp = 200;
+        botCurrentHp = 200;
+
+        preparationPhaseObject = new PreparationPhase(this);
+        drawPhaseObject = new DrawPhase(this);
+        battlePhaseObject = new BattlePhase();
+        defaultFont = new DefaultFont();
+        cardsEffectsObject = new CardsEffects(this);
 
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
         // drawFPS.start();
@@ -115,7 +120,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                     preparationPhaseObject.activeRune,
                     preparationPhaseObject.botHolderRune);
             // PASS SD KA CARD EFFECTS
-            cardsEffectsObject.passingObjects(preparationPhaseObject, battlePhaseObject);
+            cardsEffectsObject.passingObjects(preparationPhaseObject, battlePhaseObject, this);
         }
     }
 
@@ -172,5 +177,59 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    public void roundContinue() {
+
+        // preparationPhaseObject.botCurrentHp = cardsEffectsObje
+
+        // INCREMENT THAT SHOULD HAPPEN
+        roundIncrement++;
+        if (preparationPhaseObject.playerEnergyCount < 5) {
+            preparationPhaseObject.playerEnergyCount++;
+        }
+        if (preparationPhaseObject.botEnergyCount < 5) {
+            preparationPhaseObject.botEnergyCount++;
+        }
+
+        // NEED TO RESET HERE IN VSPANEL
+        timeCountHolder = 0;
+        drawing = true;
+        preparing = false;
+        battling = false;
+        botPicking = true;
+
+        // NEED TO RESET IN DRAW PHASE
+        drawPhaseObject.drawCount = 2; // para 1draw each per round
+        drawPhaseObject.playerDraw = true;
+        drawPhaseObject.botDraw = false;
+
+        // NEED TO RESET IN PREPARATION PHASE
+        preparationPhaseObject.isActiveCard = false;
+        preparationPhaseObject.isActiveRune = false;
+        preparationPhaseObject.playerCurrentHp = playerCurrentHp;
+        preparationPhaseObject.botCurrentHp = botCurrentHp;
+
+        // NEED TO RESET IN BATTLE PHASE
+        battlePhaseObject.incrementSpeed = 10;
+        battlePhaseObject.stopAfterBack = false;
+        battlePhaseObject.stopAfterBackTimer = 250;
+        battlePhaseObject.animationRuneCollideDone = false;
+        battlePhaseObject.winnerName = "tie";
+        battlePhaseObject.secondCounter = 1000; // 1sec
+        battlePhaseObject.winnerCardEffectDone = false;
+        battlePhaseObject.loserCardEffectDone = false;
+
+        // NEED TO RESET IN CARD EFFECT DRAW
+        cardsEffectsObject.winnerName = "tie";
+        cardsEffectsObject.winnerCardDuration = 1000;
+        cardsEffectsObject.loserCardDuration = 1000;
+
+        // UYY MOBALIK 200 HPS SA DUHA, MAGMINUS SA ROUND PERO RESET
+        // GA INCREMENT UG 1 ANG PLAYER ENERGY PAG CANCEL SA 1ST ACTIVE CARD
+        // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL?
+        // KULANG, DAPAT MINUS ANG CARD GIGAMIT
+        // AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
+        // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT
     }
 }
