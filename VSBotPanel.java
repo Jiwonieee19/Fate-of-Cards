@@ -219,6 +219,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // SINCE SI BOT, DTSO PILI KADA AFTER DRAW SO OVERRIDE DTSO ANG NABILIN NGA DATA
         preparationPhaseObject.botHolderCard.setImg(preparationPhaseObject.cardHolderImage);
         preparationPhaseObject.botHolderRune.setImage(preparationPhaseObject.runeHolderImage);
+        // RESET PUD ANG BOTH RUNES XY FOR PREP IN BATTLE
+        preparationPhaseObject.holderRune.setX(preparationPhaseObject.holderRuneX);
+        preparationPhaseObject.holderRune.setY(preparationPhaseObject.holderRuneY);
+        // KA BOT
+        preparationPhaseObject.botHolderRune.setX(preparationPhaseObject.holderRuneX);
+        preparationPhaseObject.botHolderRune.setY(preparationPhaseObject.holderRuneY
+                - (preparationPhaseObject.cardHeight + (preparationPhaseObject.margin * 2)));
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -250,7 +257,10 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL? - fixed
         // KULANG, DAPAT MINUS ANG CARD GIGAMIT
-        // AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
-        // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT
+
+        // -- AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
+        // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT -- - fixed
+
+        // COLLIDE AFTER 1ST ROUND SEEMS WRONG
     }
 }
