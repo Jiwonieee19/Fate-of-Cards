@@ -187,6 +187,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         roundIncrement++;
         if (preparationPhaseObject.playerEnergyCount < 5) {
             preparationPhaseObject.playerEnergyCount++;
+            preparationPhaseObject.playerEnergyCount++; // PANTRY RA NIS ERROR SA ENERGY GAINA
         }
         if (preparationPhaseObject.botEnergyCount < 5) {
             preparationPhaseObject.botEnergyCount++;
@@ -235,14 +236,19 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         cardsEffectsObject.loserCardDuration = 1000;
 
         // --- THESE ARE WHAT IVE ENCOUNTERED AFTER PUTTING THE GAMELOOP RESET I THINK
-        // ONLY MATTERED, SO THESE ARE THE LOGIC BUGS: ALL FIX??
+        // ONLY MATTERED, SO THESE ARE THE LOGIC BUGS: ALL FIX?? ---
 
         // ANG ACTIVE CARD NAME REMAINS LAST CHOSEN - fixed
         // MALAPAS UG NIGGA ANG HP - fixed
         // NULL ANG HOLDERS NI BOT AFTER ROUND 1 - fixed
-        // UYY MOBALIK 200 HPS SA DUHA, MAGMINUS SA ROUND PERO RESET
-        // GA INCREMENT UG 1 ANG PLAYER ENERGY PAG CANCEL SA 1ST ACTIVE CARD
-        // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL?
+        // UYY MOBALIK 200 HPS SA DUHA, MAGMINUS SA ROUND PERO RESET - fixed
+
+        // -- GA INCREMENT UG 1 ANG PLAYER ENERGY PAG CANCEL SA 1ST ACTIVE CARD,
+        // NO, MAWALA ANG 1 ENERGY PAGKA SWITCH, D LANG MABANTAYAN IF FIRST ROUND KY 3
+        // ENERGY MAN AND SAKTO RA SA CARDS --
+        // [COZ WLAY PANSALO SA FIRST IF, PERO NA CATCH KO NAMANI DATI] - fixed
+
+        // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL? - fixed
         // KULANG, DAPAT MINUS ANG CARD GIGAMIT
         // AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
         // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT

@@ -213,7 +213,7 @@ public class PreparationPhase {
                                 // E REFERENCE SA BATTLEPHASE
 
                                 // ON FRAME IF KNSA ACTIVE
-                                if (!isActiveCard) {
+                                if (!isActiveCard && playerEnergyCount >= playerOnHand[i].getEnergy()) {
                                         // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
                                         activeCard.setName(playerOnHand[i].getName());
                                         activeCard.setX(playerOnHand[i].getX() + (i * 100));
@@ -222,6 +222,7 @@ public class PreparationPhase {
                                         isActiveCard = true;
                                         System.out.println("NAKA TRUE NA " + activeCard.getName());
                                         // NICE, DONE ENERGY SWITCHING CARD
+                                        beforeDeductionPlayerEnergy = playerEnergyCount;
                                         playerEnergyCount -= playerOnHand[i].getEnergy();
                                         // BASIC TOGGLES
                                 } else if (isActiveCard
