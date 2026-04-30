@@ -37,7 +37,7 @@ public class CardsEffects {
     // IF !ISWINNER ANG CARD EFFECT (MEANS MO EFFECT PAG PILDI), SIYA SI OPPONENT
     // TAKE TOWER CARD AS EXAMPLE
     public void storeCardsEffects(MainCards card, Boolean isWinner) {
-        System.out.println(card.getName() + " " + isWinner); // potek d mosulod pag false si iswinner
+        System.out.println(card.getName() + " WINNER? " + isWinner); // potek d mosulod pag false si iswinner
         String loserName = "";
 
         // PARA DLI MAPUNO IF ELSE, AND ISA RA KA FUNCTION ANG EFFECTS
@@ -187,12 +187,14 @@ public class CardsEffects {
             // si loserduration ra basehan, naa mn dyuy loser and if tie, kani man ginagamit
 
             // if neither sailang hp ky below/equal to 0, then padayun
-            if (!(preparationPhaseObject.playerCurrentHp <= 0) ||
-                    !(preparationPhaseObject.botCurrentHp <= 0)) {
+            if (!(vsBotPanel.botCurrentHp <= 0) && !(vsBotPanel.playerCurrentHp <= 0)) {
                 vsBotPanel.roundContinue();
+                System.out.println(vsBotPanel.botCurrentHp);
+                System.out.println(vsBotPanel.playerCurrentHp);
 
             } else {
                 // stop the fps
+                vsBotPanel.drawing = false;
             }
         }
     }

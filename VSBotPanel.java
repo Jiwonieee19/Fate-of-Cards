@@ -209,6 +209,15 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject.isActiveRune = false;
         preparationPhaseObject.playerCurrentHp = playerCurrentHp;
         preparationPhaseObject.botCurrentHp = botCurrentHp;
+        // RESET ACTIVE CARDS & RUNES , HOLDER CARDS & RUNES
+        // preparationPhaseObject.holderCard.setName("holderCard");
+        preparationPhaseObject.activeCard.setName("activeCard");
+        // preparationPhaseObject.holderRune.setName("holderRune");
+        preparationPhaseObject.activeRune.setName("activeRune");
+        // ACTIVE RA DAAY ANG NABILIN NA WA NA RESET NGA GA MATTER
+        // SINCE SI BOT, DTSO PILI KADA AFTER DRAW SO OVERRIDE DTSO ANG NABILIN NGA DATA
+        preparationPhaseObject.botHolderCard.setImg(preparationPhaseObject.cardHolderImage);
+        preparationPhaseObject.botHolderRune.setImage(preparationPhaseObject.runeHolderImage);
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -225,6 +234,12 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         cardsEffectsObject.winnerCardDuration = 1000;
         cardsEffectsObject.loserCardDuration = 1000;
 
+        // --- THESE ARE WHAT IVE ENCOUNTERED AFTER PUTTING THE GAMELOOP RESET I THINK
+        // ONLY MATTERED, SO THESE ARE THE LOGIC BUGS: ALL FIX??
+
+        // ANG ACTIVE CARD NAME REMAINS LAST CHOSEN - fixed
+        // MALAPAS UG NIGGA ANG HP - fixed
+        // NULL ANG HOLDERS NI BOT AFTER ROUND 1 - fixed
         // UYY MOBALIK 200 HPS SA DUHA, MAGMINUS SA ROUND PERO RESET
         // GA INCREMENT UG 1 ANG PLAYER ENERGY PAG CANCEL SA 1ST ACTIVE CARD
         // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL?
