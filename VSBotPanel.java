@@ -23,7 +23,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     Timer drawFPS;
 
     int fps = 24, timeCountHolder;
-    int roundPreparingTimer = 5000;
+    int roundPreparingTimer = 3000;
     int roundIncrement;
 
     Boolean drawing, preparing, battling;
@@ -106,6 +106,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // BATTLE
         if (battling) {
+            drawPhaseObject.deleteUsedCard(preparationPhaseObject.playerCardIndex, preparationPhaseObject.botCardIndex,
+                    g);
             g.setColor(Color.WHITE);
             g.drawString("BATTLE PHASE", 20, 40);
             // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
@@ -187,10 +189,16 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         roundIncrement++;
         if (preparationPhaseObject.playerEnergyCount < 5) {
             preparationPhaseObject.playerEnergyCount++;
-            preparationPhaseObject.playerEnergyCount++; // PANTRY RA NIS ERROR SA ENERGY GAINA
+            // PREP FOR EFFECTS NA + MORE ENERGY
+            if (preparationPhaseObject.playerEnergyCount > 5) {
+                preparationPhaseObject.playerEnergyCount = 5;
+            }
         }
         if (preparationPhaseObject.botEnergyCount < 5) {
             preparationPhaseObject.botEnergyCount++;
+            if (preparationPhaseObject.botEnergyCount > 5) {
+                preparationPhaseObject.botEnergyCount = 5;
+            }
         }
 
         // NEED TO RESET HERE IN VSPANEL
@@ -204,6 +212,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         drawPhaseObject.drawCount = 2; // para 1draw each per round
         drawPhaseObject.playerDraw = true;
         drawPhaseObject.botDraw = false;
+        // BANTUG MAG THROW EXCEPTION NAPUD KAY DLI MA MINUSAN ANG CARDCOUNT
+        if (preparationPhaseObject.playerCardIndex != 9) {
+            drawPhaseObject.playerCardCount -= 1;
+        }
+        if (preparationPhaseObject.botCardIndex != 9) {
+            drawPhaseObject.botCardCount -= 1;
+        }
 
         // NEED TO RESET IN PREPARATION PHASE
         preparationPhaseObject.isActiveCard = false;
@@ -228,6 +243,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject.botHolderRune.setX(preparationPhaseObject.holderRuneX);
         preparationPhaseObject.botHolderRune.setY(preparationPhaseObject.holderRuneY
                 - (preparationPhaseObject.cardHeight + (preparationPhaseObject.margin * 2)) - 11);
+        preparationPhaseObject.playerCardIndex = 9;
+        preparationPhaseObject.botCardIndex = 9;
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -259,11 +276,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL? - fixed
         // KULANG, DAPAT MINUS ANG CARD GIGAMIT,
-        // (this is a whole method ky need ni animation) -
+        // (this is a whole method ky need ni animation) - fixed
 
         // -- AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
         // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT -- - fixed
 
         // COLLIDE AFTER 1ST ROUND SEEMS WRONG - fixed
+        // BOT ENERGY PROPER MINUS
+        // VISUAL FUNCTION FOR TUNAW/USED CARD DRAW
     }
 }

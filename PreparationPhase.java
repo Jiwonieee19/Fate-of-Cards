@@ -67,6 +67,8 @@ public class PreparationPhase {
 
         int beforeDeductionPlayerEnergy;
 
+        int playerCardIndex, botCardIndex;
+
         PreparationPhase(VSBotPanel vsBotPanel) {
 
                 // CREATING THE IMAGES AND CARDS HERE COZ SEPARATING COST A LONGER CALLING
@@ -145,6 +147,9 @@ public class PreparationPhase {
                 // IBUTANG SA ACTIVE NI BOT, RANDOMIZER SA BACKEND RA
 
                 beforeDeductionPlayerEnergy = playerEnergyCount;
+
+                playerCardIndex = 9;
+                botCardIndex = 9; // since dli ma null ang int for toggle, 9 nlng
         }
 
         public void PreparationFunction() {
@@ -224,6 +229,7 @@ public class PreparationPhase {
                                         // NICE, DONE ENERGY SWITCHING CARD
                                         beforeDeductionPlayerEnergy = playerEnergyCount;
                                         playerEnergyCount -= playerOnHand[i].getEnergy();
+                                        playerCardIndex = i;
                                         // BASIC TOGGLES
                                 } else if (isActiveCard
                                                 // && mouseClickedCoordinates.x >= (activeCard.getX() + (i * 100))
@@ -241,6 +247,7 @@ public class PreparationPhase {
                                         // IF GI CLICK ANG ACTIVE CARD, MEANS IBALIK TONG ENERGY DDTO KAY E CANCEL MAN
                                         playerEnergyCount = beforeDeductionPlayerEnergy;
                                         // IF LANG KAIGO IYANG PREVIOUS(OG ENERGY), SA BALHINAN NA CARD
+                                        playerCardIndex = 9;
                                 } else if (isActiveCard && beforeDeductionPlayerEnergy >= playerOnHand[i].getEnergy()) {
                                         // SETNAME PARA MAO NI GAMITON PUD LATER SA EFFECTS
                                         activeCard.setName(playerOnHand[i].getName());
@@ -251,6 +258,7 @@ public class PreparationPhase {
                                         // RESTART SA OG VALUE, B4 MINUS SA GIBALHINAN NA CARD
                                         playerEnergyCount = beforeDeductionPlayerEnergy;
                                         playerEnergyCount -= playerOnHand[i].getEnergy();
+                                        playerCardIndex = i;
                                 }
 
                         }
@@ -365,7 +373,7 @@ public class PreparationPhase {
                         if (affordIndexHolder[i] - 1 >= 0 && randomizerForVisual == affordIndexHolder[i] - 1) {
                                 botHolderCard.setName(botOnHand[i].getName());
                                 botHolderCard.setImg(botOnHand[i].getImg());
-
+                                botCardIndex = i; // DRIA E STORE ANG INDEX
                         }
                 }
                 // TURNS OUT TO BE GOOD, APIL SA CHOICES NIYA ANG WALA SIYAY PILION NA CARD
@@ -492,13 +500,19 @@ public class PreparationPhase {
                 if (playerCardCount != 0) {
                         // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
                         // for (int i = 0; i < playerOnHand.length; i++) {
-                        for (int i = 0; i < playerCardCount; i++) {
-                                g.drawImage(playerOnHand[i].getImg(),
-                                                playerOnHand[i].getX() + (i * 100),
-                                                playerOnHand[i].getY(),
-                                                playerOnHand[i].getWidth(),
-                                                playerOnHand[i].getHeight(),
-                                                null);
+                        for (int i = 0; i < 3; i++) {
+                                try {
+                                        g.drawImage(playerOnHand[i].getImg(),
+                                                        playerOnHand[i].getX() + (i * 100),
+                                                        playerOnHand[i].getY(),
+                                                        playerOnHand[i].getWidth(),
+                                                        playerOnHand[i].getHeight(),
+                                                        null);
+                                } catch (NullPointerException e) {
+                                        // FOR VISUAL, IF NAA NULL, DDTO IBUTANG SI LAST CARD
+                                        // playerOnHand[i] = playerOnHand[3];
+                                        continue;
+                                }
                         }
                 } else {
                         g.drawString("NO CARDS LEFT", starCard.getX(), starCard.getY() + (cardHeight / 2));
@@ -507,15 +521,19 @@ public class PreparationPhase {
                 if (botCardCount != 0) {
                         // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
                         // for (int i = 0; i < playerOnHand.length; i++) {
-                        for (int i = 0; i < botCardCount; i++) {
-                                g.drawImage(botOnHand[i].getImg(),
-                                                botOnHand[i].getX() + (i * 100),
-                                                // MATHS MATHS MATHS
-                                                deckCards.getY() -
-                                                                (botOnHand[i].getY() - deckCards.getY()),
-                                                botOnHand[i].getWidth(),
-                                                botOnHand[i].getHeight(),
-                                                null);
+                        for (int i = 0; i < 3; i++) {
+                                try {
+                                        g.drawImage(botOnHand[i].getImg(),
+                                                        botOnHand[i].getX() + (i * 100),
+                                                        // MATHS MATHS MATHS
+                                                        deckCards.getY() -
+                                                                        (botOnHand[i].getY() - deckCards.getY()),
+                                                        botOnHand[i].getWidth(),
+                                                        botOnHand[i].getHeight(),
+                                                        null);
+                                } catch (NullPointerException e) {
+                                        continue;
+                                }
                         }
                 } else {
                         g.drawString("NO CARDS LEFT", starCard.getX(),

@@ -145,6 +145,29 @@ public class DrawPhase {
         }
     }
 
+    public void deleteUsedCard(int playerIndexToDelete, int botIndexToDelete, Graphics g) {
+        if (playerIndexToDelete != 9) { // 9 is the null since int cant be null
+            for (int i = 0; i < playerOnHand.length; i++) {
+                if (i == playerIndexToDelete) {
+                    playerOnHand[i] = null;
+                    break;
+                }
+            }
+        }
+        if (botIndexToDelete != 9) {
+            for (int i = 0; i < botOnHand.length; i++) {
+                if (i == botIndexToDelete) {
+                    botOnHand[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void deleteUsedCardVisual(Graphics g) {
+
+    }
+
     public void drawingCardsAnimation(Graphics g) {
         // MALI ANG APPROACH NGA FOR LOOP, KAY E RUN TANAN BEFORE MO MOVE NEXT FPS
 

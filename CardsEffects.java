@@ -191,7 +191,8 @@ public class CardsEffects {
                 vsBotPanel.roundContinue();
                 System.out.println(vsBotPanel.botCurrentHp);
                 System.out.println(vsBotPanel.playerCurrentHp);
-
+                // IF DRI, MAWALA RA ANG CARDS AFTER EACH ROUND
+                // drawPhaseObject.deleteUsedCard(preparationPhaseObject.playerCardIndex);
             } else {
                 // stop the fps
                 vsBotPanel.drawing = false;
