@@ -245,6 +245,10 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                 - (preparationPhaseObject.cardHeight + (preparationPhaseObject.margin * 2)) - 11);
         preparationPhaseObject.playerCardIndex = 9;
         preparationPhaseObject.botCardIndex = 9;
+        // DIRIA DTSO E KALTAS ANG REYAL ENERGY NI BOT TO SEE IT VISUALLY AFTER PREP,
+        // KAY IF NAA SA SULOD SA PREP FOR LOOP, D NA KAPILI ANG BOT DEDUCT DTSO
+        preparationPhaseObject.botEnergyCount -= preparationPhaseObject.toBeDeductedBotEnergy;
+        preparationPhaseObject.toBeDeductedBotEnergy = 0;
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -282,7 +286,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT -- - fixed
 
         // COLLIDE AFTER 1ST ROUND SEEMS WRONG - fixed
-        // BOT ENERGY PROPER MINUS
+        // BOT ENERGY PROPER MINUS - fixed
         // VISUAL FUNCTION FOR TUNAW/USED CARD DRAW
     }
 }

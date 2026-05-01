@@ -65,7 +65,7 @@ public class PreparationPhase {
         MainCards botHolderCard;
         MainRunes botHolderRune;
 
-        int beforeDeductionPlayerEnergy;
+        int beforeDeductionPlayerEnergy, toBeDeductedBotEnergy;
 
         int playerCardIndex, botCardIndex;
 
@@ -147,6 +147,7 @@ public class PreparationPhase {
                 // IBUTANG SA ACTIVE NI BOT, RANDOMIZER SA BACKEND RA
 
                 beforeDeductionPlayerEnergy = playerEnergyCount;
+                toBeDeductedBotEnergy = 0;
 
                 playerCardIndex = 9;
                 botCardIndex = 9; // since dli ma null ang int for toggle, 9 nlng
@@ -374,6 +375,7 @@ public class PreparationPhase {
                                 botHolderCard.setName(botOnHand[i].getName());
                                 botHolderCard.setImg(botOnHand[i].getImg());
                                 botCardIndex = i; // DRIA E STORE ANG INDEX
+                                toBeDeductedBotEnergy = botOnHand[i].getEnergy();
                         }
                 }
                 // TURNS OUT TO BE GOOD, APIL SA CHOICES NIYA ANG WALA SIYAY PILION NA CARD
@@ -450,7 +452,8 @@ public class PreparationPhase {
                 g.drawString("Energy: ", 1010, 504);
 
                 g.drawImage(energyImage, 1092, (800 / 2) - (50 + 50 + 32), 60, 60, null);
-                g.drawString(botEnergyCount + "/5", 1108, (800 / 2) - (50 + 48));
+                // botEnergyCount - toBeDeductedBotEnergy, work of devil mind HAAHAHA
+                g.drawString(botEnergyCount - toBeDeductedBotEnergy + "/5", 1108, (800 / 2) - (50 + 48));
 
                 // HOLDER OF CHOICE RUNE&CARD FOR BATTLE
                 g.drawImage(holderCard.getImg(), holderCard.getX(), holderCard.getY(), holderCard.getWidth(),
@@ -473,6 +476,8 @@ public class PreparationPhase {
 
                 g.setFont(defaultFont.getLightFontCustomSize(20));
                 g.drawString("total card: " + playerCardCount + "/3", starCard.getX(), starCard.getY() - 12);
+                g.drawString("bot card: " + botCardCount + "/3", starCard.getX(),
+                                starCard.getY() - (12 + cardHeight + 110));
 
                 // g.drawImage(starCard.getImg(), starCard.getX(), starCard.getY(),
                 // starCard.getWidth(),
