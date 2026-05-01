@@ -221,11 +221,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject.botHolderRune.setImage(preparationPhaseObject.runeHolderImage);
         // RESET PUD ANG BOTH RUNES XY FOR PREP IN BATTLE
         preparationPhaseObject.holderRune.setX(preparationPhaseObject.holderRuneX);
-        preparationPhaseObject.holderRune.setY(preparationPhaseObject.holderRuneY);
+        preparationPhaseObject.holderRune.setY(preparationPhaseObject.holderRuneY + 11);
+        // GIHILOT NLNG NING 11 KY WA KO KABALO ASA ANG REASON NGANO MO ISDOG UG 11PIXEL
+        // ANG RUNES AFTER ONLY SA 1SR ROUND
         // KA BOT
         preparationPhaseObject.botHolderRune.setX(preparationPhaseObject.holderRuneX);
         preparationPhaseObject.botHolderRune.setY(preparationPhaseObject.holderRuneY
-                - (preparationPhaseObject.cardHeight + (preparationPhaseObject.margin * 2)));
+                - (preparationPhaseObject.cardHeight + (preparationPhaseObject.margin * 2)) - 11);
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -252,15 +254,16 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // -- GA INCREMENT UG 1 ANG PLAYER ENERGY PAG CANCEL SA 1ST ACTIVE CARD,
         // NO, MAWALA ANG 1 ENERGY PAGKA SWITCH, D LANG MABANTAYAN IF FIRST ROUND KY 3
-        // ENERGY MAN AND SAKTO RA SA CARDS --
-        // [COZ WLAY PANSALO SA FIRST IF, PERO NA CATCH KO NAMANI DATI] - fixed
+        // ENERGY MAN AND SAKTO RA SA CARDS -- [COZ WLAY PANSALO SA FIRST IF, PERO NA
+        // CATCH KO NAMANI DATI] - fixed
 
         // PATI ENERGY, SIGURO TUNGOD MAG NEW PREPHASE OBJ KADA VSPANEL? - fixed
-        // KULANG, DAPAT MINUS ANG CARD GIGAMIT
+        // KULANG, DAPAT MINUS ANG CARD GIGAMIT,
+        // (this is a whole method ky need ni animation) -
 
         // -- AND BALIK SA OG POSITION ANG RUNES NGA NAG COLLIDE,
         // D NA MO COLLIDE ANG NEXT ROUND COZ OF IT -- - fixed
 
-        // COLLIDE AFTER 1ST ROUND SEEMS WRONG
+        // COLLIDE AFTER 1ST ROUND SEEMS WRONG - fixed
     }
 }
