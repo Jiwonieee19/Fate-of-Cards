@@ -145,27 +145,27 @@ public class DrawPhase {
         }
     }
 
-    public void deleteUsedCard(int playerIndexToDelete, int botIndexToDelete, Graphics g) {
-        if (playerIndexToDelete != 9) { // 9 is the null since int cant be null
-            for (int i = 0; i < playerOnHand.length; i++) {
-                if (i == playerIndexToDelete) {
-                    playerOnHand[i] = null;
-                    break;
-                }
-            }
+    public void deleteUsedCard(String who, int indexToDelete,
+            Image animation, Boolean stillAnimating, Graphics g) {
+        MainCards[] onHand = null;
+        if (who.equals("player")) {
+            onHand = playerOnHand;
+        } else if (who.equals("bot")) {
+            onHand = botOnHand;
         }
-        if (botIndexToDelete != 9) {
-            for (int i = 0; i < botOnHand.length; i++) {
-                if (i == botIndexToDelete) {
-                    botOnHand[i] = null;
-                    break;
-                }
+        if (indexToDelete != 9) { // 9 is the null since int cant be null
+
+            if (stillAnimating) {
+                g.drawImage(animation,
+                        onHand[indexToDelete].getX(), onHand[indexToDelete].getY(),
+                        // duha ka get height kay square dyud ni ang animation
+                        onHand[indexToDelete].getHeight(), onHand[indexToDelete].getHeight(),
+                        null);
+            } else {
+                onHand[indexToDelete] = null;
             }
+
         }
-    }
-
-    public void deleteUsedCardVisual(Graphics g) {
-
     }
 
     public void drawingCardsAnimation(Graphics g) {

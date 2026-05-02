@@ -26,13 +26,15 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     int roundPreparingTimer = 3000;
     int roundIncrement;
 
-    Boolean drawing, preparing, battling;
+    Boolean drawing, preparing, battling, burning;
 
     Point mouseClickCoordinatesPoint;
 
     Boolean botPicking;
 
     int playerCurrentHp, botCurrentHp;
+
+    int deleteUsedCardAnimationDuration;
 
     VSBotPanel() {
         setBounds(0, 0, width, height);
@@ -45,11 +47,14 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparing = false;
         battling = false;
         botPicking = true;
+        burning = false;
 
         roundIncrement = 1;
 
         playerCurrentHp = 200;
         botCurrentHp = 200;
+
+        deleteUsedCardAnimationDuration = 1000;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -104,10 +109,34 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
         }
 
+        // BEFORE BATTLE, BURNING
+        if (burning) {
+            if (deleteUsedCardAnimationDuration > 0) {
+                drawPhaseObject.deleteUsedCard("player",
+                        preparationPhaseObject.playerCardIndex,
+                        battlePhaseObject.cardNoEffectAnimationGIF, true, g);
+                drawPhaseObject.deleteUsedCard("bot",
+                        preparationPhaseObject.botCardIndex,
+                        battlePhaseObject.cardNoEffectAnimationGIF, true, g);
+                deleteUsedCardAnimationDuration -= 24;
+            } else {
+                drawPhaseObject.deleteUsedCard("player", preparationPhaseObject.playerCardIndex,
+                        battlePhaseObject.cardNoEffectAnimationGIF, false, g);
+                drawPhaseObject.deleteUsedCard("bot", preparationPhaseObject.botCardIndex,
+                        battlePhaseObject.cardNoEffectAnimationGIF, false, g);
+                battling = true;
+                burning = false;
+            }
+            g.setColor(Color.WHITE);
+            g.drawString("BATTLE PHASE", 20, 40);
+            // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
+            // battlePhaseObject.passingObjects(preparationPhaseObject, drawPhaseObject,
+            // cardsEffectsObject);
+            // battlePhaseObject.draw(g);
+        }
+
         // BATTLE
         if (battling) {
-            drawPhaseObject.deleteUsedCard(preparationPhaseObject.playerCardIndex, preparationPhaseObject.botCardIndex,
-                    g);
             g.setColor(Color.WHITE);
             g.drawString("BATTLE PHASE", 20, 40);
             // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
@@ -144,7 +173,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             if (preparing)
                 System.out.println("MANA PREPARATION");
             preparing = false;
-            battling = true;
+            // battling = true;
+            burning = true;
         }
         repaint();
     }
