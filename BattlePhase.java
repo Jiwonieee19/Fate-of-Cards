@@ -30,6 +30,8 @@ public class BattlePhase {
 
     Boolean winnerCardEffectDone, loserCardEffectDone;
 
+    int deleteUsedCardAnimationDuration;
+
     // COLLISION = COLLISION OF RUNES ANIMATION,
     // BATTLE = BATTLE OF RUNES LOGIC RESULT,
     // RESULT = RESULTS VISUAL
@@ -52,6 +54,7 @@ public class BattlePhase {
         secondCounter = 1000; // 1sec
         winnerCardEffectDone = false;
         loserCardEffectDone = false;
+        deleteUsedCardAnimationDuration = 1000;
     }
 
     // PEDE RA DAAY NI YW PARA ISA RA KA OBJECT DALA NNYU
@@ -231,6 +234,21 @@ public class BattlePhase {
                 drawObject.playerCardCount,
                 drawObject.botCardCount, secondCounter <= 0);
         // NAYS, WORKING
+
+        if (deleteUsedCardAnimationDuration > 0) {
+            drawObject.deleteUsedCard("player",
+                    cardObject.playerCardIndex,
+                    cardNoEffectAnimationGIF, true, g);
+            drawObject.deleteUsedCard("bot",
+                    cardObject.botCardIndex,
+                    cardNoEffectAnimationGIF, true, g);
+            deleteUsedCardAnimationDuration -= 24;
+        } else {
+            drawObject.deleteUsedCard("player", cardObject.playerCardIndex,
+                    cardNoEffectAnimationGIF, false, g);
+            drawObject.deleteUsedCard("bot", cardObject.botCardIndex,
+                    cardNoEffectAnimationGIF, false, g);
+        }
 
         if (animationRuneCollideDone) {
             g.setFont(defaultFont.getBoldFontCustomSize(35));

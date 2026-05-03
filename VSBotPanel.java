@@ -26,15 +26,13 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     int roundPreparingTimer = 3000;
     int roundIncrement;
 
-    Boolean drawing, preparing, battling, burning;
+    Boolean drawing, preparing, battling;
 
     Point mouseClickCoordinatesPoint;
 
     Boolean botPicking;
 
     int playerCurrentHp, botCurrentHp;
-
-    int deleteUsedCardAnimationDuration;
 
     VSBotPanel() {
         setBounds(0, 0, width, height);
@@ -47,14 +45,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparing = false;
         battling = false;
         botPicking = true;
-        burning = false;
 
         roundIncrement = 1;
 
         playerCurrentHp = 200;
         botCurrentHp = 200;
-
-        deleteUsedCardAnimationDuration = 1000;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -109,32 +104,6 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             g.drawString("Preparation Phase ENDS in " + (roundPreparingTimer - timeCountHolder) / 1000, 20, 70);
         }
 
-        // BEFORE BATTLE, BURNING
-        if (burning) {
-            if (deleteUsedCardAnimationDuration > 0) {
-                drawPhaseObject.deleteUsedCard("player",
-                        preparationPhaseObject.playerCardIndex,
-                        battlePhaseObject.cardNoEffectAnimationGIF, true, g);
-                drawPhaseObject.deleteUsedCard("bot",
-                        preparationPhaseObject.botCardIndex,
-                        battlePhaseObject.cardNoEffectAnimationGIF, true, g);
-                deleteUsedCardAnimationDuration -= 24;
-            } else {
-                drawPhaseObject.deleteUsedCard("player", preparationPhaseObject.playerCardIndex,
-                        battlePhaseObject.cardNoEffectAnimationGIF, false, g);
-                drawPhaseObject.deleteUsedCard("bot", preparationPhaseObject.botCardIndex,
-                        battlePhaseObject.cardNoEffectAnimationGIF, false, g);
-                battling = true;
-                burning = false;
-            }
-            g.setColor(Color.WHITE);
-            g.drawString("BATTLE PHASE", 20, 40);
-            // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY
-            // battlePhaseObject.passingObjects(preparationPhaseObject, drawPhaseObject,
-            // cardsEffectsObject);
-            // battlePhaseObject.draw(g);
-        }
-
         // BATTLE
         if (battling) {
             g.setColor(Color.WHITE);
@@ -173,8 +142,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             if (preparing)
                 System.out.println("MANA PREPARATION");
             preparing = false;
-            // battling = true;
-            burning = true;
+            battling = true;
         }
         repaint();
     }
@@ -289,6 +257,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         battlePhaseObject.secondCounter = 1000; // 1sec
         battlePhaseObject.winnerCardEffectDone = false;
         battlePhaseObject.loserCardEffectDone = false;
+        battlePhaseObject.deleteUsedCardAnimationDuration = 1000;
 
         // NEED TO RESET IN CARD EFFECT DRAW
         cardsEffectsObject.winnerName = "tie";
@@ -296,7 +265,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         cardsEffectsObject.loserCardDuration = 1000;
 
         // --- THESE ARE WHAT IVE ENCOUNTERED AFTER PUTTING THE GAMELOOP RESET I THINK
-        // ONLY MATTERED, SO THESE ARE THE LOGIC BUGS: ALL FIX?? ---
+        // ONLY MATTERED, SO THESE ARE THE LOGIC BUGS: ALL FIX?? --- YESSIR
 
         // ANG ACTIVE CARD NAME REMAINS LAST CHOSEN - fixed
         // MALAPAS UG NIGGA ANG HP - fixed
@@ -317,6 +286,6 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // COLLIDE AFTER 1ST ROUND SEEMS WRONG - fixed
         // BOT ENERGY PROPER MINUS - fixed
-        // VISUAL FUNCTION FOR TUNAW/USED CARD DRAW
+        // VISUAL FUNCTION FOR TUNAW/USED CARD DRAW - fixed
     }
 }

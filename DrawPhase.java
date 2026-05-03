@@ -148,16 +148,21 @@ public class DrawPhase {
     public void deleteUsedCard(String who, int indexToDelete,
             Image animation, Boolean stillAnimating, Graphics g) {
         MainCards[] onHand = null;
+        int y = 0;
+        int x = 50;
         if (who.equals("player")) {
             onHand = playerOnHand;
+            y = 550;
         } else if (who.equals("bot")) {
             onHand = botOnHand;
+            // WLA DAAY SA Y NI ONHAND BOT ANG REYAL POSITION
+            y = 100;
         }
         if (indexToDelete != 9) { // 9 is the null since int cant be null
 
             if (stillAnimating) {
                 g.drawImage(animation,
-                        onHand[indexToDelete].getX(), onHand[indexToDelete].getY(),
+                        x + (indexToDelete * 100), y,
                         // duha ka get height kay square dyud ni ang animation
                         onHand[indexToDelete].getHeight(), onHand[indexToDelete].getHeight(),
                         null);
