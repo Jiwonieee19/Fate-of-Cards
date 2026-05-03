@@ -35,6 +35,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     int playerCurrentHp, botCurrentHp;
 
     Boolean isEndless;
+    Boolean roundChecker;
 
     VSBotPanel() {
         setBounds(0, 0, width, height);
@@ -54,6 +55,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         botCurrentHp = 200;
 
         isEndless = false;
+
+        roundChecker = false;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -102,6 +105,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         g.setFont(defaultFont.getBoldFontCustomSize(25));
 
+        roundChecker = false; // diria na para naa na sa next round, WOAH WHAT A DEBUG
+
         // FIRST DRAW
         if (drawing) {
             g.drawString("DRAW PHASE", 20, 40);
@@ -145,9 +150,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
             battlePhaseObject.collisionRunes(
                     preparationPhaseObject.holderRune,
                     preparationPhaseObject.botHolderRune);
-            battlePhaseObject.battleRunes(
-                    preparationPhaseObject.activeRune,
-                    preparationPhaseObject.botHolderRune);
+            if (!roundChecker) {
+                battlePhaseObject.battleRunes(
+                        preparationPhaseObject.activeRune,
+                        preparationPhaseObject.botHolderRune);
+            }
             // PASS SD KA CARD EFFECTS
             cardsEffectsObject.passingObjects(preparationPhaseObject, battlePhaseObject, this);
         }
@@ -234,6 +241,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparing = false;
         battling = false;
         botPicking = true;
+        // roundChecker = false; // dili diri si false
 
         // NEED TO RESET IN DRAW PHASE
         drawPhaseObject.drawCount = 2; // para 1draw each per round

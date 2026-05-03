@@ -134,7 +134,7 @@ public class CardsEffects {
         // System.out.println(card.getName()); // HOLDER INSTEAD ACTIVE, BUT DONE FIXED
 
         if (winnerName.equals("tie")) {
-            // System.out.println("NO DRAWING KAY TIE"); // WORKING
+            // System.out.println("NO DRAWING KAY TIE"); // WORKING // WORKING RA PAG 1ROUND
             drawTieCardEffect(g);
         }
 
@@ -156,6 +156,7 @@ public class CardsEffects {
                     preparationPhaseObject.holderCard.setImg(null);
                 } else {
                     card.setImg(null);
+                    preparationPhaseObject.botCardChoiceImage = null;
                 }
             }
         }
@@ -175,6 +176,7 @@ public class CardsEffects {
                     preparationPhaseObject.holderCard.setImg(null);
                 } else {
                     card.setImg(null);
+                    preparationPhaseObject.botCardChoiceImage = null;
                 }
             }
         }
@@ -188,6 +190,8 @@ public class CardsEffects {
 
             // if neither sailang hp ky below/equal to 0, then padayun
             if (!(vsBotPanel.botCurrentHp <= 0) && !(vsBotPanel.playerCurrentHp <= 0)) {
+                vsBotPanel.roundChecker = true; // SHET WORKING
+                // vsBotPanel.battling = false;
                 vsBotPanel.roundContinue();
                 System.out.println(vsBotPanel.botCurrentHp);
                 System.out.println(vsBotPanel.playerCurrentHp);
@@ -243,6 +247,7 @@ public class CardsEffects {
             preparationPhaseObject.activeCard.setImgOfActiveCard(null);
             preparationPhaseObject.holderCard.setImg(null);
             preparationPhaseObject.botHolderCard.setImg(null);
+            preparationPhaseObject.botCardChoiceImage = null;
             battlePhaseObject.loserCardEffectDone = true;
             // kani ra ato gamiton pra if tie matarog ghpon ni, and mao rani pang move sa
             // round instead sa duration ni loser pud, maparehas gaina

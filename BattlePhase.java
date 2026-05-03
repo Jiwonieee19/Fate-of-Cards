@@ -71,11 +71,17 @@ public class BattlePhase {
     }
 
     public void battleRunes(MainRunes player, MainRunes bot) {
+        // LIFE SAVER SYSOUTs
+
+        // DIRI DAAY KA MASANGIT WAA KA, NGANO MO RUN PANI KAS.A AFTER ROUND CONTINUE
+        // System.out.println("winner name before ang sakuna" + winnerName);
 
         // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
         if (player.getName().equals("activeRune")) {
             runeWinner = bot;
             winnerName = "bot";
+            // System.out.println("HOI 2ND TIME NAA KA DIRI, REVEAL: " + winnerName); // eh
+            // ni bot
             // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
             // if (a.getName().equals(cardObject.rockRune.getName())) {
         } else if (player.getName().equals("rock")) {
@@ -218,6 +224,7 @@ public class BattlePhase {
             cardObject.activeRune.setImageOfActiveRune(null);
             cardObject.botHolderRune.setImage(null);
             cardObject.holderRune.setImage(null);
+            cardObject.botRuneChoiceImage = null;
         } else {
             // ayg kalibog, if dli si player winner (means siya loser)
             if (!runeWinner.getName().equals(cardObject.activeRune.getName())) {
@@ -226,6 +233,7 @@ public class BattlePhase {
                 cardObject.holderRune.setImage(null);
             } else {
                 cardObject.botHolderRune.setImage(null);
+                cardObject.botRuneChoiceImage = null;
             }
         }
     }
