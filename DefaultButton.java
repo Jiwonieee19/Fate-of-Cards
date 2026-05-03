@@ -15,7 +15,7 @@ public class DefaultButton extends JButton {
         // MENU BUTTON SET UP
         this.setFont(defaultFont.getBoldFont());
         this.setText(this.text);
-        this.setBounds(70, this.y, 220, 50);
+        this.setBounds(70, this.y, 230, 50);
         this.setFocusable(false);
         this.setBorderPainted(false);
         this.setEnabled(true);

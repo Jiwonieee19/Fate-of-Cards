@@ -34,6 +34,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     int playerCurrentHp, botCurrentHp;
 
+    Boolean isEndless;
+
     VSBotPanel() {
         setBounds(0, 0, width, height);
         setFocusable(true);
@@ -51,6 +53,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         playerCurrentHp = 200;
         botCurrentHp = 200;
 
+        isEndless = false;
+
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
         battlePhaseObject = new BattlePhase();
@@ -60,6 +64,28 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         drawFPS = new Timer(1000 / fps, this); // 1000ms/24 means 24 frame per sec
         // drawFPS.start();
 
+    }
+
+    // METHOD PARA I SET ANG ENDLESS MODE,
+    // SO NEED HILBANTAN USAB ANG HP FOR VISUAL
+    public void setEndless(Boolean isEndless) {
+        this.isEndless = isEndless;
+        if (isEndless) {
+            isEndlessSetUp();
+            preparationPhaseObject.botCurrentHp = botCurrentHp;
+        } else {
+            botCurrentHp = 200;
+            preparationPhaseObject.botCurrentHp = botCurrentHp;
+        }
+    }
+
+    public void isEndlessSetUp() {
+        botCurrentHp = 100000;
+        // D MN GURO KAABOT UG 100K DMG,
+        // DRAFT LIMITER PRA GAGMAY RA MADUNGAG IF ELSE SA SULOD ANING MGA PHASE
+        preparationPhaseObject.starCard.setEnergy(0); // no energy cost if endless and no energy/5
+        preparationPhaseObject.towerCard.setEnergy(0);
+        preparationPhaseObject.devilCard.setEnergy(0);
     }
 
     public void paintComponent(Graphics g) {
@@ -106,6 +132,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // BATTLE
         if (battling) {
+            preparationPhaseObject.botHolderCard.setImg(preparationPhaseObject.botCardChoiceImage);
+            preparationPhaseObject.botHolderRune.setImage(preparationPhaseObject.botRuneChoiceImage);
             g.setColor(Color.WHITE);
             g.drawString("BATTLE PHASE", 20, 40);
             // PARA NEXT ROUND ANG OG NGA ENERGY, GKAN NA SA DEDUCTED ENERGY

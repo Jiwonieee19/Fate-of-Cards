@@ -55,6 +55,8 @@ public class PreparationPhase {
         MainCards holderCard;
         MainRunes holderRune;
 
+        Image botRuneChoiceImage, botCardChoiceImage;
+
         // MATHS MATHS MATHS
         int holderCardX = (1200 / 2) - (cardWidth + (margin / 2));
         int holderCardY = (800 / 2) + margin;
@@ -151,6 +153,9 @@ public class PreparationPhase {
 
                 playerCardIndex = 9;
                 botCardIndex = 9; // since dli ma null ang int for toggle, 9 nlng
+
+                botRuneChoiceImage = runeHolderImage; // mailisdan rmni after prep
+                botCardChoiceImage = cardHolderImage;
         }
 
         public void PreparationFunction() {
@@ -373,9 +378,12 @@ public class PreparationPhase {
                 for (int i = 0; i < botCardCount; i++) {
                         if (affordIndexHolder[i] - 1 >= 0 && randomizerForVisual == affordIndexHolder[i] - 1) {
                                 botHolderCard.setName(botOnHand[i].getName());
-                                botHolderCard.setImg(botOnHand[i].getImg());
+                                // TERNARYYY FOR VSBOT AND ENDLESS
+                                botHolderCard.setImg(
+                                                (botCurrentHp <= 200) ? deckCards.getImg() : botOnHand[i].getImg());
                                 botCardIndex = i; // DRIA E STORE ANG INDEX
                                 toBeDeductedBotEnergy = botOnHand[i].getEnergy();
+                                botCardChoiceImage = botOnHand[i].getImg();
                         }
                 }
                 // TURNS OUT TO BE GOOD, APIL SA CHOICES NIYA ANG WALA SIYAY PILION NA CARD
@@ -385,12 +393,15 @@ public class PreparationPhase {
         public void BotRuneChoice() {
                 botHolderRune.setName("botHolderRune");
                 botHolderRune.setImage(runeHolderImage);
-                int botRuneChoice = randomizer.nextInt(0, 3);
+                int botRuneChoice = randomizer.nextInt(0, 1);
                 for (int i = 0; i < runesArray.length; i++) {
                         // forever and always dyud naay mag pair dri means naay runes every round si bot
                         if (botRuneChoice == i) {
                                 botHolderRune.setName(runesArray[i].getName());
-                                botHolderRune.setImage(runesArray[i].getImage());
+                                // TERNARYYY
+                                botHolderRune.setImage(
+                                                (botCurrentHp <= 200) ? runeHolderImage : runesArray[i].getImage());
+                                botRuneChoiceImage = runesArray[i].getImage(); // PARA NI PAG AFTER PREP, MAKITA NA
                         }
                 }
 
@@ -440,12 +451,15 @@ public class PreparationPhase {
 
                 // BOT HP
                 g.setColor(Color.decode("#9A4B3A"));
-                g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
-                g.setColor(Color.WHITE);
-                // ((Graphics2D) g).setStroke(new BasicStroke(5));
-                g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), 200, 30);
-                g.drawString("Bot HP: " + botCurrentHp, (1200 - 400) + 20, (800 / 2) - 30);
-
+                if (botCurrentHp <= 200) { // means, if naka vsbot lang
+                        g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
+                        g.setColor(Color.WHITE);
+                        // ((Graphics2D) g).setStroke(new BasicStroke(5));
+                        g.drawRect((1200 - 400) + 150, (800 / 2) - (20 + 30), 200, 30);
+                        g.drawString("Bot HP: " + botCurrentHp, (1200 - 400) + 20, (800 / 2) - 30);
+                } else {
+                        g.drawString("Total Points: " + (100000 - botCurrentHp), (1200 - 400) + 60, (800 / 2) - 30);
+                }
                 // PLAYER ENERGY, AND JUST LIKE AXIE, D NMO MAKITA ENERGY SA KALABAN SOO PREDICT
                 g.drawImage(energyImage, 1092, 470, 60, 60, null);
                 g.drawString(playerEnergyCount + "/5", 1108, 504);
@@ -522,13 +536,13 @@ public class PreparationPhase {
                 } else {
                         g.drawString("NO CARDS LEFT", starCard.getX(), starCard.getY() + (cardHeight / 2));
                 }
-
                 if (botCardCount != 0) {
                         // OKEY BANTUG ERROR KAY 5 MAN PERMI LENGTH, BUHAT KO COUNTER SA GAWAS
                         // for (int i = 0; i < playerOnHand.length; i++) {
                         for (int i = 0; i < 3; i++) {
                                 try {
-                                        g.drawImage(botOnHand[i].getImg(),
+                                        // TERNARYYYYY, pag vsbot nakakulob ang card, if endless makita
+                                        g.drawImage((botCurrentHp <= 200) ? deckCards.getImg() : botOnHand[i].getImg(),
                                                         botOnHand[i].getX() + (i * 100),
                                                         // MATHS MATHS MATHS
                                                         deckCards.getY() -

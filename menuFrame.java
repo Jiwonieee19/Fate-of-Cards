@@ -15,12 +15,13 @@ public class MenuFrame extends JFrame implements ActionListener {
     ExitConfirmationPanel ECP = new ExitConfirmationPanel();
 
     DefaultFont defaultFont = new DefaultFont();
-    DefaultButton casualButton = new DefaultButton("Casual", 250);
-    DefaultButton competitiveButton = new DefaultButton("Competitive", 310);
-    DefaultButton vsbotButton = new DefaultButton("VS Bot", 370);
-    DefaultButton optionButton = new DefaultButton("Option", 440);
-    DefaultButton guideButton = new DefaultButton("Guide", 500);
-    DefaultButton exitButton = new DefaultButton("Exit", 560);
+    DefaultButton casualButton = new DefaultButton("Casual", 240);
+    DefaultButton competitiveButton = new DefaultButton("Competitive", 300);
+    DefaultButton vsbotButton = new DefaultButton("VS Bot", 360);
+    DefaultButton endlessButton = new DefaultButton("Endless (Beta)", 420);
+    DefaultButton optionButton = new DefaultButton("Option", 480);
+    DefaultButton guideButton = new DefaultButton("Guide", 540);
+    DefaultButton exitButton = new DefaultButton("Exit", 600);
 
     MenuFrame() {
 
@@ -57,6 +58,8 @@ public class MenuFrame extends JFrame implements ActionListener {
         add(competitiveButton);
         vsbotButton.addActionListener(this);
         add(vsbotButton);
+        endlessButton.addActionListener(this);
+        add(endlessButton);
         optionButton.addActionListener(this);
         add(optionButton);
         guideButton.addActionListener(this);
@@ -75,13 +78,21 @@ public class MenuFrame extends JFrame implements ActionListener {
         casualButton.setVisible(b);
         competitiveButton.setVisible(b);
         vsbotButton.setVisible(b);
+        endlessButton.setVisible(b);
         optionButton.setVisible(b);
         guideButton.setVisible(b);
         exitButton.setVisible(b);
     }
 
-    // OPEN PANEL ACCORDINGLY< THIS ONE FOR VSBOT
+    // OPEN PANEL ACCORDINGLY < THIS ONE FOR VSBOT
     public void openVSBot() {
+        FOCs.setVisible(true);
+        FOCs.requestFocus();
+        FOCs.setFocusable(true);
+    }
+
+    public void openEndless() {
+        // ENDLESS IS FOCS NGA NAKA ON VISUAL
         FOCs.setVisible(true);
         FOCs.requestFocus();
         FOCs.setFocusable(true);
@@ -91,7 +102,7 @@ public class MenuFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // CASUAL
         if (e.getSource() == casualButton) {
-            System.out.println("TRY BUTTON CASUAL");
+            System.out.println("Casual");
             setButtonsVisibility(false);
             // COMPE
         } else if (e.getSource() == competitiveButton) {
@@ -103,6 +114,13 @@ public class MenuFrame extends JFrame implements ActionListener {
             System.out.println("VS BOT");
             setButtonsVisibility(false);
             // HAHAAH huli ka, ddto pa mag start run fps if ma click
+            FOCs.drawFPS.start();
+            // ENDLESS
+        } else if (e.getSource() == endlessButton) {
+            openEndless();
+            System.out.println("Endless");
+            setButtonsVisibility(false);
+            FOCs.setEndless(true);
             FOCs.drawFPS.start();
             // OPTION
         } else if (e.getSource() == optionButton) {
