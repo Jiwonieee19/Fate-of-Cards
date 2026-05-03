@@ -57,6 +57,8 @@ public class PreparationPhase {
 
         Image botRuneChoiceImage, botCardChoiceImage;
 
+        Boolean isEndless;
+
         // MATHS MATHS MATHS
         int holderCardX = (1200 / 2) - (cardWidth + (margin / 2));
         int holderCardY = (800 / 2) + margin;
@@ -156,10 +158,16 @@ public class PreparationPhase {
 
                 botRuneChoiceImage = runeHolderImage; // mailisdan rmni after prep
                 botCardChoiceImage = cardHolderImage;
+
+                isEndless = false;
         }
 
         public void PreparationFunction() {
 
+        }
+
+        public void setEndless(Boolean isEndless) {
+                this.isEndless = isEndless;
         }
 
         // HANDLES HOVER/CLICK TO ACTIVE A CARD
@@ -374,13 +382,13 @@ public class PreparationPhase {
                 }
                 // ALL THIS SHITTY UPDATES JUST TO RESTORE THE ENDLESS CHOICE BUT NOW ONLY THOSE
                 // AFFORDABLE CARD
-                int randomizerForVisual = randomizer.nextInt(0, botCardCount);
+                int randomizerForVisual = randomizer.nextInt(0, 1);
                 for (int i = 0; i < botCardCount; i++) {
                         if (affordIndexHolder[i] - 1 >= 0 && randomizerForVisual == affordIndexHolder[i] - 1) {
                                 botHolderCard.setName(botOnHand[i].getName());
                                 // TERNARYYY FOR VSBOT AND ENDLESS
                                 botHolderCard.setImg(
-                                                (botCurrentHp <= 200) ? deckCards.getImg() : botOnHand[i].getImg());
+                                                (!isEndless) ? deckCards.getImg() : botOnHand[i].getImg());
                                 botCardIndex = i; // DRIA E STORE ANG INDEX
                                 toBeDeductedBotEnergy = botOnHand[i].getEnergy();
                                 botCardChoiceImage = botOnHand[i].getImg();
@@ -400,7 +408,7 @@ public class PreparationPhase {
                                 botHolderRune.setName(runesArray[i].getName());
                                 // TERNARYYY
                                 botHolderRune.setImage(
-                                                (botCurrentHp <= 200) ? runeHolderImage : runesArray[i].getImage());
+                                                (!isEndless) ? runeHolderImage : runesArray[i].getImage());
                                 botRuneChoiceImage = runesArray[i].getImage(); // PARA NI PAG AFTER PREP, MAKITA NA
                         }
                 }
@@ -451,7 +459,7 @@ public class PreparationPhase {
 
                 // BOT HP
                 g.setColor(Color.decode("#9A4B3A"));
-                if (botCurrentHp <= 200) { // means, if naka vsbot lang
+                if (!isEndless) { // means, if naka vsbot lang
                         g.fillRect((1200 - 400) + 150, (800 / 2) - (20 + 30), botCurrentHp, 30);
                         g.setColor(Color.WHITE);
                         // ((Graphics2D) g).setStroke(new BasicStroke(5));
@@ -542,7 +550,7 @@ public class PreparationPhase {
                         for (int i = 0; i < 3; i++) {
                                 try {
                                         // TERNARYYYYY, pag vsbot nakakulob ang card, if endless makita
-                                        g.drawImage((botCurrentHp <= 200) ? deckCards.getImg() : botOnHand[i].getImg(),
+                                        g.drawImage((!isEndless) ? deckCards.getImg() : botOnHand[i].getImg(),
                                                         botOnHand[i].getX() + (i * 100),
                                                         // MATHS MATHS MATHS
                                                         deckCards.getY() -

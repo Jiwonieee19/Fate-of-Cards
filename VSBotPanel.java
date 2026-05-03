@@ -86,6 +86,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject.starCard.setEnergy(0); // no energy cost if endless and no energy/5
         preparationPhaseObject.towerCard.setEnergy(0);
         preparationPhaseObject.devilCard.setEnergy(0);
+        preparationPhaseObject.setEndless(true);
     }
 
     public void paintComponent(Graphics g) {
@@ -275,6 +276,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // KAY IF NAA SA SULOD SA PREP FOR LOOP, D NA KAPILI ANG BOT DEDUCT DTSO
         preparationPhaseObject.botEnergyCount -= preparationPhaseObject.toBeDeductedBotEnergy;
         preparationPhaseObject.toBeDeductedBotEnergy = 0;
+        preparationPhaseObject.botCardChoiceImage = preparationPhaseObject.cardHolderImage;
+        preparationPhaseObject.botRuneChoiceImage = preparationPhaseObject.runeHolderImage;
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;
@@ -286,6 +289,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         battlePhaseObject.winnerCardEffectDone = false;
         battlePhaseObject.loserCardEffectDone = false;
         battlePhaseObject.deleteUsedCardAnimationDuration = 1000;
+        battlePhaseObject.runeWinner = null;
 
         // NEED TO RESET IN CARD EFFECT DRAW
         cardsEffectsObject.winnerName = "tie";

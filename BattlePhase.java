@@ -55,6 +55,7 @@ public class BattlePhase {
         winnerCardEffectDone = false;
         loserCardEffectDone = false;
         deleteUsedCardAnimationDuration = 1000;
+        runeWinner = null;
     }
 
     // PEDE RA DAAY NI YW PARA ISA RA KA OBJECT DALA NNYU
