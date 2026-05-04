@@ -36,6 +36,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     Boolean isEndless;
     Boolean roundChecker;
+    Boolean isAdditionalDraw;
 
     VSBotPanel() {
         setBounds(0, 0, width, height);
@@ -57,6 +58,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         isEndless = false;
 
         roundChecker = false;
+
+        isAdditionalDraw = false;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -247,6 +250,17 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         drawPhaseObject.drawCount = 2; // para 1draw each per round
         drawPhaseObject.playerDraw = true;
         drawPhaseObject.botDraw = false;
+        // NEW ADD CARD DRAW EFFECT
+        if (isAdditionalDraw) {
+            drawPhaseObject.drawCount = 3;
+            if (battlePhaseObject.winnerName.equals("player")) {
+                drawPhaseObject.playerDraw = true;
+                drawPhaseObject.botDraw = false;
+            } else {
+                drawPhaseObject.playerDraw = false;
+                drawPhaseObject.botDraw = true;
+            }
+        }
         // BANTUG MAG THROW EXCEPTION NAPUD KAY DLI MA MINUSAN ANG CARDCOUNT
         if (preparationPhaseObject.playerCardIndex != 9) {
             drawPhaseObject.playerCardCount -= 1;

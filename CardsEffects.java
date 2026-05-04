@@ -60,13 +60,26 @@ public class CardsEffects {
         if (card.getName().equals("star") && isWinner) {
             // System.out.println("star == star"); // NAKASULOD
             ownCurrentHp += 20;
+            // try new effect draw card
+            vsBotPanel.isAdditionalDraw = true;
             if (!vsBotPanel.isEndless && ownCurrentHp > 200) {
                 ownCurrentHp = 200;
             } // para ang heal d malapas sa max hp
             else if (ownCurrentHp > 200 && winnerName.equals("player")) {
                 ownCurrentHp = 200; // pag si player ofc limit 200 even naka endless
             }
-            System.out.println(winnerName + ": HEALED 20");
+            System.out.println(winnerName + ": HEALED 20, +1 DRAW NEXT ROUND");
+            // STAR LOSE EFFECT
+        } else if (card.getName().equals("star") && !isWinner) {
+            // since pildi, imoha ang opponent hp
+            opponentCurrentHp += 10;
+            System.out.println(loserName + ": HEALED 10");
+            if (!vsBotPanel.isEndless && ownCurrentHp > 200) {
+                ownCurrentHp = 200;
+            } // para ang heal d malapas sa max hp
+            else if (ownCurrentHp > 200 && winnerName.equals("bot")) {
+                ownCurrentHp = 200; // pag si player ofc limit 200 even naka endless
+            }
         }
         // TOWER
         else if (card.getName().equals("tower") && !isWinner) {
@@ -113,10 +126,14 @@ public class CardsEffects {
         }
     }
 
-    public String storeTextOfCardEffects(MainCards card) {
+    public String storeTextOfCardEffects(MainCards card, Boolean isWinner) {
         String cardText = "";
         if (card.getName().equals("star")) {
-            cardText = "heal 20";
+            if (isWinner) {
+                cardText = "heal 20 and +1 draw next round";
+            } else {
+                cardText = "heal 10";
+            }
         } else if (card.getName().equals("tower")) {
             cardText = "heal 10 and deal 10 damage"; // malamang d mogana ang \n
         } else if (card.getName().equals("devil")) {
@@ -126,7 +143,7 @@ public class CardsEffects {
     }
 
     public boolean cardEffectChecker(MainCards card, Boolean isWinner) {
-        if (card.getName().equals("star") && isWinner)
+        if (card.getName().equals("star")) // since naay effect both
             return true;
         else if (card.getName().equals("tower") && !isWinner)
             return true;
@@ -267,10 +284,10 @@ public class CardsEffects {
             // THIS ONE WILL INDICATE IF KA PLAYER NGA CARD NISULOD OR NOT BWAHAHAH
             if (card.getY() == preparationPhaseObject.holderCard.getY()) {
                 g.setColor(Color.decode("#C1B59F"));
-                effectLabel = "player: " + storeTextOfCardEffects(card);
+                effectLabel = "player: " + storeTextOfCardEffects(card, isWinner);
             } else {
                 g.setColor(Color.decode("#9A4B3A"));
-                effectLabel = "bot: " + storeTextOfCardEffects(card);
+                effectLabel = "bot: " + storeTextOfCardEffects(card, isWinner);
             }
 
             g.setFont(defaultFont.getLightFontCustomSize(20));

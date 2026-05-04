@@ -401,7 +401,7 @@ public class PreparationPhase {
         public void BotRuneChoice() {
                 botHolderRune.setName("botHolderRune");
                 botHolderRune.setImage(runeHolderImage);
-                int botRuneChoice = randomizer.nextInt(0, 3);
+                int botRuneChoice = randomizer.nextInt(0, 1);
                 for (int i = 0; i < runesArray.length; i++) {
                         // forever and always dyud naay mag pair dri means naay runes every round si bot
                         if (botRuneChoice == i) {
