@@ -60,9 +60,12 @@ public class CardsEffects {
         if (card.getName().equals("star") && isWinner) {
             // System.out.println("star == star"); // NAKASULOD
             ownCurrentHp += 20;
-            if (ownCurrentHp > 200) {
+            if (!vsBotPanel.isEndless && ownCurrentHp > 200) {
                 ownCurrentHp = 200;
             } // para ang heal d malapas sa max hp
+            else if (ownCurrentHp > 200 && winnerName.equals("player")) {
+                ownCurrentHp = 200; // pag si player ofc limit 200 even naka endless
+            }
             System.out.println(winnerName + ": HEALED 20");
         }
         // TOWER
@@ -73,9 +76,12 @@ public class CardsEffects {
             // PERO LIBOG NI LONG RUN, SO CLEANUP NLNG IF ELSE SA TAAS
             // KANI NLNG SA, MAS DALI FOR ME
             opponentCurrentHp += 10;
-            if (opponentCurrentHp > 200) {
+            if (!vsBotPanel.isEndless && opponentCurrentHp > 200) {
                 opponentCurrentHp = 200;
             } // para ang heal d malapas sa max hp
+            else if (opponentCurrentHp > 200 && winnerName.equals("bot")) {
+                opponentCurrentHp = 200; // means if si player, taman rdyud 200
+            }
             ownCurrentHp -= 10;
             System.out.println(loserName + ": HEALED 10 AND DAMAGED DEALT 10");
             // AHHHHH THATS WHY, KAY SI OPPONNENT KAY AS OF NOW SI BOT,

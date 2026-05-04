@@ -382,7 +382,7 @@ public class PreparationPhase {
                 }
                 // ALL THIS SHITTY UPDATES JUST TO RESTORE THE ENDLESS CHOICE BUT NOW ONLY THOSE
                 // AFFORDABLE CARD
-                int randomizerForVisual = randomizer.nextInt(0, 1);
+                int randomizerForVisual = randomizer.nextInt(0, botCardCount);
                 for (int i = 0; i < botCardCount; i++) {
                         if (affordIndexHolder[i] - 1 >= 0 && randomizerForVisual == affordIndexHolder[i] - 1) {
                                 botHolderCard.setName(botOnHand[i].getName());
@@ -401,7 +401,7 @@ public class PreparationPhase {
         public void BotRuneChoice() {
                 botHolderRune.setName("botHolderRune");
                 botHolderRune.setImage(runeHolderImage);
-                int botRuneChoice = randomizer.nextInt(0, 1);
+                int botRuneChoice = randomizer.nextInt(0, 3);
                 for (int i = 0; i < runesArray.length; i++) {
                         // forever and always dyud naay mag pair dri means naay runes every round si bot
                         if (botRuneChoice == i) {
