@@ -37,6 +37,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     Boolean isEndless;
     Boolean roundChecker;
     Boolean isAdditionalDraw;
+    Boolean isStun, botStunned, playerStunned;
 
     VSBotPanel() {
         setBounds(0, 0, width, height);
@@ -59,7 +60,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         roundChecker = false;
 
+        // NEW EFFECTS
         isAdditionalDraw = false;
+        isStun = false;
+        botStunned = false;
+        playerStunned = false;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -125,8 +130,10 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                     drawPhaseObject.botCardCount, false);
             if (botPicking) {
                 // PASS THE BOT ON HAND HERE TOO TO PICK A PLAY
-                preparationPhaseObject.BotCardChoice(drawPhaseObject.botOnHand, drawPhaseObject.botCardCount);
-                preparationPhaseObject.BotRuneChoice();
+                if (!botStunned) {
+                    preparationPhaseObject.BotCardChoice(drawPhaseObject.botOnHand, drawPhaseObject.botCardCount);
+                    preparationPhaseObject.BotRuneChoice();
+                }
                 // TAMA AKO HINALA, IF WALAY BOOLEAN, THEN REPAINT = NEW CHOICE,
                 // WHICH IS STILL GOOD, LOOKS LIKE A LOT MACHINE THEN END OF TIME MA BUNOT NA
                 // NIYA
@@ -188,7 +195,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (preparing) {
+        if (preparing && !playerStunned) {
             mouseClickCoordinatesPoint = e.getPoint();
             preparationPhaseObject.PreparationMouseClick(mouseClickCoordinatesPoint,
                     drawPhaseObject.playerOnHand,
@@ -222,6 +229,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
 
         // preparationPhaseObject.botCurrentHp = cardsEffectsObje
 
+        System.out.println("Last bot rune: " + preparationPhaseObject.botHolderRune.getName());
+
         // INCREMENT THAT SHOULD HAPPEN
         roundIncrement++;
         if (preparationPhaseObject.playerEnergyCount < 5) {
@@ -244,7 +253,28 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparing = false;
         battling = false;
         botPicking = true;
+        botStunned = false;
+        playerStunned = false;
         // roundChecker = false; // dili diri si false
+
+        // PAG NEXT ROUND AFTER STUN MO BALIK UG FALSE, THEN TRUE NAPUD IF GI STUN
+        if (isStun && botStunned) {
+            botStunned = false; // reset stun after 1 round
+
+        }
+        if (isStun && playerStunned) {
+            playerStunned = false;
+        }
+        // NEW STUN EFFECT
+        if (isStun) {
+            if (battlePhaseObject.winnerName.equals("player")
+                    && preparationPhaseObject.activeCard.getName().equals("tower")) {
+                botStunned = true;
+            } else if (battlePhaseObject.winnerName.equals("bot")
+                    && preparationPhaseObject.botHolderCard.getName().equals("tower")) {
+                playerStunned = true;
+            }
+        }
 
         // NEED TO RESET IN DRAW PHASE
         drawPhaseObject.drawCount = 2; // para 1draw each per round
@@ -300,6 +330,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         preparationPhaseObject.toBeDeductedBotEnergy = 0;
         preparationPhaseObject.botCardChoiceImage = preparationPhaseObject.cardHolderImage;
         preparationPhaseObject.botRuneChoiceImage = preparationPhaseObject.runeHolderImage;
+        // for some reason, dli ma null ang rune&card ni bot bskan na stun, mabilin tong
+        // last pick niya ktong pagka stun
+        preparationPhaseObject.botHolderRune.setName("botHolderRune");
+        preparationPhaseObject.botHolderCard.setName("botHolderCard");
+        // tama, gina assume mn gud na next round mo pick si bot mao dli na gina reset
 
         // NEED TO RESET IN BATTLE PHASE
         battlePhaseObject.incrementSpeed = 10;

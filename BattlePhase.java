@@ -77,13 +77,19 @@ public class BattlePhase {
         // System.out.println("winner name before ang sakuna" + winnerName);
 
         // ASSUMING NGA SI BOT GAPILI PERMI UG RUNES (WHICH IS MAO ANG CURRENT SETUP)
-        if (player.getName().equals("activeRune")) {
+        // MA STUN NA SI BOT RON, +1 IF, added && para if tie, matagak sa else, dli
+        // madaog if both null
+        if (player.getName().equals("activeRune") && !bot.getName().equals("botHolderRune")) {
             runeWinner = bot;
             winnerName = "bot";
             // System.out.println("HOI 2ND TIME NAA KA DIRI, REVEAL: " + winnerName); // eh
             // ni bot
             // THIS IS MUCH FLEXIBLE BUT THIS IS JUST FOR RUNES SO REKTA NAME NA
             // if (a.getName().equals(cardObject.rockRune.getName())) {
+        } else if (bot.getName().equals("botHolderRune") && !player.getName().equals("activeRune")) {
+            // dara ang kulang, darti kasi walay stun
+            runeWinner = player;
+            winnerName = "player";
         } else if (player.getName().equals("rock")) {
 
             if (bot.getName().equals("scissors")) {

@@ -69,8 +69,9 @@ public class CardsEffects {
                 ownCurrentHp = 200; // pag si player ofc limit 200 even naka endless
             }
             System.out.println(winnerName + ": HEALED 20, +1 DRAW NEXT ROUND");
-            // STAR LOSE EFFECT
-        } else if (card.getName().equals("star") && !isWinner) {
+        }
+        // STAR LOSE EFFECT
+        else if (card.getName().equals("star") && !isWinner) {
             // since pildi, imoha ang opponent hp
             opponentCurrentHp += 10;
             System.out.println(loserName + ": HEALED 10");
@@ -82,23 +83,18 @@ public class CardsEffects {
             }
         }
         // TOWER
-        else if (card.getName().equals("tower") && !isWinner) {
+        else if (card.getName().equals("tower") && isWinner) {
             // WORKING, PERO PER FRAME MAG MINUS BHWHAHAH // fixed
-            // DRAFT FIX, ACTUALLY WORKING,
+            opponentCurrentHp -= 20;
+            vsBotPanel.isStun = true;
+            System.out.println(winnerName + ": DEALS 20 DMG, STUN OPPONENT NEXT ROUND");
+        }
+        // TOWER LOSE EFFECT
+        else if (card.getName().equals("tower") && !isWinner) {
             // TO THINK NGA IF DLI KA WINNER (!isWinner) THEN IKAW SI OPPONENT: ANA LANG
             // PERO LIBOG NI LONG RUN, SO CLEANUP NLNG IF ELSE SA TAAS
-            // KANI NLNG SA, MAS DALI FOR ME
-            opponentCurrentHp += 10;
-            if (!vsBotPanel.isEndless && opponentCurrentHp > 200) {
-                opponentCurrentHp = 200;
-            } // para ang heal d malapas sa max hp
-            else if (opponentCurrentHp > 200 && winnerName.equals("bot")) {
-                opponentCurrentHp = 200; // means if si player, taman rdyud 200
-            }
-            ownCurrentHp -= 10;
-            System.out.println(loserName + ": HEALED 10 AND DAMAGED DEALT 10");
-            // AHHHHH THATS WHY, KAY SI OPPONNENT KAY AS OF NOW SI BOT,
-            // KAY NA SET UP DDTOAS VARIABLES FOR WINNER RA BWHAHAHA GETS
+            ownCurrentHp -= 10; // since pildi, ikaw si opponent
+            System.out.println(loserName + ": DEALS 10 DMG");
         }
         // DEVIL
         else if (card.getName().equals("devil") && isWinner) {
@@ -135,7 +131,11 @@ public class CardsEffects {
                 cardText = "heal 10";
             }
         } else if (card.getName().equals("tower")) {
-            cardText = "heal 10 and deal 10 damage"; // malamang d mogana ang \n
+            if (isWinner) {
+                cardText = "deal 20 dmg and stun opponent next round"; // malamang d mogana ang \n
+            } else {
+                cardText = "deal 10";
+            }
         } else if (card.getName().equals("devil")) {
             cardText = "deal 20 damage";
         }
@@ -145,7 +145,7 @@ public class CardsEffects {
     public boolean cardEffectChecker(MainCards card, Boolean isWinner) {
         if (card.getName().equals("star")) // since naay effect both
             return true;
-        else if (card.getName().equals("tower") && !isWinner)
+        else if (card.getName().equals("tower"))
             return true;
         else if (card.getName().equals("devil") && isWinner)
             return true;
