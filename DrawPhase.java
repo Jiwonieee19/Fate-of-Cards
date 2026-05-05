@@ -86,7 +86,7 @@ public class DrawPhase {
         for (int i = 0; i < 3; i++) {
             // MUCH FLEXIBLE PARA MA RECORD RA DRAW IF DLI PA MAX ANG ONHAND
             if (playerOnHand[i] == null) {
-                playerOnHand[i] = drawPossibility[picker.nextInt(1, 2)];
+                playerOnHand[i] = drawPossibility[picker.nextInt(0, 1)];
                 System.out.println("NA DRAW NI PLAYER: " + playerOnHand[i].getName());
                 break;
             }
@@ -96,7 +96,7 @@ public class DrawPhase {
     public void botDrawCard() {
         for (int i = 0; i < 3; i++) {
             if (botOnHand[i] == null) {
-                botOnHand[i] = drawPossibility[picker.nextInt(1, 2)];
+                botOnHand[i] = drawPossibility[picker.nextInt(2, 3)];
                 System.out.println("NA DRAW NI BOT: " + botOnHand[i].getName());
                 break;
             }

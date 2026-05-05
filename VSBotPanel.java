@@ -39,6 +39,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     Boolean isAdditionalDraw;
     Boolean isStun, botStunned, playerStunned;
 
+    int roundCounter;
+
     VSBotPanel() {
         setBounds(0, 0, width, height);
         setFocusable(true);
@@ -65,6 +67,8 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         isStun = false;
         botStunned = false;
         playerStunned = false;
+
+        roundCounter = 1;
 
         preparationPhaseObject = new PreparationPhase(this);
         drawPhaseObject = new DrawPhase(this);
@@ -301,6 +305,11 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         drawPhaseObject.drawCount = 2; // para 1draw each per round
         drawPhaseObject.playerDraw = true;
         drawPhaseObject.botDraw = false;
+        if (isAdditionalDraw && roundCounter == 0) {
+            // PARA IF DRAWPHASE, MA OFF AFTER IF NAKA TRUE NI NGA EFFECT
+            isAdditionalDraw = false;
+            roundCounter = 1;
+        }
         // NEW ADD CARD DRAW EFFECT
         if (isAdditionalDraw) {
             drawPhaseObject.drawCount = 3;
@@ -308,10 +317,12 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
                     && preparationPhaseObject.activeCard.getName().equals("star")) {
                 drawPhaseObject.playerDraw = true;
                 drawPhaseObject.botDraw = false;
+                roundCounter -= 1;
             } else if (battlePhaseObject.winnerName.equals("bot")
                     && preparationPhaseObject.botHolderCard.getName().equals("star")) {
                 drawPhaseObject.playerDraw = false;
                 drawPhaseObject.botDraw = true;
+                roundCounter -= 1;
             }
         }
         // BANTUG MAG THROW EXCEPTION NAPUD KAY DLI MA MINUSAN ANG CARDCOUNT
