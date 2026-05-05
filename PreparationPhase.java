@@ -84,9 +84,9 @@ public class PreparationPhase {
                 Image devilImg = new ImageIcon(getClass().getResource("assets/cards/devil.png")).getImage();
 
                 // TANAN CARS, SAME X, MAG DIFFER NA DIDTO SA ARRAY NGA ONHAND-CARDS NI PLAYER
-                starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg, 3);
-                towerCard = new MainCards("tower", margin, cardY, cardWidth, cardHeight, towerImg, 3);
-                devilCard = new MainCards("devil", margin, cardY, cardWidth, cardHeight, devilImg, 3);
+                starCard = new MainCards("star", margin, cardY, cardWidth, cardHeight, starImg, 2);
+                towerCard = new MainCards("tower", margin, cardY, cardWidth, cardHeight, towerImg, 2);
+                devilCard = new MainCards("devil", margin, cardY, cardWidth, cardHeight, devilImg, 2);
 
                 randomizer = new Random();
 
@@ -612,6 +612,18 @@ public class PreparationPhase {
                         g.drawImage(activeRune.getImage(), activeRune.getX(), activeRune.getY(), activeRune.getWidth(),
                                         activeRune.getHeight(), null);
                 }
+        }
+
+        // WAAAH BERI WATDAFAK SOLUTION HAHAHA
+        // mgamit pani nga solution-style pero dli nako magbuhat dula usab sa swing
+        public void drawUpdateEnergy(Graphics g) {
+                g.drawImage(energyImage, 1092, 470, 60, 60, null);
+                g.drawString(playerEnergyCount + "/5", 1108, 504);
+                g.drawString("Energy: ", 1010, 504);
+
+                g.drawImage(energyImage, 1092, (800 / 2) - (50 + 50 + 32), 60, 60, null);
+                // botEnergyCount - toBeDeductedBotEnergy, work of devil mind HAAHAHA
+                g.drawString(botEnergyCount + "/5", 1108, (800 / 2) - (50 + 48));
         }
         // PLANNING TO REVISION THIS DRAFT
 }

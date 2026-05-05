@@ -36,7 +36,7 @@ public class CardsEffects {
     // (MUCH EASIER SOLUTION BUT NOT RECOMMENDABLE, SINCE LIBOG IN LONG RUN)
     // IF !ISWINNER ANG CARD EFFECT (MEANS MO EFFECT PAG PILDI), SIYA SI OPPONENT
     // TAKE TOWER CARD AS EXAMPLE
-    public void storeCardsEffects(MainCards card, Boolean isWinner) {
+    public void storeCardsEffects(MainCards card, Boolean isWinner, Graphics g) {
         System.out.println(card.getName() + " WINNER? " + isWinner); // potek d mosulod pag false si iswinner
         String loserName = "";
 
@@ -98,8 +98,24 @@ public class CardsEffects {
         }
         // DEVIL
         else if (card.getName().equals("devil") && isWinner) {
-            opponentCurrentHp -= 20;
-            System.out.println(winnerName + ": DAMAGED DEALT 20");
+            opponentCurrentHp -= 25;
+            ownCurrentHp += 5;
+            if (!vsBotPanel.isEndless && ownCurrentHp > 200) {
+                ownCurrentHp = 200;
+            } // para ang heal d malapas sa max hp
+            else if (ownCurrentHp > 200 && winnerName.equals("player")) {
+                ownCurrentHp = 200; // pag si player ofc limit 200 even naka endless
+            }
+            System.out.println(winnerName + ": DAMAGED DEALT 25, HEALS 5");
+        }
+        // DEVIL LOSE EFFECT
+        else if (card.getName().equals("devil") && !isWinner) {
+            System.out.println(loserName + ": STEAL 1 OPPONENT'S ENERGY");
+            if (winnerName.equals("player")) {
+                vsBotPanel.stealOpponentEnergy("player", preparationPhaseObject.playerEnergyCount, g);
+            } else if (winnerName.equals("bot")) {
+                vsBotPanel.stealOpponentEnergy("bot", preparationPhaseObject.botEnergyCount, g);
+            }
         }
 
         // AFTER MA STORE, I PASA SA ORIGINAL TO CHANGE IT,
@@ -137,7 +153,11 @@ public class CardsEffects {
                 cardText = "deal 10";
             }
         } else if (card.getName().equals("devil")) {
-            cardText = "deal 20 damage";
+            if (isWinner) {
+                cardText = "deal 25 dmg and heal 5";
+            } else {
+                cardText = "steal 1 opponent energy";
+            }
         }
         return cardText;
     }
@@ -147,7 +167,7 @@ public class CardsEffects {
             return true;
         else if (card.getName().equals("tower"))
             return true;
-        else if (card.getName().equals("devil") && isWinner)
+        else if (card.getName().equals("devil"))
             return true;
         else
             return false;
@@ -170,7 +190,7 @@ public class CardsEffects {
                 winnerCardDuration -= 24;
             } else {
                 // mosulod pani kas.a sa else before ma true ang bool
-                storeCardsEffects(card, true);
+                storeCardsEffects(card, true, g);
                 battlePhaseObject.winnerCardEffectDone = true;
                 // KUNG SI BOT, CARD = MNULL,
                 // PAG SI PLAYER, IYANG ACTIVECARDIMAGE = NULL
@@ -192,7 +212,7 @@ public class CardsEffects {
                 // GANA NANI IF FOR LOSER NGA CARD
                 loserCardDuration -= 24;
             } else {
-                storeCardsEffects(card, false);
+                storeCardsEffects(card, false, g);
                 battlePhaseObject.loserCardEffectDone = true;
                 if (winnerName.equals("bot")) {
                     preparationPhaseObject.activeCard.setImgOfActiveCard(null);

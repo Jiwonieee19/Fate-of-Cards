@@ -225,6 +225,27 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     public void mouseExited(MouseEvent e) {
     }
 
+    // IF FOR NEXT ROUND EFFECT, NAKA BOOLEAN, IF EFFECT DITSO DURING, NAKA METHOD
+    public void stealOpponentEnergy(String opponent, int opponentEnergyCount, Graphics g) {
+        if (opponentEnergyCount > 0) {
+            if (opponent.equals("player")) {
+                preparationPhaseObject.playerEnergyCount -= 1;
+                preparationPhaseObject.botEnergyCount += 1;
+                if (preparationPhaseObject.botEnergyCount > 5) {
+                    preparationPhaseObject.botEnergyCount = 5;
+                }
+            } else if (opponent.equals("bot")) {
+                preparationPhaseObject.botEnergyCount -= 1;
+                preparationPhaseObject.playerEnergyCount += 1;
+                // PARA DLI MA LAPAS SA 5 ENERGY
+                if (preparationPhaseObject.playerEnergyCount > 5) {
+                    preparationPhaseObject.playerEnergyCount = 5;
+                }
+            }
+        }
+        preparationPhaseObject.drawUpdateEnergy(g);
+    }
+
     public void roundContinue() {
 
         // preparationPhaseObject.botCurrentHp = cardsEffectsObje
