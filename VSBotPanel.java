@@ -23,7 +23,7 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
     Timer drawFPS;
 
     int fps = 24, timeCountHolder;
-    int roundPreparingTimer = 3000;
+    int roundPreparingTimer = 5000;
     int roundIncrement;
 
     Boolean drawing, preparing, battling;

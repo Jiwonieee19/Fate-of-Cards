@@ -401,7 +401,7 @@ public class PreparationPhase {
         public void BotRuneChoice() {
                 botHolderRune.setName("botHolderRune");
                 botHolderRune.setImage(runeHolderImage);
-                int botRuneChoice = randomizer.nextInt(0, 1);
+                int botRuneChoice = randomizer.nextInt(0, 3);
                 for (int i = 0; i < runesArray.length; i++) {
                         // forever and always dyud naay mag pair dri means naay runes every round si bot
                         if (botRuneChoice == i) {
@@ -492,9 +492,9 @@ public class PreparationPhase {
 
                 // LINES AND BOUNDARIES
                 g.setColor(Color.WHITE);
-                g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
-                g.drawLine(margin + cardWidth + margin, 800 / 2, 1200, 800 / 2);
-                g.drawLine(1200 / 2, 0, 1200 / 2, 800);
+                // g.drawRect((1200 / 2) - ((cardWidth * 4) / 2), 0, cardWidth * 4, 800);
+                // g.drawLine(margin + cardWidth + margin, 800 / 2, 1200, 800 / 2);
+                // g.drawLine(1200 / 2, 0, 1200 / 2, 800);
 
                 g.setFont(defaultFont.getLightFontCustomSize(20));
                 g.drawString("total card: " + playerCardCount + "/3", starCard.getX(), starCard.getY() - 12);
