@@ -283,10 +283,12 @@ public class VSBotPanel extends JPanel implements ActionListener, MouseListener 
         // NEW ADD CARD DRAW EFFECT
         if (isAdditionalDraw) {
             drawPhaseObject.drawCount = 3;
-            if (battlePhaseObject.winnerName.equals("player")) {
+            if (battlePhaseObject.winnerName.equals("player")
+                    && preparationPhaseObject.activeCard.getName().equals("star")) {
                 drawPhaseObject.playerDraw = true;
                 drawPhaseObject.botDraw = false;
-            } else {
+            } else if (battlePhaseObject.winnerName.equals("bot")
+                    && preparationPhaseObject.botHolderCard.getName().equals("star")) {
                 drawPhaseObject.playerDraw = false;
                 drawPhaseObject.botDraw = true;
             }
