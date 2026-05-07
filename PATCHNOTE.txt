@@ -45,3 +45,41 @@
     - devil, 
         win: deals 25 DMG , heals 5 HP
         lose: steal opponent 1 ENERGY
+
+
+       
+        ***** VISUAL UPDATE && PATCHNOTE 0.0.3v ***** 
+
+    OVERVIEW:
+    - Added asset for winning card instead of just plain scaling it bigger
+    - Added asset for rune back (like card back), as of now, runeholder acts on it in bot prepphase
+    - And longer the durations of existing assets (the loser rune and no effect card)
+    - Adding new cards
+
+    ------- CARD GUIDE/MANUAL -------
+    POWER TYPE CARD (3 COST ENERGY)
+    - star, tower, devil
+
+    NEUTRAL TYPE CARD (2 COST ENERGY)
+    - hermit,
+        regardless: heals 10 HP
+
+    - world,
+        regardless: you gain 3 ENERGY
+
+    - death,
+        regardless: cleanse
+
+    - strength
+        regardless: deals 15 DMG
+
+    BASE TYPE CARD (1 COST ENERGY)
+    - moon, 
+        win: opponent loses 1 hand CARD randomly
+
+    - sun,
+        lose: you gain 2 ENERGY
+
+    
+    ----- NEW EFFECTS -----
+    cleanse: removed all your debuff (Stun)
