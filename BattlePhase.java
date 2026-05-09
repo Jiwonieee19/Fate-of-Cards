@@ -40,13 +40,8 @@ public class BattlePhase {
     // (FUNCTION/METHOD)
     BattlePhase() {
         URL gifUrl = BattlePhase.class.getResource("/assets/animations/runeLoseGIF.gif");
-        // URL gifUrl =
-        // BattlePhase.class.getResource("/assets/animations/newLoseRuneAnimation.gif");
         runeAnimationGIF = new ImageIcon(gifUrl).getImage();
-        // X = new ImageIcon(getClass().getResource("assets/X.png")).getImage();
         URL gifUrl2 = BattlePhase.class.getResource("/assets/animations/cardNoEffectGIF.gif");
-        // URL gifUrl2 =
-        // BattlePhase.class.getResource("/assets/animations/newCardNoEffectAnimation.gif");
         cardNoEffectAnimationGIF = new ImageIcon(gifUrl2).getImage();
         backAnimationTimer = 120;
         incrementSpeed = 10;
