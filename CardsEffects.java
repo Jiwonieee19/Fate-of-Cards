@@ -259,7 +259,7 @@ public class CardsEffects {
                     card.getHeight(), card.getHeight(),
                     null);
         } else {
-            g.drawImage(card.getImg(),
+            g.drawImage(battlePhaseObject.cardWithEffectAnimationGIF,
                     // MATHS MATHS MATHS (PARA SAME RATIO GHPON PAGDAKO SA PIC CARD)
                     // 92:151 = 1:1.64
                     card.getX() - 25, card.getY() - 42,

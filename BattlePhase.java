@@ -12,7 +12,7 @@ public class BattlePhase {
     MainRunes runeWinner;
     CardsEffects cardsEffectsObject;
 
-    Image runeAnimationGIF, cardNoEffectAnimationGIF;
+    Image runeAnimationGIF, cardNoEffectAnimationGIF, cardWithEffectAnimationGIF;
 
     // REFACTOR INIT
     int backAnimationTimer;
@@ -43,6 +43,8 @@ public class BattlePhase {
         runeAnimationGIF = new ImageIcon(gifUrl).getImage();
         URL gifUrl2 = BattlePhase.class.getResource("/assets/animations/cardNoEffectGIF.gif");
         cardNoEffectAnimationGIF = new ImageIcon(gifUrl2).getImage();
+        URL gifUrl3 = BattlePhase.class.getResource("/assets/animations/cardWithEffectAnimation.gif");
+        cardWithEffectAnimationGIF = new ImageIcon(gifUrl3).getImage();
         backAnimationTimer = 120;
         incrementSpeed = 10;
         stopAfterBack = false;
