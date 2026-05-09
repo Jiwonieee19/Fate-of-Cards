@@ -51,7 +51,7 @@ public class PreparationPhase {
         Image energyImage;
         int playerEnergyCount, botEnergyCount;
 
-        Image cardHolderImage, runeHolderImage;
+        Image cardHolderImage, runeHolderImage, runeBackImage;
         MainCards holderCard;
         MainRunes holderRune;
 
@@ -130,8 +130,9 @@ public class PreparationPhase {
                 // 2 dyud initial, pero 3 sa para makaplay ug cards since 3cards are power type,
                 // and wla pay implementation for next round which will increment the energy
 
-                cardHolderImage = new ImageIcon(getClass().getResource("assets/cards/cardHolder.png")).getImage();
-                runeHolderImage = new ImageIcon(getClass().getResource("assets/runes/runeHolder.png")).getImage();
+                cardHolderImage = new ImageIcon(getClass().getResource("/assets/cards/cardHolder.png")).getImage();
+                runeHolderImage = new ImageIcon(getClass().getResource("/assets/runes/runeHolder.png")).getImage();
+                runeBackImage = new ImageIcon(getClass().getResource("/assets/runes/runesBack.png")).getImage();
 
                 holderCard = new MainCards("holderCard", holderCardX, holderCardY, cardWidth, cardHeight,
                                 cardHolderImage, 0);
@@ -408,7 +409,7 @@ public class PreparationPhase {
                                 botHolderRune.setName(runesArray[i].getName());
                                 // TERNARYYY
                                 botHolderRune.setImage(
-                                                (!isEndless) ? runeHolderImage : runesArray[i].getImage());
+                                                (!isEndless) ? runeBackImage : runesArray[i].getImage());
                                 botRuneChoiceImage = runesArray[i].getImage(); // PARA NI PAG AFTER PREP, MAKITA NA
                         }
                 }
