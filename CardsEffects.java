@@ -265,9 +265,15 @@ public class CardsEffects {
                     card.getX() - 25, card.getY() - 42,
                     card.getWidth() + 50, card.getHeight() + 84,
                     null);
-            g.drawImage(battlePhaseObject.cardWithEffectAnimationGIF,
+            // E COMMENT SA, KAY MAOT PAGKA DRAWING ANG EFFECT,
+            // g.drawImage(battlePhaseObject.cardWithEffectAnimationGIF,
+            // card.getX() - 25, card.getY() - 42,
+            // card.getHeight() + 84, card.getHeight() + 84, // square pics ang gif
+            // null);
+            // OG SCALE IMAGE ONLY
+            g.drawImage(card.getImg(),
                     card.getX() - 25, card.getY() - 42,
-                    card.getHeight() + 84, card.getHeight() + 84, // square ang pics sa gif effects
+                    card.getWidth() + 50, card.getHeight() + 84,
                     null);
         }
 
