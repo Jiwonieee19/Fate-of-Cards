@@ -4,7 +4,7 @@ ENDLESS MODE
 
 <!-- ![Video of Endless Mode](zxcEndlessMode.mp4) -->
 <!-- <video src="zxcEndlessMode.mp4" controls width="100%"></video> -->
-[Watch Endless Gameplay Video](./zxcEndlessMode.mp4)
+![Watch Endless Gameplay Video](./zxcEndlessModeGIF.gif)
 - in this mode, you can see the cards of enemy and try to play your card with that info, also no energy cost here
 
 VS BOT
